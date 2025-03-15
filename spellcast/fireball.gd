@@ -10,7 +10,7 @@ var direction : Vector2
 func _ready() -> void:
 	initial_position = position
 
-##_target must be a global position
+#_target must be a global position
 func _activate(_creator : Node2D, _target : Vector2):
 	creator = _creator
 	#Save the position of the player at the time the fireball is cast to know how far it can travel

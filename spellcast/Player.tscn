@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://beoo6fxdgr6ks" path="res://Individual Sprites/adventurer-run-05.png" id="9_hakp1"]
 [ext_resource type="Script" path="res://PlayerJump.gd" id="13_smh3d"]
 [ext_resource type="Script" path="res://PlayerFall.gd" id="16_2bwsu"]
-[ext_resource type="Script" path="res://cast_fireball.gd" id="19_bghcx"]
+[ext_resource type="Script" path="res://PlayerCastFireball.gd" id="19_bghcx"]
 [ext_resource type="PackedScene" uid="uid://j4tmoiklso7j" path="res://fireball.tscn" id="24_k3r8j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o6wom"]
