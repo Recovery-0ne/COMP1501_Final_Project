@@ -100,6 +100,7 @@ animations = [{
 }]
 
 [node name="SkeletonEnemy1" type="CharacterBody2D"]
+scale = Vector2(3, 3)
 script = ExtResource("1_6j8tb")
 
 [node name="SkeletonCollision" type="CollisionShape2D" parent="."]
@@ -112,8 +113,24 @@ inital_state = NodePath("idle")
 [node name="idle" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("3_jnm23")
 
+[node name="wander" type="Node" parent="EnemyStateMachine"]
+
 [node name="AnimatedSpriteSkeleton" type="AnimatedSprite2D" parent="."]
 position = Vector2(4, -2)
 sprite_frames = SubResource("SpriteFrames_w3uf8")
 animation = &"idle"
 frame_progress = 0.441881
+
+[node name="FloorCheckLeft" type="RayCast2D" parent="."]
+position = Vector2(12, 9)
+target_position = Vector2(0, 10)
+collision_mask = 2
+
+[node name="FloorCheckRight" type="RayCast2D" parent="."]
+position = Vector2(-12, 9)
+target_position = Vector2(0, 10)
+collision_mask = 2
+
+[node name="WallCheck" type="RayCast2D" parent="."]
+target_position = Vector2(30, 0)
+collision_mask = 2
