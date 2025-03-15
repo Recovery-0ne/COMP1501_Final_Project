@@ -18,10 +18,8 @@ func _enter():
 
 func _update(delta: float): #Write code here that should be used in every state only.
 	#anim2D.flip_v = false  # Ensure no vertical flipping
+	anim2D.flip_h = player.direction < 0  # Flip horizontally when moving left
 	player.direction = Input.get_axis("left", "right")
-	if player.direction != 0:
-		anim2D.flip_h = player.direction < 0
-	#anim2D.flip_h = player.direction < 0  # Flip horizontally when moving left
 	player.apply_gravity(delta)
 	player.move_and_slide()
 
