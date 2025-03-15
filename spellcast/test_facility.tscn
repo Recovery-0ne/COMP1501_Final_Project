@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://pwhcfr60yjc2"]
+
+[ext_resource type="PackedScene" uid="uid://drhydcmoetxlj" path="res://skeleton_enemy_1.tscn" id="1_ii7p6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sw80l"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_afiq8"]
+
+[node name="TestFacility" type="Node"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(500, 250)
+scale = Vector2(26.09, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_sw80l")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_afiq8")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(737.15, 173.365)
+scale = Vector2(1, 6.52)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_sw80l")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D2"]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_afiq8")
+
+[node name="SkeletonEnemy1" parent="." instance=ExtResource("1_ii7p6")]
+position = Vector2(500, 100)
