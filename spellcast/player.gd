@@ -12,7 +12,6 @@ func _ready():
 	for state in $StateMachine.get_children():
 		state.initialize($StateMachine, self, $Animations, state.name.to_lower())
 		states[state.name.to_lower()] = state
-	print(states)
 	$StateMachine.initialize()
 
 func apply_gravity(delta):

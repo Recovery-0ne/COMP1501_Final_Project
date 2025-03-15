@@ -1,14 +1,11 @@
-[gd_scene load_steps=37 format=3 uid="uid://br344x2p25dxq"]
+[gd_scene load_steps=25 format=3 uid="uid://br344x2p25dxq"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_rwj2d"]
 [ext_resource type="Texture2D" uid="uid://j0lf0svhy5cw" path="res://Individual Sprites/adventurer-idle-00.png" id="1_sye36"]
-[ext_resource type="Texture2D" uid="uid://bgc5tpvtmys3q" path="res://Individual Sprites/adventurer-attack1-00.png" id="2_8c5cg"]
 [ext_resource type="Texture2D" uid="uid://cnhex13g3y5l2" path="res://Individual Sprites/adventurer-fall-00.png" id="2_nrqnx"]
 [ext_resource type="Texture2D" uid="uid://chu0ojsnwvo2t" path="res://Individual Sprites/adventurer-idle-01.png" id="2_qo0of"]
 [ext_resource type="Texture2D" uid="uid://cwi8ot66h41c3" path="res://Individual Sprites/adventurer-fall-01.png" id="3_d77gv"]
-[ext_resource type="Texture2D" uid="uid://ce6qvtb5q74u7" path="res://Individual Sprites/adventurer-attack1-01.png" id="3_rlls8"]
 [ext_resource type="Script" path="res://PlayerStateMachine.gd" id="3_uo80o"]
-[ext_resource type="Texture2D" uid="uid://btj3kxwlw8fj0" path="res://Individual Sprites/adventurer-attack1-02.png" id="4_hchpk"]
 [ext_resource type="Texture2D" uid="uid://cx1o7xqtrfenu" path="res://Individual Sprites/adventurer-run-00.png" id="4_oe4oi"]
 [ext_resource type="Texture2D" uid="uid://wl8jx1crkj5u" path="res://Individual Sprites/adventurer-cast-02.png" id="4_qphtn"]
 [ext_resource type="Texture2D" uid="uid://dvsvkr8wm5646" path="res://Individual Sprites/adventurer-jump-02.png" id="4_wbvdd"]
@@ -16,26 +13,13 @@
 [ext_resource type="Texture2D" uid="uid://d20tsf3tfvh2t" path="res://Individual Sprites/adventurer-jump-03.png" id="5_6w83i"]
 [ext_resource type="Script" path="res://PlayerIdle.gd" id="5_addl2"]
 [ext_resource type="Texture2D" uid="uid://dub3pgyd1s0k4" path="res://Individual Sprites/adventurer-run-01.png" id="5_li8uh"]
-[ext_resource type="Texture2D" uid="uid://b4kjpevfunrfp" path="res://Individual Sprites/adventurer-attack1-03.png" id="5_nxfmq"]
-[ext_resource type="Texture2D" uid="uid://cqrhrjxxiuc4e" path="res://Individual Sprites/adventurer-attack1-04.png" id="6_b2umy"]
 [ext_resource type="Texture2D" uid="uid://duvkpc2ldalsq" path="res://Individual Sprites/adventurer-run-02.png" id="6_uj4xc"]
 [ext_resource type="Script" path="res://PlayerMove.gd" id="6_ujqk5"]
 [ext_resource type="Texture2D" uid="uid://bhnnw2xj3v6n4" path="res://Individual Sprites/adventurer-run-03.png" id="7_0sg2j"]
 [ext_resource type="Texture2D" uid="uid://prboc1suf1eu" path="res://Individual Sprites/adventurer-run-04.png" id="8_0nqyd"]
 [ext_resource type="Texture2D" uid="uid://beoo6fxdgr6ks" path="res://Individual Sprites/adventurer-run-05.png" id="9_hakp1"]
-[ext_resource type="Texture2D" uid="uid://du1h63mhm7mih" path="res://Individual Sprites/adventurer-air-attack1-00.png" id="13_3hetm"]
 [ext_resource type="Script" path="res://PlayerJump.gd" id="13_smh3d"]
-[ext_resource type="Texture2D" uid="uid://ctoaohiffkqug" path="res://Individual Sprites/adventurer-air-attack1-01.png" id="14_vvx2q"]
-[ext_resource type="Texture2D" uid="uid://f0qt8qshk06y" path="res://Individual Sprites/adventurer-air-attack1-02.png" id="15_yxtps"]
 [ext_resource type="Script" path="res://PlayerFall.gd" id="16_2bwsu"]
-[ext_resource type="Texture2D" uid="uid://cq28gihbfwha0" path="res://Individual Sprites/adventurer-air-attack1-03.png" id="16_58134"]
-[ext_resource type="Script" path="res://PlayerAttack.gd" id="19_bj4n6"]
-[ext_resource type="Texture2D" uid="uid://bogesyyjuohi7" path="res://Individual Sprites/adventurer-attack3-00.png" id="23_l5tq3"]
-[ext_resource type="Texture2D" uid="uid://cm7jpre0xfj60" path="res://Individual Sprites/adventurer-attack3-01.png" id="24_su84p"]
-[ext_resource type="Texture2D" uid="uid://d0nkkn8p23ufi" path="res://Individual Sprites/adventurer-attack3-02.png" id="25_ntdpn"]
-[ext_resource type="Texture2D" uid="uid://cny4tcck2n0vs" path="res://Individual Sprites/adventurer-attack3-03.png" id="26_h16sx"]
-[ext_resource type="Script" path="res://JumpAttack.gd" id="29_ovbcc"]
-[ext_resource type="Script" path="res://MoveAttack.gd" id="36_dyxnf"]
 [ext_resource type="Script" path="res://PlayerCastFireball.gd" id="19_bghcx"]
 [ext_resource type="PackedScene" uid="uid://j4tmoiklso7j" path="res://fireball.tscn" id="24_k3r8j"]
 
@@ -45,23 +29,6 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_8c5cg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_rlls8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_hchpk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_nxfmq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_b2umy")
-}],
-"loop": false,
-"name": &"basicattack",
-
 "texture": ExtResource("4_qphtn")
 }, {
 "duration": 1.0,
@@ -106,23 +73,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_3hetm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_vvx2q")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_yxtps")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_58134")
-}],
-"loop": false,
-"name": &"jumpattack",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("4_oe4oi")
 }, {
 "duration": 1.0,
@@ -143,23 +93,6 @@ animations = [{
 "loop": true,
 "name": &"move",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("23_l5tq3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_su84p")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_ntdpn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_h16sx")
-}],
-"loop": false,
-"name": &"moveattack",
-"speed": 5.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -176,8 +109,6 @@ shape = SubResource("CapsuleShape2D_o6wom")
 position = Vector2(0, -19)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mau3t")
-
-animation = &"moveattack"
 animation = &"cast_projectile"
 frame = 1
 frame_progress = 1.0
@@ -201,15 +132,6 @@ script = ExtResource("13_smh3d")
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("16_2bwsu")
 
-[node name="BasicAttack" type="Node" parent="StateMachine"]
-script = ExtResource("19_bj4n6")
-
-[node name="JumpAttack" type="Node" parent="StateMachine"]
-script = ExtResource("29_ovbcc")
-
-[node name="MoveAttack" type="Node" parent="StateMachine"]
-script = ExtResource("36_dyxnf")
-
 [node name="Cast_Fireball" type="Node" parent="StateMachine"]
 script = ExtResource("19_bghcx")
 
@@ -219,6 +141,3 @@ position = Vector2(15, -20)
 [connection signal="animation_finished" from="Animations" to="StateMachine/Cast_Fireball" method="_on_animations_animation_finished"]
 [connection signal="animation_looped" from="Animations" to="StateMachine/Cast_Fireball" method="_on_animations_animation_looped"]
 [connection signal="frame_changed" from="Animations" to="StateMachine/Cast_Fireball" method="_on_animations_frame_changed"]
-[connection signal="animation_finished" from="Animations" to="StateMachine/BasicAttack" method="_on_animations_animation_finished"]
-[connection signal="animation_finished" from="Animations" to="StateMachine/JumpAttack" method="_on_animations_animation_finished"]
-[connection signal="animation_finished" from="Animations" to="StateMachine/MoveAttack" method="_on_animations_animation_finished"]
