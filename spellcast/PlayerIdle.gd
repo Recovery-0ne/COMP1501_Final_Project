@@ -12,5 +12,9 @@ func _update(delta: float):
 		state_machine.change_state(player.states["jump"])
 	if not player.is_on_floor():
 		state_machine.change_state(player.states["fall"])
+	if Input.is_action_just_pressed("basic_attack"):
+		state_machine.change_state(player.states["basicattack"])
+
+
 func _exit():
 	super()
