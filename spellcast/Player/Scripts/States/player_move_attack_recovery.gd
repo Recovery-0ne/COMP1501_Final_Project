@@ -5,14 +5,11 @@ func _enter():
 
 func _update(delta: float):
 	super(delta)
-	if player.is_on_floor():
-		player.velocity.x = 0
 	player.move()
 
 func _exit():
 	super()
-	player.damage_target()
 
 func _on_animations_animation_finished():
-	if state_machine.current_state == self:
-		state_machine.change_state("air_attack_recovery")
+	if state_machine.current_state == self and anim2D.frame_progress != 0:
+		state_machine.change_state("idle")

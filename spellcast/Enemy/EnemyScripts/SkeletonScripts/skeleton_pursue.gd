@@ -15,11 +15,11 @@ func _update(delta: float):
 	enemy.change_facing_direction()
 	enemy.set_move()
 	if not enemy.can_see_target:
-		state_machine.change_state(enemy.states["idle"])
+		state_machine.change_state("idle")
 	if enemy.attack_check.is_colliding():
 		#After colliding, have the enemy move forward for longer before attacking so that the RayShape overlaps the player more
 		if (enemy.position - enemy.player.position).length() <= 50:
-			state_machine.change_state(enemy.states["attack"])
+			state_machine.change_state("attack")
 	
 func _exit():
 	super()

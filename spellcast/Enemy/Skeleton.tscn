@@ -1,13 +1,15 @@
-[gd_scene load_steps=58 format=3 uid="uid://drhydcmoetxlj"]
+[gd_scene load_steps=60 format=3 uid="uid://drhydcmoetxlj"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton.gd" id="1_0cshr"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_wander.gd" id="2_5do2f"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="2_xm5eo"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_idle.gd" id="2_y1qu0"]
-[ext_resource type="Script" path="res://Enemy/skeleton_pursue.gd" id="5_pj0ix"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_pursue.gd" id="5_pj0ix"]
 [ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/detector.tscn" id="6_3dtnt"]
-[ext_resource type="Script" path="res://Enemy/skeleton_attack.gd" id="6_kcfp7"]
-[ext_resource type="Script" path="res://Enemy/skeleton_attack_recovery.gd" id="7_qyjjk"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_attack.gd" id="6_kcfp7"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_attack_recovery.gd" id="7_qyjjk"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="8_8qg5g"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="9_2cmh8"]
 [ext_resource type="Texture2D" uid="uid://brx7gdwx5ed6" path="res://Assets/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="12_31pwv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3yx3n"]
@@ -62,6 +64,26 @@ region = Rect2(528, 48, 48, 48)
 atlas = ExtResource("12_31pwv")
 region = Rect2(576, 48, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnv40"]
+atlas = ExtResource("12_31pwv")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu5lw"]
+atlas = ExtResource("12_31pwv")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqcji"]
+atlas = ExtResource("12_31pwv")
+region = Rect2(96, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hu8l"]
+atlas = ExtResource("12_31pwv")
+region = Rect2(144, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4oxu"]
+atlas = ExtResource("12_31pwv")
+region = Rect2(192, 144, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_3q3jk"]
 atlas = ExtResource("12_31pwv")
 region = Rect2(0, 192, 48, 48)
@@ -113,26 +135,6 @@ region = Rect2(528, 192, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kgxnf"]
 atlas = ExtResource("12_31pwv")
 region = Rect2(576, 192, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dnv40"]
-atlas = ExtResource("12_31pwv")
-region = Rect2(0, 144, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yu5lw"]
-atlas = ExtResource("12_31pwv")
-region = Rect2(48, 144, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xqcji"]
-atlas = ExtResource("12_31pwv")
-region = Rect2(96, 144, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1hu8l"]
-atlas = ExtResource("12_31pwv")
-region = Rect2(144, 144, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v4oxu"]
-atlas = ExtResource("12_31pwv")
-region = Rect2(192, 144, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gd3bn"]
 atlas = ExtResource("12_31pwv")
@@ -243,6 +245,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_dnv40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu5lw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqcji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hu8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4oxu")
+}],
+"loop": false,
+"name": &"damaged",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_3q3jk")
 }, {
 "duration": 1.0,
@@ -282,28 +304,8 @@ animations = [{
 "texture": SubResource("AtlasTexture_kgxnf")
 }],
 "loop": false,
-"name": &"die",
+"name": &"dead",
 "speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dnv40")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yu5lw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xqcji")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1hu8l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v4oxu")
-}],
-"loop": false,
-"name": &"hit",
-"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -371,29 +373,35 @@ collision_mask = 128
 script = ExtResource("1_0cshr")
 animated_sprite = NodePath("AnimatedSprite2D")
 
-[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("2_xm5eo")
 inital_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="EnemyStateMachine"]
+[node name="idle" type="Node" parent="StateMachine"]
 script = ExtResource("2_y1qu0")
 
-[node name="Timer" type="Timer" parent="EnemyStateMachine/idle"]
+[node name="Timer" type="Timer" parent="StateMachine/idle"]
 wait_time = 3.0
 one_shot = true
 autostart = true
 
-[node name="wander" type="Node" parent="EnemyStateMachine"]
+[node name="wander" type="Node" parent="StateMachine"]
 script = ExtResource("2_5do2f")
 
-[node name="pursue" type="Node" parent="EnemyStateMachine"]
+[node name="pursue" type="Node" parent="StateMachine"]
 script = ExtResource("5_pj0ix")
 
-[node name="attack" type="Node" parent="EnemyStateMachine"]
+[node name="attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_kcfp7")
 
-[node name="attack_recovery" type="Node" parent="EnemyStateMachine"]
+[node name="attack_recovery" type="Node" parent="StateMachine"]
 script = ExtResource("7_qyjjk")
+
+[node name="dead" type="Node" parent="StateMachine"]
+script = ExtResource("8_8qg5g")
+
+[node name="damaged" type="Node" parent="StateMachine"]
+script = ExtResource("9_2cmh8")
 
 [node name="Detector" parent="." instance=ExtResource("6_3dtnt")]
 Vision_cone_size = 0.7
@@ -401,7 +409,7 @@ Vision_cone_size = 0.7
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_cyhpe")
-animation = &"attack_recovery"
+animation = &"idle"
 offset = Vector2(3.47, -3.1)
 
 [node name="SkeletonCollision" type="CollisionShape2D" parent="."]
@@ -423,6 +431,17 @@ collision_mask = 128
 target_position = Vector2(20, 0)
 collision_mask = 128
 
-[connection signal="timeout" from="EnemyStateMachine/idle/Timer" to="EnemyStateMachine/idle" method="_on_timer_timeout"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="EnemyStateMachine/attack" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="EnemyStateMachine/attack_recovery" method="_on_animated_sprite_2d_animation_finished"]
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = -7.14286
+offset_top = -20.8571
+offset_right = 44.8571
+offset_bottom = 2.14286
+scale = Vector2(0.29, 0.29)
+text = "Health"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="timeout" from="StateMachine/idle/Timer" to="StateMachine/idle" method="_on_timer_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/attack" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/attack_recovery" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/damaged" method="_on_animated_sprite_2d_animation_finished"]

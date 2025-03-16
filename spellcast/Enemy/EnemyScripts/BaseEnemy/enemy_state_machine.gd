@@ -8,7 +8,8 @@ func _initalize():
 	current_state = inital_state
 	current_state._enter()
 	
-func change_state(new_state: EnemyState):
+func change_state(new_state_name: String):
+	var new_state = current_state.enemy.states[new_state_name]
 	current_state._exit()
 	current_state = new_state
 	current_state._enter()

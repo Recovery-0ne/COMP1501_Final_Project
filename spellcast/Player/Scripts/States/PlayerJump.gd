@@ -7,9 +7,9 @@ func _enter():
 func _update(delta: float):
 	super(delta)
 	if player.velocity.y > 0:
-		state_machine.change_state(player.states["fall"])
+		state_machine.change_state("fall")
 	if Input.is_action_just_pressed("attack"):
-		state_machine.change_state(player.states["air_attack"])
+		state_machine.change_state("air_attack")
 	player.move()		
 
 func _exit():

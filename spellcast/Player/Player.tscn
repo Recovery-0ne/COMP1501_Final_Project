@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://br344x2p25dxq"]
+[gd_scene load_steps=59 format=3 uid="uid://br344x2p25dxq"]
 
 [ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_rwj2d"]
 [ext_resource type="Texture2D" uid="uid://j0lf0svhy5cw" path="res://Assets/Player/adventurer-idle-00.png" id="1_sye36"]
@@ -22,8 +22,13 @@
 [ext_resource type="Texture2D" uid="uid://bhnnw2xj3v6n4" path="res://Assets/Player/adventurer-run-03.png" id="7_0sg2j"]
 [ext_resource type="Texture2D" uid="uid://prboc1suf1eu" path="res://Assets/Player/adventurer-run-04.png" id="8_0nqyd"]
 [ext_resource type="Texture2D" uid="uid://beoo6fxdgr6ks" path="res://Assets/Player/adventurer-run-05.png" id="9_hakp1"]
+[ext_resource type="Script" path="res://Player/Scripts/States/player_attack_recovery.gd" id="10_66ay8"]
 [ext_resource type="Texture2D" uid="uid://djc0ko47ydonj" path="res://Assets/Player/adventurer-attack2-00.png" id="11_ij5tq"]
+[ext_resource type="Script" path="res://Player/Scripts/States/player_dead_state.gd" id="12_haatu"]
+[ext_resource type="Script" path="res://Player/Scripts/States/player_air_attack_recovery.gd" id="12_sm7v8"]
 [ext_resource type="Texture2D" uid="uid://bp746g63lrmlr" path="res://Assets/Player/adventurer-attack2-01.png" id="12_uwawa"]
+[ext_resource type="Script" path="res://Player/Scripts/States/player_move_attack_recovery.gd" id="13_efvso"]
+[ext_resource type="Script" path="res://Player/Scripts/States/player_damaged_state.gd" id="13_j6a3j"]
 [ext_resource type="Texture2D" uid="uid://bx1cl6iut4ail" path="res://Assets/Player/adventurer-attack2-02.png" id="13_rp8vf"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerJump.gd" id="13_smh3d"]
 [ext_resource type="Texture2D" uid="uid://tao3ix50t5qr" path="res://Assets/Player/adventurer-attack2-03.png" id="14_hm5qh"]
@@ -39,7 +44,19 @@
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerAttack.gd" id="23_vcf0r"]
 [ext_resource type="PackedScene" uid="uid://j4tmoiklso7j" path="res://Spells/fireball.tscn" id="24_k3r8j"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerAirAttack.gd" id="24_obgxp"]
+[ext_resource type="Texture2D" uid="uid://b0k144vwrvvqy" path="res://Assets/Player/adventurer-die-00.png" id="24_skdkq"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerMoveAttack.gd" id="25_2ywap"]
+[ext_resource type="Texture2D" uid="uid://domg66481u8ur" path="res://Assets/Player/adventurer-die-01.png" id="25_dguv7"]
+[ext_resource type="Texture2D" uid="uid://b1d6uppotu37u" path="res://Assets/Player/adventurer-die-02.png" id="26_ixcec"]
+[ext_resource type="Texture2D" uid="uid://cpuj3xrk7rhsy" path="res://Assets/Player/adventurer-hurt-00.png" id="26_oqr6o"]
+[ext_resource type="Texture2D" uid="uid://bthj8keinmgy0" path="res://Assets/Player/adventurer-hurt-01.png" id="27_c84u0"]
+[ext_resource type="Texture2D" uid="uid://b55ebfqiw62t0" path="res://Assets/Player/adventurer-die-03.png" id="27_n0hov"]
+[ext_resource type="Texture2D" uid="uid://bd4eh7llkgvpn" path="res://Assets/Player/adventurer-hurt-02.png" id="28_30eyu"]
+[ext_resource type="Texture2D" uid="uid://cbwr8ap6o2g8p" path="res://Assets/Player/adventurer-die-04.png" id="28_mm7md"]
+[ext_resource type="Texture2D" uid="uid://nh05w42f2ms7" path="res://Assets/Player/adventurer-die-05.png" id="29_kdyps"]
+[ext_resource type="Texture2D" uid="uid://4shnl510fd57" path="res://Assets/Player/adventurer-die-06.png" id="30_ue0rj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tfxn8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o6wom"]
 
@@ -51,7 +68,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("3_gk861")
+}],
+"loop": false,
+"name": &"air_attack",
+"speed": 7.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_jbmhf")
 }, {
@@ -59,7 +81,7 @@ animations = [{
 "texture": ExtResource("5_vlohr")
 }],
 "loop": false,
-"name": &"air_attack",
+"name": &"air_attack_recovery",
 "speed": 7.0
 }, {
 "frames": [{
@@ -74,7 +96,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("14_hm5qh")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 7.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("15_wlu17")
 }, {
@@ -82,7 +109,7 @@ animations = [{
 "texture": ExtResource("16_3rv45")
 }],
 "loop": false,
-"name": &"attack",
+"name": &"attack_recovery",
 "speed": 7.0
 }, {
 "frames": [{
@@ -95,6 +122,46 @@ animations = [{
 "loop": false,
 "name": &"cast_projectile",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_oqr6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_c84u0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_30eyu")
+}],
+"loop": false,
+"name": &"damaged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_skdkq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_dguv7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_ixcec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_n0hov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_mm7md")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_kdyps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_ue0rj")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -161,7 +228,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("19_srgpx")
+}],
+"loop": false,
+"name": &"move_attack",
+"speed": 7.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("20_n23w7")
 }, {
@@ -169,7 +241,7 @@ animations = [{
 "texture": ExtResource("21_lolbd")
 }],
 "loop": false,
-"name": &"move_attack",
+"name": &"move_attack_recovery",
 "speed": 7.0
 }]
 
@@ -177,23 +249,6 @@ animations = [{
 position = Vector2(1, -39)
 collision_mask = 128
 script = ExtResource("1_rwj2d")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -9)
-scale = Vector2(3, 3)
-shape = SubResource("CapsuleShape2D_o6wom")
-
-[node name="Animations" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -19)
-scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_mau3t")
-animation = &"jump"
-frame = 1
-frame_progress = 1.0
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -81)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_uo80o")
@@ -221,15 +276,64 @@ position = Vector2(15, -20)
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("23_vcf0r")
 
+[node name="Attack_Recovery" type="Node" parent="StateMachine"]
+script = ExtResource("10_66ay8")
+
 [node name="Air_Attack" type="Node" parent="StateMachine"]
 script = ExtResource("24_obgxp")
+
+[node name="Air_Attack_Recovery" type="Node" parent="StateMachine"]
+script = ExtResource("12_sm7v8")
 
 [node name="Move_Attack" type="Node" parent="StateMachine"]
 script = ExtResource("25_2ywap")
 
+[node name="Move_Attack_Recovery" type="Node" parent="StateMachine"]
+script = ExtResource("13_efvso")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("12_haatu")
+
+[node name="Damaged" type="Node" parent="StateMachine"]
+script = ExtResource("13_j6a3j")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -81)
+
+[node name="AttackCheck" type="ShapeCast2D" parent="."]
+position = Vector2(48.425, -7.455)
+scale = Vector2(3.205, 3.205)
+shape = SubResource("CircleShape2D_tfxn8")
+target_position = Vector2(0, 0)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -9)
+scale = Vector2(3, 3)
+shape = SubResource("CapsuleShape2D_o6wom")
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -19)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_mau3t")
+animation = &"idle"
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = -27.0
+offset_top = -79.0
+offset_right = 25.0
+offset_bottom = -56.0
+text = "Health"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="animation_finished" from="Animations" to="StateMachine/Cast_Fireball" method="_on_animations_animation_finished"]
 [connection signal="animation_finished" from="Animations" to="StateMachine/Attack" method="_on_animations_animation_finished"]
+[connection signal="animation_finished" from="Animations" to="StateMachine/Attack_Recovery" method="_on_animations_animation_finished"]
 [connection signal="animation_finished" from="Animations" to="StateMachine/Air_Attack" method="_on_animations_animation_finished"]
+[connection signal="animation_finished" from="Animations" to="StateMachine/Air_Attack_Recovery" method="_on_animations_animation_finished"]
 [connection signal="animation_finished" from="Animations" to="StateMachine/Move_Attack" method="_on_animations_animation_finished"]
+[connection signal="animation_finished" from="Animations" to="StateMachine/Move_Attack_Recovery" method="_on_animations_animation_finished"]
+[connection signal="animation_finished" from="Animations" to="StateMachine/Damaged" method="_on_animations_animation_finished"]
 [connection signal="animation_looped" from="Animations" to="StateMachine/Cast_Fireball" method="_on_animations_animation_looped"]
 [connection signal="frame_changed" from="Animations" to="StateMachine/Cast_Fireball" method="_on_animations_frame_changed"]

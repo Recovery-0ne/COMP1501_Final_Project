@@ -4,13 +4,17 @@ class_name Enemy
 @export var animated_sprite: AnimatedSprite2D
 
 var player: Player
-var last_known_player_position:= Vector2.ZERO
-var looking_for_player:= false
+#var last_known_player_position:= Vector2.ZERO
+#var looking_for_player:= false
 var states: Dictionary
-@export var move_dir:= 1
-@export var facing_dir = 1
+
+@export var max_health:= 100
+@onready var health:= max_health
+@export var damage:= 5
 @export var speed:= 15
 @export var gravity:= 2000
+@export var move_dir:= 1
+@onready var facing_dir:= move_dir
 
 @onready var vision:= $Detector
 
@@ -21,16 +25,18 @@ var states: Dictionary
 @onready var start_pos:= position
 
 var can_see_target = false
+var dead:= false
 
 func _ready():
-	for state in $EnemyStateMachine.get_children():
-		state._initalize($EnemyStateMachine, self, animated_sprite, state.name.to_lower())
+	for state in $StateMachine.get_children():
+		state._initalize($StateMachine, self, animated_sprite, state.name.to_lower())
 		states[state.name.to_lower()] = state
-	$EnemyStateMachine._initalize()
+	$StateMachine._initalize()
 	self.add_to_group("Enemies")
 	player = get_tree().get_nodes_in_group("Player")[0]
 	vision.body = self
 	vision.target = player
+	update_health_display()
 
 func _is_facing_wall():
 	return wall_check.is_colliding()
@@ -54,3 +60,22 @@ func change_direction_to(directon: int):
 func flip_checks():
 	wall_check.target_position.x *= -1
 	floor_check.position.x *= -1
+	
+func damage_target():
+	if attack_check.is_colliding():
+		player.take_damage(damage)
+		
+func take_damage(_damage):
+	if dead: return
+	health = clamp(health - _damage, 0, max_health)
+	if health == 0:
+		dead = true
+		$StateMachine.change_state("dead")
+		$HealthLabel.visible = false
+	else:
+		if $StateMachine.current_state != states["attack"]:
+			$StateMachine.change_state("damaged")
+	update_health_display()
+		
+func update_health_display():
+	$HealthLabel.text = str(health)

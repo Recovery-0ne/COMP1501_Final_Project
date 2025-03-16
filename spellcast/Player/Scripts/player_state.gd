@@ -20,6 +20,7 @@ func _update(delta: float): #Write code here that should be used in every state 
 	player.direction = Input.get_axis("left", "right")
 	if player.direction != 0:
 		anim2D.flip_h = player.direction < 0
+		player.attack_check.position.x = abs(player.attack_check.position.x) * player.direction
 	player.apply_gravity()
 
 func _exit():
