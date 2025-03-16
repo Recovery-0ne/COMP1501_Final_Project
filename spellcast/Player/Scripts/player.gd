@@ -8,6 +8,9 @@ var speed = 500
 var gravity = 65
 var jump_velocity = 1000
 
+func _init() -> void:
+	self.add_to_group("Player")
+
 func _ready():
 	for state in $StateMachine.get_children():
 		state.initialize($StateMachine, self, $Animations, state.name.to_lower())
