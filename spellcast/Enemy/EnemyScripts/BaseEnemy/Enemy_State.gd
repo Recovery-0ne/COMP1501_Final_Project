@@ -16,7 +16,6 @@ func _enter():
 	animated_sprite.play(animation_name)
 	
 func _update(delta: float):
-	enemy.flip_sprite()
 	enemy.apply_gravity(delta)
 	enemy.move_and_slide()
 	

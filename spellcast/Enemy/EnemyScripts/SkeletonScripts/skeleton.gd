@@ -1,9 +1,23 @@
 extends Enemy
+	
+func set_move():
+	velocity.x = move_dir * speed
+	
+func stop():
+	velocity.x = 0
 
-func flip_sprite():
+func change_facing_direction():
 	if velocity.x > 0:
+		facing_dir = 1
 		animated_sprite.flip_h = false
-		animated_sprite.offset.x = 0
+		animated_sprite.offset.x = abs(animated_sprite.offset.x)
+		attack_check.position.x = abs(attack_check.position.x)
 	elif  velocity.x < 0:
+		facing_dir = -1
 		animated_sprite.flip_h = true
-		animated_sprite.offset.x = -8
+		animated_sprite.offset.x = -abs(animated_sprite.offset.x)
+		attack_check.position.x = -abs(attack_check.position.x)
+			
+func damage_target():
+	if attack_check.is_colliding():
+		print_debug("Player Hit")
