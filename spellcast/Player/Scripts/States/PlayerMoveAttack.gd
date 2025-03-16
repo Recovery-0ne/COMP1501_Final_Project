@@ -9,7 +9,8 @@ func _update(delta: float):
 
 func _exit():
 	super()
+	player.damage_target()
 
 func _on_animations_animation_finished():
 	if state_machine.current_state == self:
-		state_machine.change_state(player.states["idle"])
+		state_machine.change_state("move_attack_recovery")

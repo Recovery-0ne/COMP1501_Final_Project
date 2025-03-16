@@ -13,7 +13,7 @@ func _exit():
 
 func _on_animations_animation_finished() -> void:
 	if state_machine.current_state == self:
-		state_machine.change_state(player.states["idle"])
+		state_machine.change_state("idle")
 
 func _on_animations_frame_changed() -> void:
 	if state_machine.current_state == self and not $Fireball.visible:

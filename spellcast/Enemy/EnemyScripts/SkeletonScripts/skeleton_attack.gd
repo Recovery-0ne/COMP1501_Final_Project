@@ -12,4 +12,4 @@ func _exit():
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if state_machine.current_state == self:
 		enemy.damage_target()
-		state_machine.change_state(enemy.states["attack_recovery"])
+		state_machine.change_state("attack_recovery")
