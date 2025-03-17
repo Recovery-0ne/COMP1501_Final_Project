@@ -12,6 +12,12 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="9_2cmh8"]
 [ext_resource type="Texture2D" uid="uid://brx7gdwx5ed6" path="res://Assets/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="12_31pwv"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1t2sk"]
+radius = 6.66667
+height = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_awxm6"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_3yx3n"]
 atlas = ExtResource("12_31pwv")
 region = Rect2(0, 48, 48, 48)
@@ -218,7 +224,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -241,7 +247,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_recovery",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -360,18 +366,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1t2sk"]
-radius = 6.66667
-height = 26.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_awxm6"]
-
 [node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite")]
 scale = Vector2(3.5, 3.5)
 collision_layer = 2
 collision_mask = 128
 script = ExtResource("1_0cshr")
 animated_sprite = NodePath("AnimatedSprite2D")
+speed = 25
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("2_xm5eo")
@@ -391,6 +392,10 @@ script = ExtResource("2_5do2f")
 [node name="pursue" type="Node" parent="StateMachine"]
 script = ExtResource("5_pj0ix")
 
+[node name="Timer" type="Timer" parent="StateMachine/pursue"]
+wait_time = 0.5
+one_shot = true
+
 [node name="attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_kcfp7")
 
@@ -405,12 +410,6 @@ script = ExtResource("9_2cmh8")
 
 [node name="Detector" parent="." instance=ExtResource("6_3dtnt")]
 Vision_cone_size = 0.7
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.8, 0.8)
-sprite_frames = SubResource("SpriteFrames_cyhpe")
-animation = &"idle"
-offset = Vector2(3.47, -3.1)
 
 [node name="SkeletonCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1t2sk")
@@ -431,6 +430,12 @@ collision_mask = 128
 target_position = Vector2(20, 0)
 collision_mask = 128
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_cyhpe")
+animation = &"attack_recovery"
+offset = Vector2(3.47, -3.1)
+
 [node name="HealthLabel" type="Label" parent="."]
 offset_left = -7.14286
 offset_top = -20.8571
@@ -442,6 +447,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="timeout" from="StateMachine/idle/Timer" to="StateMachine/idle" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/pursue/Timer" to="StateMachine/pursue" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/attack" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/attack_recovery" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/damaged" method="_on_animated_sprite_2d_animation_finished"]

@@ -9,11 +9,11 @@ func _enter():
 func _update(delta: float):
 	super(delta)
 	
-	if enemy.can_see_target:
-		state_machine.change_state("pursue")
 	if enemy._is_facing_wall() or enemy._is_on_ledge():
 		enemy.change_direction()
 		state_machine.change_state("idle")
+	elif enemy.can_see_target:
+		state_machine.change_state("pursue")
 	
 func _exit():
 	super()

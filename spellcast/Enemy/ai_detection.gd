@@ -2,7 +2,6 @@ extends Node
 
 @export var target : Node2D
 @export var body : Node2D
-@export var sense_range = 200
 @export var vision_range = 900
 ##Min = 0, Max = 1 (0 = 0 degrees, 1 = 90 degrees)
 @export var Vision_cone_size = 0.4
@@ -18,11 +17,8 @@ func _low_detect_rate():
 	$Timer.wait_time = default_timer_time
 	
 func _can_see_target():
-	#Check if the target is near enough that the body should know of their presence
-	if body.global_position.distance_to(target.global_position) <= sense_range:
-		return true
 	#Check is the target is in the vision range
-	elif body.global_position.distance_to(target.global_position) <= vision_range:
+	if body.global_position.distance_to(target.global_position) <= vision_range:
 		#Get the dot product of the vector to the target and the facing direction
 		#Normalize the vector to the target before calculating the dot product to ensure it is in the range of -1 to 1
 		var dot = (target.global_position - body.global_position).normalized().dot(Vector2(body.facing_dir,0))

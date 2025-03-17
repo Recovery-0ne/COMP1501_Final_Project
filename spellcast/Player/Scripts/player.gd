@@ -26,7 +26,7 @@ func _ready():
 
 func apply_gravity():
 	if not is_on_floor():
-		velocity.y += gravity
+		velocity.y = clamp(velocity.y + gravity, -jump_velocity, 1.75*jump_velocity)
 		
 func move(multiplier:=1.0):
 	velocity.x = direction * speed * multiplier
@@ -34,20 +34,25 @@ func move(multiplier:=1.0):
 		
 func damage_target():
 	if attack_check.is_colliding():
-		
+		#Damage all colliding objects
 		for i in attack_check.get_collision_count():
 			attack_check.get_collider(i).take_damage(damage)
 
-func take_damage(_damage):
+func take_damage(_damage:int, _flinch:=true):
 	if dead: return
 	health = clamp(health - _damage, 0, max_health)
 	if health == 0:
 		dead = true
 		$StateMachine.change_state("dead")
 		$HealthLabel.visible = false
-	else:
+	elif _flinch == true:
 		$StateMachine.change_state("damaged")
 	update_health_display()
 		
 func update_health_display():
 	$HealthLabel.text = str(health)
+	
+func cast_fireball():
+	if not $StateMachine/Cast_Fireball/Fireball.visible and $StateMachine/Cast_Fireball/Cast_Timer.is_stopped():
+		$StateMachine/Cast_Fireball/Cast_Timer.start()
+		$StateMachine/Cast_Fireball/Fireball._activate(self, get_global_mouse_position())

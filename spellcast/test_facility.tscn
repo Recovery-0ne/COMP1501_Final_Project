@@ -10,8 +10,8 @@
 [node name="TestFacility" type="Node"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(500, 250)
-scale = Vector2(42.84, 1)
+position = Vector2(-153, 265)
+scale = Vector2(100, 1)
 collision_layer = 128
 collision_mask = 0
 metadata/_edit_group_ = true
@@ -37,8 +37,22 @@ shape = SubResource("RectangleShape2D_sw80l")
 scale = Vector2(20, 20)
 mesh = SubResource("QuadMesh_afiq8")
 
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(1014, 307)
+scale = Vector2(5.3, 5.375)
+collision_layer = 128
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_sw80l")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D3"]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_afiq8")
+
 [node name="Player" parent="." instance=ExtResource("2_nvjhg")]
-position = Vector2(252, 186)
+position = Vector2(502, 86)
 
 [node name="Skeleton" parent="." instance=ExtResource("2_786br")]
 position = Vector2(728, 182)

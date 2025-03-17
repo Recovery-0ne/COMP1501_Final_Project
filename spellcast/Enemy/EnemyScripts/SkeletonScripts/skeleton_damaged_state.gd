@@ -12,4 +12,4 @@ func _exit():
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if state_machine.current_state == self:
-		state_machine.change_state("idle")
+		state_machine.change_state("pursue")
