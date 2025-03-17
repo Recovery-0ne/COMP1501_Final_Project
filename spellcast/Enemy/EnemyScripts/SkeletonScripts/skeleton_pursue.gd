@@ -1,13 +1,12 @@
 extends EnemyState
 
-@export var speed_scale = 3
-
 func _enter():
 	animation_name = "idle"
 	super()
 	#Increase detection rate
 	enemy.vision._high_detect_rate()
-	enemy.speed *= speed_scale
+	enemy.speed *= enemy.pursuit_speed_multiplier
+	animated_sprite.speed_scale=0.4*enemy.pursuit_speed_multiplier
 	
 func _update(delta: float):
 	super(delta)
@@ -21,7 +20,7 @@ func _update(delta: float):
 		$Timer.start()
 		
 	#After colliding, have the enemy move forward for longer before attacking so that the ShapeCast overlaps the player more
-	if enemy.attack_check.is_colliding() and (enemy.position - enemy.player.position).length() <= 50:
+	if enemy.attack_check.is_colliding() and (enemy.position - enemy.player.position).length() <= 60:
 		state_machine.change_state("attack")
 	elif enemy._is_facing_wall() or enemy._is_on_ledge():
 		enemy.stop()
@@ -33,7 +32,8 @@ func _update(delta: float):
 func _exit():
 	super()
 	enemy.vision._low_detect_rate()
-	enemy.speed /= speed_scale
+	enemy.speed /= enemy.pursuit_speed_multiplier
+	animated_sprite.speed_scale=1
 	enemy.stop()
 
 func _on_timer_timeout() -> void:

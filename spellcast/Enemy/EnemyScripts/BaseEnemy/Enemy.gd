@@ -8,10 +8,12 @@ var player: Player
 #var looking_for_player:= false
 var states: Dictionary
 
+@export var flip_on_start:=false
 @export var max_health:= 100
 @onready var health:= max_health
 @export var damage:= 5
 @export var speed:= 15
+@export var pursuit_speed_multiplier:=1
 @export var gravity:= 2000
 @export var move_dir:= 1
 @onready var facing_dir:= move_dir
@@ -38,6 +40,7 @@ func _ready():
 	vision.body = self
 	vision.target = player
 	update_health_display()
+	if flip_on_start: change_direction()
 
 func _is_facing_wall():
 	return wall_check.is_colliding()
