@@ -6,9 +6,10 @@ func _enter():
 	
 func _update(delta: float):
 	super(delta)
+	
 	if enemy.can_see_target:
 		state_machine.change_state("pursue")
-	if enemy.attack_check.is_colliding():
+	elif enemy.attack_check.is_colliding():
 		state_machine.change_state("attack")
 	
 func _exit():

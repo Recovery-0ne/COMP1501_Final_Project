@@ -3,8 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://cjqjq755yc2y2" path="res://Assets/FireBall/Sheets/ShotLoop-Sheet.png" id="1_1xfwh"]
 [ext_resource type="Script" path="res://Spells/fireball.gd" id="2_leros"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_enaa4"]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_l563i"]
 atlas = ExtResource("1_1xfwh")
 region = Rect2(0, 0, 64, 64)
@@ -41,12 +39,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Fireball" type="Area2D"]
-script = ExtResource("2_leros")
+[sub_resource type="CircleShape2D" id="CircleShape2D_enaa4"]
 
-[node name="FireballCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
-shape = SubResource("CircleShape2D_enaa4")
+[node name="Fireball" type="Area2D"]
+collision_layer = 0
+collision_mask = 131
+script = ExtResource("2_leros")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 
@@ -56,5 +54,10 @@ scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_25x3l")
 autoplay = "default"
 frame_progress = 0.978535
+
+[node name="FireballCollider" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 0)
+shape = SubResource("CircleShape2D_enaa4")
+disabled = true
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

@@ -6,6 +6,7 @@ var creator_position : Vector2
 var direction : Vector2
 @export var speed = 400
 @export var projectile_range = 400
+@export var damage = 10
 
 func _ready() -> void:
 	initial_position = position
@@ -21,6 +22,7 @@ func _activate(_creator : Node2D, _target : Vector2):
 	direction = (_target - position).normalized()
 	#Turn the sprite to face the direction it will move in. Use look_at() and pass a point in the path the object will take
 	$Marker2D.look_at(position + direction)
+	$FireballCollider.disabled = false
 	visible = true
 	
 func _process(delta: float) -> void:
@@ -31,8 +33,14 @@ func _process(delta: float) -> void:
 			_deactivate()
 
 func _deactivate():
+	$FireballCollider.disabled = true
 	visible = false
 	
 func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
+	if creator == null: return
 	if body != creator:
-		_deactivate()
+		call_deferred("_deactivate") #Only call deactivate once the collider is finished with the collision
+		if body is Player or body is Enemy:
+			body.take_damage(damage, false)
+			
+			

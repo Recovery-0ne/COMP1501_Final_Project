@@ -13,5 +13,4 @@ func _exit():
 
 func _on_animations_animation_finished():
 	if state_machine.current_state == self and anim2D.frame_progress != 0:
-		print_debug("LEAVING RECOVERY")
 		state_machine.change_state("idle")

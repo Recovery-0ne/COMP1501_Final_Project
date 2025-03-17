@@ -25,6 +25,7 @@ var states: Dictionary
 @onready var start_pos:= position
 
 var can_see_target = false
+#var has_seen_target = false
 var dead:= false
 
 func _ready():
@@ -65,7 +66,7 @@ func damage_target():
 	if attack_check.is_colliding():
 		player.take_damage(damage)
 		
-func take_damage(_damage):
+func take_damage(_damage:int, _flinch:=true):
 	if dead: return
 	health = clamp(health - _damage, 0, max_health)
 	if health == 0:
@@ -73,7 +74,11 @@ func take_damage(_damage):
 		$StateMachine.change_state("dead")
 		$HealthLabel.visible = false
 	else:
-		if $StateMachine.current_state != states["attack"]:
+		#If an enemy was hit and it can't see the player, it is possible they are behind it
+		if can_see_target == false:
+			change_direction()
+			$StateMachine.change_state("pursue")
+		if $StateMachine.current_state != states["attack"] and _flinch == true:
 			$StateMachine.change_state("damaged")
 	update_health_display()
 		
