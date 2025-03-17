@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://cd4doq0o7358i"]
+[gd_scene load_steps=8 format=4 uid="uid://cd4doq0o7358i"]
 
 [ext_resource type="PackedScene" uid="uid://bumlnxcwfugof" path="res://Area Template/area_template.tscn" id="1_nxw4m"]
 [ext_resource type="Texture2D" uid="uid://b70bu57dkmd43" path="res://Assets/Tileset.png" id="2_xqdcf"]
 [ext_resource type="PackedScene" uid="uid://br344x2p25dxq" path="res://Player/Player.tscn" id="3_jxyi2"]
-[ext_resource type="PackedScene" uid="uid://drhydcmoetxlj" path="res://Enemy/Skeleton.tscn" id="4_u4knd"]
+[ext_resource type="PackedScene" uid="uid://drhydcmoetxlj" path="res://Enemy/Skeleton.tscn" id="5_67su7"]
+[ext_resource type="PackedScene" uid="uid://ls572kqc41a2" path="res://Enemy/SkullWolf.tscn" id="5_yw13f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4jm5f"]
 texture = ExtResource("2_xqdcf")
@@ -82,7 +83,17 @@ tile_map_data = PackedByteArray("AAAGAAAAAAAHAAIAAAAFAAAAAAAIAAIAAAAEAAAAAAAHAAI
 tile_map_data = PackedByteArray("AAAKAAAAAAAJAAQAAAALAAAAAAAJAAQAAADm//X/AAAJAAQAAADn//X/AAAJAAQAAACk/wAAAAAJAAQAAACl/wAAAAAJAAQAAABdAA0AAAAJAAQAAABeAA0AAAAJAAQAAAC4AAMAAAAJAAQAAAC5AAMAAAAJAAQAAAA=")
 
 [node name="Player" parent="." index="4" instance=ExtResource("3_jxyi2")]
-position = Vector2(2, -39)
+position = Vector2(5, -91)
 
-[node name="Skeleton" parent="." index="5" instance=ExtResource("4_u4knd")]
-position = Vector2(1185, -50)
+[node name="SkullWolf" parent="." index="5" instance=ExtResource("5_yw13f")]
+position = Vector2(3969, 541)
+flip_on_start = true
+
+[node name="SkullWolf2" parent="." index="6" instance=ExtResource("5_yw13f")]
+position = Vector2(3278, 546)
+
+[node name="Skeleton" parent="." index="7" instance=ExtResource("5_67su7")]
+position = Vector2(1256, -91)
+
+[node name="Skeleton2" parent="." index="8" instance=ExtResource("5_67su7")]
+position = Vector2(5009, 461)

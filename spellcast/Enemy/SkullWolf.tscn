@@ -12,7 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://dmm843cnrnrfl" path="res://Assets/Massacre Sprite Sheet.png" id="10_dpnav"]
 [ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/detector.tscn" id="10_fk00d"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u4ruj"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omxgw"]
+size = Vector2(31.5, 17)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5lmgg"]
 
@@ -222,6 +223,7 @@ animations = [{
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 128
+platform_floor_layers = 4294967168
 script = ExtResource("1_hmn74")
 animated_sprite = NodePath("AnimatedSprite2D")
 max_health = 50
@@ -267,8 +269,8 @@ script = ExtResource("9_7575k")
 [node name="Detector" parent="." instance=ExtResource("10_fk00d")]
 
 [node name="SkeletonCollision" type="CollisionShape2D" parent="."]
-scale = Vector2(2, 0.7)
-shape = SubResource("CapsuleShape2D_u4ruj")
+position = Vector2(0.75, 2.5)
+shape = SubResource("RectangleShape2D_omxgw")
 
 [node name="AttackCheck" type="ShapeCast2D" parent="."]
 position = Vector2(-21.965, -3)
@@ -277,7 +279,7 @@ shape = SubResource("CircleShape2D_5lmgg")
 target_position = Vector2(0, 0)
 
 [node name="FloorCheck" type="RayCast2D" parent="."]
-position = Vector2(-28, 9)
+position = Vector2(-30, 3.5)
 target_position = Vector2(0, 10)
 collision_mask = 128
 
@@ -289,7 +291,7 @@ collision_mask = 128
 position = Vector2(0, -12.28)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_3fmhf")
-animation = &"attack_recovery"
+animation = &"idle"
 offset = Vector2(3.47, -3.1)
 
 [node name="HealthLabel" type="Label" parent="."]
