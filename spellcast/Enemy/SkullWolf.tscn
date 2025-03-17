@@ -224,7 +224,8 @@ collision_layer = 2
 collision_mask = 128
 script = ExtResource("1_hmn74")
 animated_sprite = NodePath("AnimatedSprite2D")
-max_health = 80
+max_health = 50
+damage = 10
 speed = 80
 pursuit_speed_multiplier = 5
 move_dir = -1
@@ -292,8 +293,14 @@ animation = &"attack_recovery"
 offset = Vector2(3.47, -3.1)
 
 [node name="HealthLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -11.5
+offset_top = -29.5
+offset_right = 40.5
+offset_bottom = -6.5
+scale = Vector2(0.5, 0.5)
+text = "Health"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="timeout" from="StateMachine/idle/Timer" to="StateMachine/idle" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/pursue/Timer" to="StateMachine/pursue" method="_on_timer_timeout"]
