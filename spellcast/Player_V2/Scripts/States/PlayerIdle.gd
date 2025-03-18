@@ -1,7 +1,6 @@
 extends PlayerState
 
 func _enter():
-	#print_debug("idle")
 	super()
 
 func _update(delta: float):
