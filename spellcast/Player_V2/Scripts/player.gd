@@ -19,7 +19,7 @@ func _init() -> void:
 
 func _ready():
 	for state in $StateMachine.get_children():
-		state.initialize($StateMachine, self, $Animations, state.name.to_lower())
+		state.initialize($StateMachine, self, $Sprite2D, $Sprite2D/AnimationPlayer, state.name.to_lower())
 		states[state.name.to_lower()] = state
 	$StateMachine.initialize()
 	update_health_display()
