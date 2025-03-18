@@ -448,3 +448,6 @@ region_rect = Rect2(0, 0, 350, 592)
 libraries = {
 "": SubResource("AnimationLibrary_xmvff")
 }
+
+[node name="StatusEffectTimer" type="Timer" parent="."]
+one_shot = true

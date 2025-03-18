@@ -254,5 +254,8 @@ text = "Health"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="StatusEffectTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="StateMachine/idle/Timer" to="StateMachine/idle" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/pursue/Timer" to="StateMachine/pursue" method="_on_timer_timeout"]

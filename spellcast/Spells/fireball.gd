@@ -42,5 +42,6 @@ func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int
 		call_deferred("_deactivate") #Only call deactivate once the collider is finished with the collision
 		if body is Player or body is Enemy:
 			body.take_damage(damage, false)
+			body.apply_burning()
 			
 			
