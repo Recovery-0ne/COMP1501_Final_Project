@@ -168,19 +168,18 @@ _data = {
 "walk": SubResource("Animation_tte2k")
 }
 
-[node name="SkullWolf" type="CharacterBody2D" node_paths=PackedStringArray("anim", "sprite")]
+[node name="SkullWolf" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 128
 platform_floor_layers = 4294967168
 script = ExtResource("1_hmn74")
-anim = NodePath("Sprite2D/AnimationPlayer")
-sprite = NodePath("Sprite2D")
+pursuit_speed_multiplier = 5
+move_dir = -1
 max_health = 50
 damage = 10
 speed = 80
-pursuit_speed_multiplier = 5
-move_dir = -1
+burn_effect_duration = [5, 10]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("2_rvhue")

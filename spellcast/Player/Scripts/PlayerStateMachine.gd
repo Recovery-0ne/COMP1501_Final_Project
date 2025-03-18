@@ -5,7 +5,7 @@ class_name StateMachine
 @export var initial_state: PlayerState
 var current_state: PlayerState
 
-func initialize():
+func _initialize():
 	current_state = initial_state
 	current_state._enter()
 

@@ -8,7 +8,7 @@ var sprite: Sprite2D
 var anim: AnimationPlayer
 var animation_name: String
 
-func initialize(_state_machine: StateMachine, _player: Player, _sprite: Sprite2D, _anim: AnimationPlayer, _animation_name: String):
+func _initialize(_state_machine: StateMachine, _player: Player, _sprite: Sprite2D, _anim: AnimationPlayer, _animation_name: String):
 	state_machine = _state_machine
 	player = _player
 	sprite = _sprite

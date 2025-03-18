@@ -4,7 +4,7 @@ class_name StateMachineEnemy
 @export var inital_state: EnemyState
 var current_state: EnemyState
 
-func _initalize():
+func _initialize():
 	current_state = inital_state
 	current_state._enter()
 	
