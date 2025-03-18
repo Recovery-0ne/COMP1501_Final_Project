@@ -7,4 +7,4 @@ func _update(delta: float):
 	super(delta)
 	
 func _exit():
-	super()	
+	super()
