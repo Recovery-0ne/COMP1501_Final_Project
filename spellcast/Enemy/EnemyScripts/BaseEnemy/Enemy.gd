@@ -25,6 +25,9 @@ var states: Dictionary
 
 @onready var start_pos:= position
 
+var has_status_effect:= false
+var status_effect_duration:float #Depending on the effect, this could be a max number of occurances or a time
+
 var can_see_target = false
 var dead:= false
 
@@ -85,3 +88,20 @@ func take_damage(_damage:int, _flinch:=true):
 		
 func update_health_display():
 	$HealthLabel.text = str(health)
+	
+func apply_burning():
+	if has_status_effect: return
+	has_status_effect = true
+	status_effect_duration = randi_range(5,10)
+	$StatusEffectTimer.wait_time = 1
+	$StatusEffectTimer.connect("timeout", take_burn_damage)
+	$StatusEffectTimer.start()
+	
+func take_burn_damage():
+	status_effect_duration -= 1
+	if status_effect_duration >= 0:
+		take_damage(1,false)
+		$StatusEffectTimer.start()
+	else:
+		has_status_effect = false
+		$StatusEffectTimer.disconnect("timeout", take_burn_damage)

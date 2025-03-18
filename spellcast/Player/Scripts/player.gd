@@ -12,6 +12,9 @@ var gravity:= 35
 @onready var jump_velocity:= gravity*gravity
 @onready var attack_check:= $AttackCheck
 
+var has_status_effect:= false
+var status_effect_duration:float #Depending on the effect, this could be a max number of occurances or a time
+
 var dead = false
 
 func _init() -> void:
@@ -56,3 +59,20 @@ func cast_fireball():
 	if not $StateMachine/Cast_Fireball/Fireball.visible and $StateMachine/Cast_Fireball/Cast_Timer.is_stopped():
 		$StateMachine/Cast_Fireball/Cast_Timer.start()
 		$StateMachine/Cast_Fireball/Fireball._activate(self, get_global_mouse_position())
+		
+func apply_burning():
+	if has_status_effect: return
+	has_status_effect = true
+	status_effect_duration = randi_range(5,10)
+	$StatusEffectTimer.wait_time = 1
+	$StatusEffectTimer.connect("timeout", take_burn_damage)
+	$StatusEffectTimer.start()
+	
+func take_burn_damage():
+	status_effect_duration -= 1
+	if status_effect_duration >= 0:
+		take_damage(1,false)
+		$StatusEffectTimer.start()
+	else:
+		has_status_effect = false
+		$StatusEffectTimer.disconnect("timeout", take_burn_damage)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://cd4doq0o7358i"]
+[gd_scene load_steps=8 format=4 uid="uid://cd4doq0o7358i"]
 
 [ext_resource type="PackedScene" uid="uid://bumlnxcwfugof" path="res://Area Template/area_template.tscn" id="1_nxw4m"]
 [ext_resource type="Texture2D" uid="uid://b70bu57dkmd43" path="res://Assets/Tileset.png" id="2_xqdcf"]
 [ext_resource type="PackedScene" uid="uid://drhydcmoetxlj" path="res://Enemy/Skeleton.tscn" id="5_67su7"]
+[ext_resource type="PackedScene" uid="uid://udvv0q57vsxm" path="res://Player/Player.tscn" id="5_anssd"]
 [ext_resource type="PackedScene" uid="uid://ls572kqc41a2" path="res://Enemy/SkullWolf.tscn" id="5_yw13f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4jm5f"]
@@ -93,3 +94,5 @@ position = Vector2(1256, -91)
 
 [node name="Skeleton2" parent="." index="7" instance=ExtResource("5_67su7")]
 position = Vector2(5009, 461)
+
+[node name="Player" parent="." index="8" instance=ExtResource("5_anssd")]
