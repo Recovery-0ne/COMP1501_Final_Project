@@ -9,7 +9,5 @@ func _update(delta: float):
 func _exit():
 	super()	
 
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if state_machine.current_state == self:
-		state_machine.change_state("pursue")
+func _animation_finished():
+	state_machine.change_state("pursue")

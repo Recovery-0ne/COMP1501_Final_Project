@@ -12,4 +12,4 @@ func _exit():
 	super()	
 	
 func _animation_end():
-	player.damage_target()
+	state_machine.change_state("idle")

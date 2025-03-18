@@ -1,11 +1,10 @@
 extends CharacterBody2D
 class_name Enemy
 
-@export var animated_sprite: AnimatedSprite2D
+@export var anim: AnimationPlayer
+@export var sprite: Sprite2D
 
 var player: Player
-#var last_known_player_position:= Vector2.ZERO
-#var looking_for_player:= false
 var states: Dictionary
 
 @export var flip_on_start:=false
@@ -27,12 +26,11 @@ var states: Dictionary
 @onready var start_pos:= position
 
 var can_see_target = false
-#var has_seen_target = false
 var dead:= false
 
 func _ready():
 	for state in $StateMachine.get_children():
-		state._initalize($StateMachine, self, animated_sprite, state.name.to_lower())
+		state._initalize($StateMachine, self, sprite, anim, state.name.to_lower())
 		states[state.name.to_lower()] = state
 	$StateMachine._initalize()
 	self.add_to_group("Enemies")
