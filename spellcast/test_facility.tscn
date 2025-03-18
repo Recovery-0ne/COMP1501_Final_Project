@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://pwhcfr60yjc2"]
 
-[ext_resource type="PackedScene" uid="uid://udvv0q57vsxm" path="res://Player_V2/Player_V2.tscn" id="1_v26ed"]
+[ext_resource type="PackedScene" uid="uid://udvv0q57vsxm" path="res://Player/Player.tscn" id="1_v26ed"]
 [ext_resource type="PackedScene" uid="uid://ls572kqc41a2" path="res://Enemy/SkullWolf.tscn" id="2_rab8n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sw80l"]
@@ -52,6 +52,6 @@ scale = Vector2(20, 20)
 mesh = SubResource("QuadMesh_afiq8")
 
 [node name="Player" parent="." instance=ExtResource("1_v26ed")]
-position = Vector2(-168, 145)
+position = Vector2(698, 223)
 
 [node name="SkullWolf" parent="." instance=ExtResource("2_rab8n")]

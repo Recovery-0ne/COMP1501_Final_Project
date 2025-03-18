@@ -8,8 +8,8 @@ var direction:= 1
 @onready var health:= max_health
 var damage:= 5
 var speed:= 500
-var gravity:= 65
-var jump_velocity:= 1000
+var gravity:= 35
+@onready var jump_velocity:= gravity*gravity
 @onready var attack_check:= $AttackCheck
 
 var dead = false
