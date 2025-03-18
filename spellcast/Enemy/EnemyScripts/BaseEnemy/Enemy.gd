@@ -1,19 +1,11 @@
-extends CharacterBody2D
+extends Entity
 class_name Enemy
 
-@export var anim: AnimationPlayer
-@export var sprite: Sprite2D
-
 var player: Player
-var states: Dictionary
 
 @export var flip_on_start:=false
-@export var max_health:= 100
-@onready var health:= max_health
-@export var damage:= 5
-@export var speed:= 15
+
 @export var pursuit_speed_multiplier:=1
-@export var gravity:= 2000
 @export var move_dir:= 1
 @onready var facing_dir:= move_dir
 
@@ -21,21 +13,16 @@ var states: Dictionary
 
 @onready var floor_check:= $FloorCheck
 @onready var wall_check:= $WallCheck
-@onready var attack_check:= $AttackCheck
 
 @onready var start_pos:= position
 
-var has_status_effect:= false
-var status_effect_duration:float #Depending on the effect, this could be a max number of occurances or a time
-
 var can_see_target = false
-var dead:= false
 
 func _ready():
 	for state in $StateMachine.get_children():
-		state._initalize($StateMachine, self, sprite, anim, state.name.to_lower())
+		state._initialize($StateMachine, self, sprite, anim, state.name.to_lower())
 		states[state.name.to_lower()] = state
-	$StateMachine._initalize()
+	$StateMachine._initialize()
 	self.add_to_group("Enemies")
 	player = get_tree().get_nodes_in_group("Player")[0]
 	vision.body = self
@@ -48,10 +35,6 @@ func _is_facing_wall():
 	
 func _is_on_ledge():
 	return not floor_check.is_colliding()
-	
-func apply_gravity(delta):
-	if not is_on_floor():
-		velocity.y += gravity * delta
 		
 func change_direction():
 	move_dir *= -1
@@ -71,8 +54,7 @@ func damage_target():
 		player.take_damage(damage)
 		
 func take_damage(_damage:int, _flinch:=true):
-	if dead: return
-	health = clamp(health - _damage, 0, max_health)
+	super(_damage, _flinch)
 	if health == 0:
 		dead = true
 		$StateMachine.change_state("dead")
@@ -84,24 +66,3 @@ func take_damage(_damage:int, _flinch:=true):
 			$StateMachine.change_state("pursue")
 		if $StateMachine.current_state != states["attack"] and _flinch == true:
 			$StateMachine.change_state("damaged")
-	update_health_display()
-		
-func update_health_display():
-	$HealthLabel.text = str(health)
-	
-func apply_burning():
-	if has_status_effect: return
-	has_status_effect = true
-	status_effect_duration = randi_range(5,10)
-	$StatusEffectTimer.wait_time = 1
-	$StatusEffectTimer.connect("timeout", take_burn_damage)
-	$StatusEffectTimer.start()
-	
-func take_burn_damage():
-	status_effect_duration -= 1
-	if status_effect_duration >= 0:
-		take_damage(1,false)
-		$StatusEffectTimer.start()
-	else:
-		has_status_effect = false
-		$StatusEffectTimer.disconnect("timeout", take_burn_damage)

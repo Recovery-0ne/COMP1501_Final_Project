@@ -7,7 +7,7 @@ var sprite: Sprite2D
 var anim: AnimationPlayer
 var animation_name: String
 
-func _initalize(_state_machine: StateMachineEnemy, _enemy: Enemy, _sprite: Sprite2D, _anim: AnimationPlayer, _animation_name: String):
+func _initialize(_state_machine: StateMachineEnemy, _enemy: Enemy, _sprite: Sprite2D, _anim: AnimationPlayer, _animation_name: String):
 	state_machine = _state_machine
 	enemy = _enemy
 	sprite = _sprite
@@ -18,7 +18,7 @@ func _enter():
 	anim.play(animation_name)
 	
 func _update(delta: float):
-	enemy.apply_gravity(delta)
+	enemy.apply_gravity()
 	enemy.move_and_slide()
 	
 func _exit():
