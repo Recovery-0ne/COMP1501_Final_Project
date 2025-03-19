@@ -10,7 +10,10 @@ func _update(delta: float):
 		state_machine.change_state("fall")
 	elif Input.is_action_just_pressed("attack"):
 		state_machine.change_state("air_attack")
-	player.move()		
+	
+func _physics_update(delta: float):
+	super(delta)
+	player.move()
 
 func _exit():
 	super()

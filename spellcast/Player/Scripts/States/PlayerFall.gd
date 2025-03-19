@@ -9,7 +9,10 @@ func _update(delta: float):
 		state_machine.change_state("idle")
 	elif Input.is_action_just_pressed("attack"):
 		state_machine.change_state("air_attack")
-	elif player.position.y > 1500:
+	
+func _physics_update(delta: float):
+	super(delta)
+	if player.position.y > 1500:
 		player.position = Vector2(0,0)
 	player.move()
 

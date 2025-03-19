@@ -7,7 +7,7 @@ void fragment() {
     vec4 tex_color = texture(TEXTURE, UV);
  
 	for (int i = 0; i < target_colors.length(); i++)
-	    if (distance(tex_color.rgb, target_colors[i].rgb) < tolerance) {
+	    if (distance(texture(TEXTURE, UV).rgb, target_colors[i].rgb) < tolerance) {
 	        tex_color.rgb = replace_colors[i].rgb;
 	    }
  

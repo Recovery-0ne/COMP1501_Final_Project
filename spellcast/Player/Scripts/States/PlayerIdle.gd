@@ -18,5 +18,8 @@ func _update(delta: float):
 	elif Input.is_action_pressed("attack"):
 		state_machine.change_state("attack")
 		
+func _physics_update(delta:float):
+	super(delta)
+		
 func _exit():
 	super()

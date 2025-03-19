@@ -7,6 +7,9 @@ func _enter():
 func _update(delta: float):
 	super(delta)
 	
+func _physics_update(delta:float):
+	super(delta)
+	
 func _exit():
 	super()
 	
