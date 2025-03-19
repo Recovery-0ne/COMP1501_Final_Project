@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bf4hiql8ihk44"]
+
+[ext_resource type="Shader" path="res://Shaders/ColourSwap.gdshader" id="1_ublu2"]
+
+[resource]
+shader = ExtResource("1_ublu2")
+shader_parameter/target_colors = PackedColorArray(0.780392, 0.811765, 0.8, 1, 0.505882, 0.592157, 0.588235, 1, 0.921569, 0.929412, 0.913725, 1, 0.223529, 0.290196, 0.313726, 1, 0.341176, 0.447059, 0.466667, 1, 0.745098, 0.466667, 0.168627, 1)
+shader_parameter/replace_colors = PackedColorArray(0.385, 0.348215, 0.397616, 1, 0.277712, 0.249722, 0.306517, 1, 0.449979, 0.409044, 0.518383, 1, 0.113687, 0.107775, 0.230029, 1, 0.432742, 0.483287, 0.615059, 1, 0.0760858, 0.0309927, 0.119837, 1)
+shader_parameter/tolerance = 0.2

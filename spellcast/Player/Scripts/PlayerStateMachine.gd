@@ -16,5 +16,8 @@ func change_state(new_state_name: String):
 	current_state = new_state
 	current_state._enter()
 
-func _process(delta):
+func _process(delta: float):
 	current_state._update(delta)
+	
+func _physics_process(delta: float):
+	current_state._physics_update(delta)
