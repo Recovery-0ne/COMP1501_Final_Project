@@ -175,7 +175,6 @@ collision_layer = 2
 collision_mask = 128
 script = ExtResource("1_0cshr")
 pursuit_speed_multiplier = 3
-speed = 25
 burn_effect_duration = [5, 10]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
@@ -210,7 +209,6 @@ script = ExtResource("8_8qg5g")
 script = ExtResource("9_2cmh8")
 
 [node name="Detector" parent="." instance=ExtResource("6_3dtnt")]
-Vision_cone_size = 0.7
 
 [node name="SkeletonCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1t2sk")

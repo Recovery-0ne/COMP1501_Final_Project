@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://caga1sk4dx5gt"]
+
+[ext_resource type="Shader" path="res://Shaders/ColourSwap.gdshader" id="1_p5he2"]
+
+[resource]
+shader = ExtResource("1_p5he2")
+shader_parameter/target_colors = PackedColorArray(1, 1, 1, 1, 0.172549, 0.101961, 0.286275, 1, 0.807843, 0.913725, 0.929412, 1, 0.32549, 0.729412, 0.792157, 1, 0.694118, 0.305882, 0.305882, 1)
+shader_parameter/replace_colors = PackedColorArray(0, 0, 0, 1, 0.0968045, 0.21134, 0.284688, 1, 0.147672, 0.147672, 0.147672, 1, 0, 0, 0, 1, 0.558714, 0.838688, 0.838979, 1)
+shader_parameter/tolerance = 0.2

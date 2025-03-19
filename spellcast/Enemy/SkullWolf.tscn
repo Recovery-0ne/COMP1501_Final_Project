@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ls572kqc41a2"]
+[gd_scene load_steps=21 format=3 uid="uid://ls572kqc41a2"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkullWolf/skull_wolf.gd" id="1_hmn74"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="2_rvhue"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_attack.gd" id="6_fxofp"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="8_ml8if"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="9_7575k"]
+[ext_resource type="Material" uid="uid://caga1sk4dx5gt" path="res://Shaders/SkullWolfBlue.tres" id="10_4lcvl"]
 [ext_resource type="Texture2D" uid="uid://dmm843cnrnrfl" path="res://Assets/Massacre Sprite Sheet.png" id="10_dpnav"]
 [ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/detector.tscn" id="10_fk00d"]
 
@@ -169,6 +170,7 @@ _data = {
 }
 
 [node name="SkullWolf" type="CharacterBody2D"]
+material = ExtResource("10_4lcvl")
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 128
@@ -244,6 +246,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("10_4lcvl")
 position = Vector2(1, -14.5)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("10_dpnav")
