@@ -26,8 +26,8 @@ func damage_target():
 func take_damage(_damage:int, _flinch:=true):
 	super(_damage, _flinch)
 	if health == 0:
-		dead = true
 		$StateMachine.change_state("dead")
 		$HealthLabel.visible = false
+		dead = true
 	elif _flinch == true:
 		$StateMachine.change_state("damaged")

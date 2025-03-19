@@ -5,7 +5,8 @@ func _enter():
 	super()
 	#Increase detection rate
 	enemy.vision._high_detect_rate()
-	enemy.speed *= enemy.pursuit_speed_multiplier
+	enemy.default_speed *= enemy.pursuit_speed_multiplier
+	enemy.speed = enemy.default_speed
 	anim.speed_scale=0.4*enemy.pursuit_speed_multiplier
 	
 func _update(delta: float):
@@ -32,7 +33,8 @@ func _update(delta: float):
 func _exit():
 	super()
 	enemy.vision._low_detect_rate()
-	enemy.speed /= enemy.pursuit_speed_multiplier
+	enemy.default_speed /= enemy.pursuit_speed_multiplier
+	enemy.speed = enemy.default_speed
 	anim.speed_scale = 1
 	enemy.stop()
 
