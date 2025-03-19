@@ -174,11 +174,11 @@ collision_layer = 2
 collision_mask = 128
 platform_floor_layers = 4294967168
 script = ExtResource("1_hmn74")
-pursuit_speed_multiplier = 5
+pursuit_speed_multiplier = 4
 move_dir = -1
 max_health = 50
-damage = 10
-speed = 80
+default_damage = 10
+default_speed = 100
 burn_effect_duration = [5, 10]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]

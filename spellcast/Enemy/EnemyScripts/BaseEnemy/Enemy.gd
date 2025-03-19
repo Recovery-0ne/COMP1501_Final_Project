@@ -56,9 +56,9 @@ func damage_target():
 func take_damage(_damage:int, _flinch:=true):
 	super(_damage, _flinch)
 	if health == 0:
-		dead = true
 		$StateMachine.change_state("dead")
 		$HealthLabel.visible = false
+		dead = true
 	else:
 		#If an enemy was hit and it can't see the player, it is possible they are behind it
 		if can_see_target == false:

@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 @export var target : Node2D
 @export var body : Node2D
@@ -25,12 +25,15 @@ func _can_see_target():
 		#Use the dot product to create a vision cone in front of the body with this detection system
 		#Use 1-vision_cone_size so that when the variable is increased, the size of the cone also increases
 		if 1-Vision_cone_size <= dot:
-			#Raycast to check if things are blocking line of sight
-			var space_state = body.get_world_2d().direct_space_state
-			var sight_check = space_state.intersect_ray(PhysicsRayQueryParameters2D.create(body.position, target.position))
-			#Was the raycast successful?
-			if sight_check:
-				#Is the hit object the target?
-				if sight_check.collider.name == target.name:
-					return true
+			#Use ray cast to check if things are blocking line of sight
+			#Set the ray cast to point towards the player
+			$RayCast2D.target_position = target.global_position - global_position
+			#Enable the raycast
+			$RayCast2D.enabled = true
+			#Is the hit object the target?
+			if $RayCast2D.get_collider() == target:
+				#Disable the ray cast to save procesing power
+				$RayCast2D.enabled = false
+				#The player has been seen
+				return true
 	return false

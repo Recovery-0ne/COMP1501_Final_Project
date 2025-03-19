@@ -13,6 +13,8 @@ func _update(delta: float):
 		state_machine.change_state("fall")
 	elif Input.is_action_pressed("fireball"):
 		state_machine.change_state("cast_fireball")
+	elif Input.is_action_pressed("frost"):
+		state_machine.change_state("cast_frost")
 	elif Input.is_action_pressed("attack"):
 		state_machine.change_state("attack")
 		

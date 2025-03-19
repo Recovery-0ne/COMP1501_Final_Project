@@ -2,11 +2,16 @@
 
 [ext_resource type="Script" path="res://Enemy/ai_detection.gd" id="1_88hxw"]
 
-[node name="Detector" type="Node"]
+[node name="Detector" type="Node2D"]
 script = ExtResource("1_88hxw")
+Vision_cone_size = 0.7
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = false
+collision_mask = 129
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
