@@ -23,6 +23,7 @@ var status_effect_duration:float #Depending on the effect, this could be a max n
 
 ##Index 0 = minimum duration, Index 1 = maximum duration
 @export var burn_effect_duration=[0,10]
+var burning = false
 ##Time in seconds a frozen entity will be frozen for
 @export var freeze_slow_duration:=5.0
 var frozen = false
@@ -52,6 +53,7 @@ func apply_effect(function_name:String):
 func apply_burning():
 	if has_status_effect: return
 	has_status_effect = true
+	burning = true
 	status_effect_duration = randi_range(burn_effect_duration[0],burn_effect_duration[1])
 	$StatusEffectTimer.wait_time = 1
 	$StatusEffectTimer.connect("timeout", take_burn_damage)
@@ -64,6 +66,7 @@ func take_burn_damage():
 		$StatusEffectTimer.start()
 	else:
 		has_status_effect = false
+		burning = false
 		$StatusEffectTimer.disconnect("timeout", take_burn_damage)
 			
 func apply_freezing():
@@ -83,3 +86,13 @@ func end_frozen_effect():
 	has_status_effect = false
 	frozen = false
 	$StatusEffectTimer.disconnect("timeout", end_frozen_effect)
+	
+func lightning_strike():
+	if dead: return
+	$LightningStrike.enable()
+	
+func is_lightning_strike_cooldown_done():
+	return $LightningStrikeCooldownTimer.is_stopped()
+	
+func start_lightning_strike_cooldown():
+	$LightningStrikeCooldownTimer.start()

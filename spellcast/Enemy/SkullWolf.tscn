@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ls572kqc41a2"]
+[gd_scene load_steps=22 format=3 uid="uid://ls572kqc41a2"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkullWolf/skull_wolf.gd" id="1_hmn74"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="2_rvhue"]
@@ -11,6 +11,7 @@
 [ext_resource type="Material" uid="uid://caga1sk4dx5gt" path="res://Shaders/SkullWolfBlue.tres" id="10_4lcvl"]
 [ext_resource type="Texture2D" uid="uid://dmm843cnrnrfl" path="res://Assets/Massacre Sprite Sheet.png" id="10_dpnav"]
 [ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/detector.tscn" id="10_fk00d"]
+[ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://lightning_strike.tscn" id="12_et6r1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omxgw"]
 size = Vector2(31.5, 17)
@@ -260,6 +261,11 @@ libraries = {
 
 [node name="StatusEffectTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="LightningStrike" parent="." instance=ExtResource("12_et6r1")]
+position = Vector2(0, -16.96)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [connection signal="timeout" from="StateMachine/idle/Timer" to="StateMachine/idle" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/pursue/Timer" to="StateMachine/pursue" method="_on_timer_timeout"]

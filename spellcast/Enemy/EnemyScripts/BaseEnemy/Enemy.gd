@@ -17,8 +17,12 @@ var player: Player
 @onready var start_pos:= position
 
 var can_see_target = false
+var is_on_screen = false
 
 func _ready():
+	$LightningStrike.target = self
+	$VisibleOnScreenNotifier2D.connect("screen_entered", on_screen)
+	$VisibleOnScreenNotifier2D.connect("screen_exited", off_screen)
 	for state in $StateMachine.get_children():
 		state._initialize($StateMachine, self, sprite, anim, state.name.to_lower())
 		states[state.name.to_lower()] = state
@@ -28,7 +32,8 @@ func _ready():
 	vision.body = self
 	vision.target = player
 	update_health_display()
-	if flip_on_start: change_direction()
+	if flip_on_start: 
+		change_direction()
 
 func _is_facing_wall():
 	return wall_check.is_colliding()
@@ -66,3 +71,9 @@ func take_damage(_damage:int, _flinch:=true):
 			$StateMachine.change_state("pursue")
 		if $StateMachine.current_state != states["attack"] and _flinch == true:
 			$StateMachine.change_state("damaged")
+
+func on_screen():
+	is_on_screen = true
+	
+func off_screen():
+	is_on_screen = false
