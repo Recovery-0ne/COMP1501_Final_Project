@@ -49,6 +49,9 @@ func change_direction_to(directon: int):
 	if move_dir != directon:
 		move_dir = directon
 		flip_checks()
+		
+func change_direction_to_player():
+	change_direction_to((player.position.x - position.x)/abs(player.position.x - position.x))
 	
 func flip_checks():
 	wall_check.target_position.x *= -1
@@ -67,7 +70,7 @@ func take_damage(_damage:int, _flinch:=true):
 	else:
 		#If an enemy was hit and it can't see the player, it is possible they are behind it
 		if can_see_target == false:
-			change_direction()
+			change_direction_to_player()
 			$StateMachine.change_state("pursue")
 		if $StateMachine.current_state != states["attack"] and _flinch == true:
 			$StateMachine.change_state("damaged")

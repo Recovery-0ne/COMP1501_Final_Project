@@ -11,7 +11,7 @@ func _enter():
 	
 func _update(delta: float):
 	super(delta)
-	enemy.change_direction_to((enemy.player.position.x - enemy.position.x)/abs(enemy.player.position.x - enemy.position.x))
+	enemy.change_direction_to_player()
 	enemy.set_move()
 	enemy.change_facing_direction()
 		

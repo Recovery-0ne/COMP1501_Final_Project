@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://drhydcmoetxlj"]
+[gd_scene load_steps=21 format=3 uid="uid://drhydcmoetxlj"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton.gd" id="1_0cshr"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_wander.gd" id="2_5do2f"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_attack.gd" id="6_kcfp7"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="8_8qg5g"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="9_2cmh8"]
-[ext_resource type="Material" uid="uid://bf4hiql8ihk44" path="res://Shaders/IcySkeleton.tres" id="10_6pc7f"]
 [ext_resource type="Texture2D" uid="uid://brx7gdwx5ed6" path="res://Assets/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="12_31pwv"]
 [ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_dc0i1"]
 
@@ -213,12 +212,15 @@ script = ExtResource("9_2cmh8")
 
 [node name="Detector" parent="." instance=ExtResource("6_3dtnt")]
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.285714, 1.42857)
+scale = Vector2(0.2, 1.14286)
+
 [node name="SkeletonCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1t2sk")
 
 [node name="AttackCheck" type="ShapeCast2D" parent="."]
-position = Vector2(13.495, 0)
-scale = Vector2(0.85, 0.85)
+position = Vector2(12.14, 0)
 shape = SubResource("CircleShape2D_awxm6")
 target_position = Vector2(0, 0)
 max_results = 1
@@ -233,7 +235,6 @@ target_position = Vector2(20, 0)
 collision_mask = 128
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = ExtResource("10_6pc7f")
 position = Vector2(2.975, -4.84)
 scale = Vector2(0.93, 0.93)
 texture = ExtResource("12_31pwv")
@@ -260,8 +261,6 @@ one_shot = true
 
 [node name="LightningStrike" parent="." instance=ExtResource("12_dc0i1")]
 position = Vector2(0, -15.07)
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [connection signal="timeout" from="StateMachine/idle/Timer" to="StateMachine/idle" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/pursue/Timer" to="StateMachine/pursue" method="_on_timer_timeout"]
