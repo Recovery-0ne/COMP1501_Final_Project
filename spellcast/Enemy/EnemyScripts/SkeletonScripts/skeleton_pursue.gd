@@ -1,7 +1,7 @@
 extends EnemyState
 
 func _enter():
-	animation_name = "idle"
+	animation_name = "walk"
 	super()
 	#Increase detection rate
 	enemy.vision._high_detect_rate()
@@ -12,23 +12,14 @@ func _enter():
 func _update(delta: float):
 	super(delta)
 	enemy.change_direction_to((enemy.player.position.x - enemy.position.x)/abs(enemy.player.position.x - enemy.position.x))
+	enemy.set_move()
 	enemy.change_facing_direction()
-	
-	#Have the enemy able to track the player for a short duration after losing visual
-	if enemy.can_see_target:
-		$Timer.stop()
-	elif not enemy.can_see_target and $Timer.is_stopped():
-		$Timer.start()
 		
 	#After colliding, have the enemy move forward for longer before attacking so that the ShapeCast overlaps the player more
-	if enemy.attack_check.is_colliding() and (enemy.attack_check.global_position - enemy.player.position).length() <= 15:
+	if enemy.attack_check.is_colliding() and (enemy.attack_check.global_position - enemy.player.position).length() <= 25:
 		state_machine.change_state("attack")
-	elif enemy._is_facing_wall() or enemy._is_on_ledge():
-		enemy.stop()
-		anim.play("idle")
-	else:
-		enemy.set_move()
-		anim.play("walk")
+	elif enemy._is_facing_wall() or enemy._is_on_ledge() or abs(enemy.attack_check.global_position.x - enemy.player.position.x) <= 25:
+		state_machine.change_state("idle")
 	
 func _exit():
 	super()
@@ -39,7 +30,6 @@ func _exit():
 	enemy.stop()
 
 func _on_timer_timeout() -> void:
+	return
 	if enemy.dead or state_machine.current_state == enemy.states["attack"]: return
-	if enemy._is_facing_wall() or enemy._is_on_ledge():
-		enemy.change_direction()
 	state_machine.change_state("idle")

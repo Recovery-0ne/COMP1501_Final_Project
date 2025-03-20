@@ -7,7 +7,7 @@ func _enter():
 func _update(delta: float):
 	super(delta)
 	
-	if enemy.can_see_target:
+	if enemy.can_see_target and not enemy._is_on_ledge():
 		state_machine.change_state("pursue")
 	elif enemy.attack_check.is_colliding():
 		state_machine.change_state("attack")

@@ -18,7 +18,8 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tfxn8"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o6wom"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q64bo"]
+size = Vector2(12.3333, 29)
 
 [sub_resource type="Animation" id="Animation_csesh"]
 length = 0.001
@@ -466,9 +467,9 @@ target_position = Vector2(0, 0)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -9)
+position = Vector2(-0.5, -8.5)
 scale = Vector2(3, 3)
-shape = SubResource("CapsuleShape2D_o6wom")
+shape = SubResource("RectangleShape2D_q64bo")
 
 [node name="HealthLabel" type="Label" parent="."]
 offset_left = -27.0

@@ -11,7 +11,7 @@
 [ext_resource type="Material" uid="uid://caga1sk4dx5gt" path="res://Shaders/SkullWolfBlue.tres" id="10_4lcvl"]
 [ext_resource type="Texture2D" uid="uid://dmm843cnrnrfl" path="res://Assets/Massacre Sprite Sheet.png" id="10_dpnav"]
 [ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/detector.tscn" id="10_fk00d"]
-[ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://lightning_strike.tscn" id="12_et6r1"]
+[ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_et6r1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omxgw"]
 size = Vector2(31.5, 17)

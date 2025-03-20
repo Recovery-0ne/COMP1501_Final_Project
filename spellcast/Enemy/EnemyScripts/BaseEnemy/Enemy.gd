@@ -20,6 +20,9 @@ var can_see_target = false
 var is_on_screen = false
 
 func _ready():
+	player = get_tree().get_nodes_in_group("Player")[0]
+	vision.body = self
+	vision.target = player
 	$LightningStrike.target = self
 	$VisibleOnScreenNotifier2D.connect("screen_entered", on_screen)
 	$VisibleOnScreenNotifier2D.connect("screen_exited", off_screen)
@@ -28,9 +31,6 @@ func _ready():
 		states[state.name.to_lower()] = state
 	$StateMachine._initialize()
 	self.add_to_group("Enemies")
-	player = get_tree().get_nodes_in_group("Player")[0]
-	vision.body = self
-	vision.target = player
 	update_health_display()
 	if flip_on_start: 
 		change_direction()
