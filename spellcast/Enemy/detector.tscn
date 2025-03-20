@@ -12,6 +12,7 @@ autostart = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = false
-collision_mask = 129
+collision_mask = 193
+collide_with_areas = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

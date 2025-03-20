@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="9_2cmh8"]
 [ext_resource type="Material" uid="uid://bf4hiql8ihk44" path="res://Shaders/IcySkeleton.tres" id="10_6pc7f"]
 [ext_resource type="Texture2D" uid="uid://brx7gdwx5ed6" path="res://Assets/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="12_31pwv"]
-[ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://lightning_strike.tscn" id="12_dc0i1"]
+[ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_dc0i1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1t2sk"]
 radius = 6.66667
@@ -177,6 +177,7 @@ collision_layer = 2
 collision_mask = 128
 script = ExtResource("1_0cshr")
 pursuit_speed_multiplier = 3
+default_speed = 25
 burn_effect_duration = [5, 10]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]

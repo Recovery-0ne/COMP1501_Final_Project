@@ -29,5 +29,5 @@ func take_damage(_damage:int, _flinch:=true):
 		$StateMachine.change_state("dead")
 		$HealthLabel.visible = false
 		dead = true
-	elif _flinch == true:
+	elif _flinch == true and $StateMachine.current_state == states["idle"]:
 		$StateMachine.change_state("damaged")
