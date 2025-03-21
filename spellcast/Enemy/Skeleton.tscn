@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://drhydcmoetxlj"]
+[gd_scene load_steps=22 format=3 uid="uid://drhydcmoetxlj"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton.gd" id="1_0cshr"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_wander.gd" id="2_5do2f"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_attack.gd" id="6_kcfp7"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="8_8qg5g"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="9_2cmh8"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_look_around.gd" id="9_i0e52"]
 [ext_resource type="Texture2D" uid="uid://brx7gdwx5ed6" path="res://Assets/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="12_31pwv"]
 [ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_dc0i1"]
 
@@ -66,7 +67,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../StateMachine/attack")
+tracks/2/path = NodePath("../StateMachine/Attack")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -80,6 +81,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_uw6p1"]
 resource_name = "damaged"
+length = 0.75
 step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -96,11 +98,11 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../StateMachine/damaged")
+tracks/1/path = NodePath("../StateMachine/Damaged")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.75),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -175,40 +177,47 @@ scale = Vector2(3.5, 3.5)
 collision_layer = 2
 collision_mask = 128
 script = ExtResource("1_0cshr")
+sprite_offset = {
+-1: Vector2(-2.975, -4.84),
+1: Vector2(2.975, -4.84)
+}
 pursuit_speed_multiplier = 3
 default_speed = 25
 burn_effect_duration = [5, 10]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("2_xm5eo")
-inital_state = NodePath("idle")
+inital_state = NodePath("Idle")
 
-[node name="idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("2_y1qu0")
 
-[node name="Timer" type="Timer" parent="StateMachine/idle"]
+[node name="Timer" type="Timer" parent="StateMachine/Idle"]
 wait_time = 3.0
 one_shot = true
 autostart = true
 
-[node name="wander" type="Node" parent="StateMachine"]
+[node name="Wander" type="Node" parent="StateMachine"]
 script = ExtResource("2_5do2f")
 
-[node name="pursue" type="Node" parent="StateMachine"]
+[node name="Pursue" type="Node" parent="StateMachine"]
 script = ExtResource("5_pj0ix")
 
-[node name="Timer" type="Timer" parent="StateMachine/pursue"]
-wait_time = 0.5
-one_shot = true
-
-[node name="attack" type="Node" parent="StateMachine"]
+[node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_kcfp7")
 
-[node name="dead" type="Node" parent="StateMachine"]
+[node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource("8_8qg5g")
 
-[node name="damaged" type="Node" parent="StateMachine"]
+[node name="Damaged" type="Node" parent="StateMachine"]
 script = ExtResource("9_2cmh8")
+
+[node name="Look_Around" type="Node" parent="StateMachine"]
+script = ExtResource("9_i0e52")
+
+[node name="Timer" type="Timer" parent="StateMachine/Look_Around"]
+wait_time = 1.5
+one_shot = true
 
 [node name="Detector" parent="." instance=ExtResource("6_3dtnt")]
 
@@ -235,9 +244,9 @@ target_position = Vector2(20, 0)
 collision_mask = 128
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2.975, -4.84)
 scale = Vector2(0.93, 0.93)
 texture = ExtResource("12_31pwv")
+offset = Vector2(2.975, -4.84)
 hframes = 13
 vframes = 5
 
@@ -262,5 +271,5 @@ one_shot = true
 [node name="LightningStrike" parent="." instance=ExtResource("12_dc0i1")]
 position = Vector2(0, -15.07)
 
-[connection signal="timeout" from="StateMachine/idle/Timer" to="StateMachine/idle" method="_on_timer_timeout"]
-[connection signal="timeout" from="StateMachine/pursue/Timer" to="StateMachine/pursue" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Look_Around/Timer" to="StateMachine/Look_Around" method="_on_timer_timeout"]

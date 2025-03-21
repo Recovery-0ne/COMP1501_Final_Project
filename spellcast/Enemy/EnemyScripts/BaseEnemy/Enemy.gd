@@ -5,6 +5,8 @@ var player: Player
 
 @export var flip_on_start:=false
 
+@export var sprite_offset = {1:Vector2.ZERO, -1:Vector2.ZERO}
+
 @export var pursuit_speed_multiplier:=1
 @export var move_dir:= 1
 @onready var facing_dir:= move_dir
@@ -51,6 +53,7 @@ func change_direction_to(directon: int):
 		flip_checks()
 		
 func change_direction_to_player():
+	if player.position.x - position.x == 0: return
 	change_direction_to((player.position.x - position.x)/abs(player.position.x - position.x))
 	
 func flip_checks():
@@ -61,19 +64,17 @@ func damage_target():
 	if attack_check.is_colliding():
 		player.take_damage(damage)
 		
-func take_damage(_damage:int, _flinch:=true):
-	super(_damage, _flinch)
-	if health == 0:
-		$StateMachine.change_state("dead")
-		$HealthLabel.visible = false
-		dead = true
-	else:
-		#If an enemy was hit and it can't see the player, it is possible they are behind it
-		if can_see_target == false:
-			change_direction_to_player()
-			$StateMachine.change_state("pursue")
-		if $StateMachine.current_state != states["attack"] and _flinch == true:
-			$StateMachine.change_state("damaged")
+func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
+	super(_damage, _flinch, _apply_frozen_multiplier)
+	if $StateMachine.current_state != states["attack"] and _flinch == true:
+		$StateMachine.change_state("damaged")
+	#elif can_see_target == false:
+		#$StateMachine.change_state("look_around")
+		
+func end_frozen_effect():
+	super()
+	#if $StateMachine.current_state == states["idle"]: 
+		#$StateMachine/Idle/Timer.start()
 
 func on_screen():
 	is_on_screen = true

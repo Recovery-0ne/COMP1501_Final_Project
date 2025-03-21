@@ -402,7 +402,6 @@ position = Vector2(1, -39)
 collision_mask = 128
 script = ExtResource("1_uytxk")
 default_speed = 500
-default_gravity = 65
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_jpeyr")

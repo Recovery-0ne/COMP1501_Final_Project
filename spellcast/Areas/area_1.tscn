@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://cd4doq0o7358i"]
+[gd_scene load_steps=10 format=4 uid="uid://cd4doq0o7358i"]
 
 [ext_resource type="PackedScene" uid="uid://bumlnxcwfugof" path="res://Area Template/area_template.tscn" id="1_nxw4m"]
 [ext_resource type="Texture2D" uid="uid://b70bu57dkmd43" path="res://Assets/Tileset.png" id="2_xqdcf"]
@@ -66,6 +66,10 @@ physics_layer_0/collision_layer = 128
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_4jm5f")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8cie1"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_m83p6"]
+
 [node name="AreaTemplate" instance=ExtResource("1_nxw4m")]
 
 [node name="BridgeLayer" type="TileMapLayer" parent="." index="0"]
@@ -96,3 +100,17 @@ position = Vector2(1256, -91)
 position = Vector2(5009, 461)
 
 [node name="Player" parent="." index="8" instance=ExtResource("5_anssd")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="9"]
+position = Vector2(3581, 594)
+scale = Vector2(1, 9.715)
+collision_layer = 128
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+shape = SubResource("RectangleShape2D_8cie1")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D" index="1"]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_m83p6")
