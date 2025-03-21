@@ -1,7 +1,7 @@
 extends Area2D
 
 var initial_position
-var creator : Node2D
+var creator : Entity
 var creator_position : Vector2
 var direction : Vector2
 @export var speed = 400
@@ -42,6 +42,6 @@ func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int
 	if body != creator:
 		call_deferred("_deactivate") #Only call deactivate once the collider is finished with the collision
 		if body is Player or body is Enemy:
-			body.take_damage(damage, false)
+			body.take_damage(damage, true, false)
 			body.apply_effect(effect_function_name)
 			

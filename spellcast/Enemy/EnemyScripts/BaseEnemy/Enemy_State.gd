@@ -17,9 +17,12 @@ func _initialize(_state_machine: StateMachineEnemy, _enemy: Enemy, _sprite: Spri
 func _enter():
 	anim.play(animation_name)
 	
-func _update(delta: float):
+func _physics_update(delta: float):
 	enemy.apply_gravity()
 	enemy.move_and_slide()
+	
+func _update(delta: float):
+	pass
 	
 func _exit():
 	pass
