@@ -1,5 +1,4 @@
 extends EnemyState
-var f = 0
 
 func _enter():
 	animation_name = "walk"
@@ -8,7 +7,7 @@ func _enter():
 		enemy.change_direction()
 	enemy.set_move()
 	enemy.change_facing_direction()
-	#Force the raycasts to update so that the update function won't immediately transition the enemy back to idle
+	#Force the raycasts to update to make sure that if we turned away from any walls/ledges, the enemy know immediately
 	enemy.wall_check.force_raycast_update()
 	enemy.floor_check.force_raycast_update()
 	
@@ -17,11 +16,12 @@ func _update(delta: float):
 		
 func _physics_update(delta: float):
 	super(delta)
-	enemy.set_move()
 	if enemy._is_facing_wall() or enemy._is_on_ledge():
 		state_machine.change_state("idle")
 	elif enemy.can_see_target:
 		state_machine.change_state("pursue")
+	else:
+		enemy.set_move()
 	
 func _exit():
 	super()
