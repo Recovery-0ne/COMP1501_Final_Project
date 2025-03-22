@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://pdne3m6kthea"]
+[gd_scene load_steps=26 format=3 uid="uid://pdne3m6kthea"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster.gd" id="1_nf63w"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="2_qw1m8"]
@@ -7,7 +7,9 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster_pursue.gd" id="5_0wap3"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster_cast_spell.gd" id="6_kcwx6"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="7_oy7wf"]
+[ext_resource type="PackedScene" uid="uid://j4tmoiklso7j" path="res://Spells/fireball.tscn" id="7_s27xr"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="8_b2iyi"]
+[ext_resource type="PackedScene" uid="uid://b7i6kk0kgvgwg" path="res://Spells/frost.tscn" id="8_lc27i"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_look_around.gd" id="9_t3i24"]
 [ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/detector.tscn" id="10_jb2fk"]
 [ext_resource type="Texture2D" uid="uid://bf7tts78gbkgw" path="res://Assets/AnimationSheet_Character.png" id="11_euaae"]
@@ -243,6 +245,10 @@ script = ExtResource("5_0wap3")
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_kcwx6")
 
+[node name="Fireball" parent="StateMachine/Attack" instance=ExtResource("7_s27xr")]
+
+[node name="Frost" parent="StateMachine/Attack" instance=ExtResource("8_lc27i")]
+
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource("7_oy7wf")
 
@@ -303,6 +309,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="StatusEffectTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 
 [node name="LightningStrike" parent="." instance=ExtResource("12_dif5t")]

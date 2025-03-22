@@ -13,14 +13,14 @@ func _ready() -> void:
 	initial_position = position
 
 #_target must be a global position
-func _activate(_creator : Node2D, _target : Vector2):
+func _activate(_creator : Node2D, _target_pos : Vector2):
 	creator = _creator
 	#Save the position of the player at the time the fireball is cast to know how far it can travel
 	creator_position = creator.position
 	#Reset the position (which is global since it needs to move independently from the node that created it)
 	position = creator.position + initial_position
 	#Direction is the difference in the current position and the target position. Normalize the vector to make it more useful during calculations
-	direction = (_target - position).normalized()
+	direction = (_target_pos - position).normalized()
 	#Turn the sprite to face the direction it will move in. Use look_at() and pass a point in the path the object will take
 	$Marker2D.look_at(position + direction)
 	$SpellCollider.disabled = false

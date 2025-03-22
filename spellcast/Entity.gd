@@ -51,11 +51,6 @@ func flinch():pass #Define this for each entity in their own script
 		
 func update_health_display():
 	$HealthLabel.text = str(health)
-	
-func cast_projectile_spell(_spell, _timer):
-	if not _spell.visible and _timer.is_stopped():
-		_timer.start()
-		_spell._activate(self, get_global_mouse_position())
 		
 func apply_effect(function_name:String):
 	call(function_name)
