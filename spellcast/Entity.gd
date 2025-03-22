@@ -38,6 +38,7 @@ func decrease_health(_damage: int):
 	health = clamp(health - _damage, 0, max_health)
 	update_health_display()
 	if health == 0:
+		end_frozen_effect()
 		$StateMachine.change_state("dead")
 		$HealthLabel.visible = false
 		dead = true
@@ -86,6 +87,7 @@ func apply_freezing():
 	$StatusEffectTimer.start()
 		
 func end_frozen_effect():
+	if not frozen: return
 	speed = default_speed
 	anim.speed_scale = 1
 	has_status_effect = false

@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://pdne3m6kthea"]
+[gd_scene load_steps=27 format=3 uid="uid://pdne3m6kthea"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster.gd" id="1_nf63w"]
+[ext_resource type="Material" uid="uid://b0l4jry2bsxbl" path="res://Shaders/ShadowSpellCaster.tres" id="2_qfxht"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="2_qw1m8"]
-[ext_resource type="Script" path="res://Enemy/spell_caster_idle.gd" id="3_ute1v"]
-[ext_resource type="Script" path="res://Enemy/spell_caster_wander.gd" id="4_7a44m"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster_idle.gd" id="3_ute1v"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster_wander.gd" id="4_7a44m"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster_pursue.gd" id="5_0wap3"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster_cast_spell.gd" id="6_kcwx6"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="7_oy7wf"]
@@ -12,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b7i6kk0kgvgwg" path="res://Spells/frost.tscn" id="8_lc27i"]
 [ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/detector.tscn" id="10_jb2fk"]
 [ext_resource type="Texture2D" uid="uid://bf7tts78gbkgw" path="res://Assets/AnimationSheet_Character.png" id="11_euaae"]
-[ext_resource type="Script" path="res://Enemy/spell_caster_look_around.gd" id="11_xvwt5"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster_look_around.gd" id="11_xvwt5"]
 [ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_dif5t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1t2sk"]
@@ -217,12 +218,15 @@ scale = Vector2(3.5, 3.5)
 collision_layer = 2
 collision_mask = 128
 script = ExtResource("1_nf63w")
+variant_material = ExtResource("2_qfxht")
 sprite_offset = {
 -1: Vector2(-0.465, -2.06),
 1: Vector2(0.465, -2.06)
 }
 pursuit_speed_multiplier = 2
+max_health = 80
 default_speed = 40
+freeze_slow_duration = 2.0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("2_qw1m8")
@@ -271,7 +275,7 @@ one_shot = true
 position = Vector2(0.285714, 1.42857)
 scale = Vector2(0.2, 1.14286)
 
-[node name="SkeletonCollision" type="CollisionShape2D" parent="."]
+[node name="BodyCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1t2sk")
 
 [node name="AttackCheck" type="ShapeCast2D" parent="."]

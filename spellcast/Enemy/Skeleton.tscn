@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://drhydcmoetxlj"]
+[gd_scene load_steps=23 format=3 uid="uid://drhydcmoetxlj"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton.gd" id="1_0cshr"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_wander.gd" id="2_5do2f"]
+[ext_resource type="Material" uid="uid://dxr8ms5x5sjgj" path="res://Shaders/GreySkeleton.tres" id="2_giisx"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="2_xm5eo"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_idle.gd" id="2_y1qu0"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_pursue.gd" id="5_pj0ix"]
@@ -177,6 +178,7 @@ scale = Vector2(3.5, 3.5)
 collision_layer = 2
 collision_mask = 128
 script = ExtResource("1_0cshr")
+variant_material = ExtResource("2_giisx")
 sprite_offset = {
 -1: Vector2(-2.975, -4.84),
 1: Vector2(2.975, -4.84)
@@ -225,7 +227,7 @@ one_shot = true
 position = Vector2(0.285714, 1.42857)
 scale = Vector2(0.2, 1.14286)
 
-[node name="SkeletonCollision" type="CollisionShape2D" parent="."]
+[node name="BodyCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1t2sk")
 
 [node name="AttackCheck" type="ShapeCast2D" parent="."]
