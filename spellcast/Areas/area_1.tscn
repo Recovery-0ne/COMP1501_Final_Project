@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://cd4doq0o7358i"]
+[gd_scene load_steps=9 format=4 uid="uid://cd4doq0o7358i"]
 
 [ext_resource type="PackedScene" uid="uid://bumlnxcwfugof" path="res://Area Template/area_template.tscn" id="1_nxw4m"]
 [ext_resource type="Texture2D" uid="uid://b70bu57dkmd43" path="res://Assets/Tileset.png" id="2_xqdcf"]
 [ext_resource type="PackedScene" uid="uid://drhydcmoetxlj" path="res://Enemy/Skeleton.tscn" id="5_67su7"]
 [ext_resource type="PackedScene" uid="uid://udvv0q57vsxm" path="res://Player/Player.tscn" id="5_anssd"]
 [ext_resource type="PackedScene" uid="uid://ls572kqc41a2" path="res://Enemy/SkullWolf.tscn" id="5_yw13f"]
+[ext_resource type="PackedScene" uid="uid://pdne3m6kthea" path="res://Enemy/SpellCaster.tscn" id="6_k4r17"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4jm5f"]
 texture = ExtResource("2_xqdcf")
@@ -66,10 +67,6 @@ physics_layer_0/collision_layer = 128
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_4jm5f")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8cie1"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_m83p6"]
-
 [node name="AreaTemplate" instance=ExtResource("1_nxw4m")]
 
 [node name="BridgeLayer" type="TileMapLayer" parent="." index="0"]
@@ -87,7 +84,7 @@ tile_map_data = PackedByteArray("AAAGAAAAAAAHAAIAAAAFAAAAAAAIAAIAAAAEAAAAAAAHAAI
 tile_map_data = PackedByteArray("AAAKAAAAAAAJAAQAAAALAAAAAAAJAAQAAADm//X/AAAJAAQAAADn//X/AAAJAAQAAACk/wAAAAAJAAQAAACl/wAAAAAJAAQAAABdAA0AAAAJAAQAAABeAA0AAAAJAAQAAAC4AAMAAAAJAAQAAAC5AAMAAAAJAAQAAAA=")
 
 [node name="SkullWolf" parent="." index="4" instance=ExtResource("5_yw13f")]
-position = Vector2(3969, 541)
+position = Vector2(1990, -54)
 flip_on_start = true
 
 [node name="SkullWolf2" parent="." index="5" instance=ExtResource("5_yw13f")]
@@ -101,16 +98,6 @@ position = Vector2(5009, 461)
 
 [node name="Player" parent="." index="8" instance=ExtResource("5_anssd")]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="9"]
-position = Vector2(3581, 594)
-scale = Vector2(1, 9.715)
-collision_layer = 128
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
-shape = SubResource("RectangleShape2D_8cie1")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D" index="1"]
-scale = Vector2(20, 20)
-mesh = SubResource("QuadMesh_m83p6")
+[node name="SpellCaster" parent="." index="9" instance=ExtResource("6_k4r17")]
+position = Vector2(3943, 539)
+freeze_slow_duration = 5.0

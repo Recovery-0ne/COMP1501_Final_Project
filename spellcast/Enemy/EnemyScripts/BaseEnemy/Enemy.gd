@@ -3,6 +3,10 @@ class_name Enemy
 
 var player: Player
 
+@export var is_boss:bool
+@export var boss_damage_multiplier:=1.5
+@export var boss_health_multiplier:=1.5
+@export var variant_material : Material
 @export var flip_on_start:=false
 
 @export var sprite_offset = {1:Vector2.ZERO, -1:Vector2.ZERO}
@@ -15,6 +19,7 @@ var player: Player
 
 @onready var floor_check:= $FloorCheck
 @onready var wall_check:= $WallCheck
+@onready var body_collider = $BodyCollider
 
 @onready var start_pos:= position
 
@@ -33,9 +38,15 @@ func _ready():
 		states[state.name.to_lower()] = state
 	$StateMachine._initialize()
 	self.add_to_group("Enemies")
-	update_health_display()
 	if flip_on_start: 
 		change_direction()
+	if is_boss:
+		default_damage *= boss_damage_multiplier
+		damage = default_damage
+		max_health *= boss_health_multiplier
+		health = max_health
+		sprite.material = variant_material
+	update_health_display()
 
 func _is_facing_wall():
 	return wall_check.is_colliding()
@@ -77,3 +88,11 @@ func on_screen():
 	
 func off_screen():
 	is_on_screen = false
+	
+func disable_functions_for_dead():
+	vision.process_mode = Node.PROCESS_MODE_DISABLED
+	attack_check.enabled = false
+	floor_check.enabled = false
+	wall_check.enabled = false
+	set_collision_layer_value(2, false)
+	

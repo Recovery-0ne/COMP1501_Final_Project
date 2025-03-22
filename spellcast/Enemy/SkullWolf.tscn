@@ -8,10 +8,10 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_attack.gd" id="6_fxofp"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="8_ml8if"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="9_7575k"]
-[ext_resource type="Material" uid="uid://caga1sk4dx5gt" path="res://Shaders/SkullWolfBlue.tres" id="10_4lcvl"]
 [ext_resource type="Texture2D" uid="uid://dmm843cnrnrfl" path="res://Assets/Massacre Sprite Sheet.png" id="10_dpnav"]
 [ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/detector.tscn" id="10_fk00d"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_look_around.gd" id="10_u5b6j"]
+[ext_resource type="Material" uid="uid://byfawqk2e8tyv" path="res://Shaders/GreySkullWolf.tres" id="12_5q7dh"]
 [ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_et6r1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omxgw"]
@@ -172,12 +172,12 @@ _data = {
 }
 
 [node name="SkullWolf" type="CharacterBody2D"]
-material = ExtResource("10_4lcvl")
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 128
 platform_floor_layers = 4294967168
 script = ExtResource("1_hmn74")
+variant_material = ExtResource("12_5q7dh")
 pursuit_speed_multiplier = 4
 move_dir = -1
 max_health = 50
@@ -229,7 +229,7 @@ one_shot = true
 position = Vector2(0.5, 2.5)
 scale = Vector2(0.25, 0.85)
 
-[node name="SkeletonCollision" type="CollisionShape2D" parent="."]
+[node name="BodyCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0.75, 2.5)
 shape = SubResource("RectangleShape2D_omxgw")
 
