@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://udvv0q57vsxm"]
+[gd_scene load_steps=40 format=3 uid="uid://udvv0q57vsxm"]
 
 [ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_uytxk"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerStateMachine.gd" id="2_jpeyr"]
@@ -14,6 +14,10 @@
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerMoveAttack.gd" id="11_t58u5"]
 [ext_resource type="Script" path="res://Player/Scripts/States/player_dead_state.gd" id="12_oeuba"]
 [ext_resource type="Script" path="res://Player/Scripts/States/player_damaged_state.gd" id="13_vdguy"]
+[ext_resource type="Script" path="res://Player/Scripts/States/PlayerWallSlide.gd" id="15_725lw"]
+[ext_resource type="Script" path="res://Player/Scripts/States/PlayerWallClimb.gd" id="16_0mk32"]
+[ext_resource type="Script" path="res://Player/Scripts/States/PlayerWallJump.gd" id="17_ve5nd"]
+[ext_resource type="Script" path="res://Player/Scripts/PlayerDash.gd" id="18_iy4go"]
 [ext_resource type="Texture2D" uid="uid://mxabjsvr2h0h" path="res://Assets/adventurer-v1.5-Sheet.png" id="56_sfjbp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tfxn8"]
@@ -294,6 +298,23 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_4i6o1"]
+resource_name = "dash"
+length = 0.8
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [77, 78]
+}
+
 [sub_resource type="Animation" id="Animation_so3nw"]
 resource_name = "dead"
 length = 1.5
@@ -380,6 +401,59 @@ tracks/0/keys = {
 "values": [8, 9, 10, 11, 12, 13]
 }
 
+[sub_resource type="Animation" id="Animation_m5llu"]
+resource_name = "wall_climb"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [81, 82, 83, 84]
+}
+
+[sub_resource type="Animation" id="Animation_yxl4w"]
+resource_name = "wall_jump"
+length = 0.4
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_o1m7j"]
+resource_name = "wall_slide"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [79, 80]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xmvff"]
 _data = {
 "RESET": SubResource("Animation_csesh"),
@@ -390,11 +464,15 @@ _data = {
 "cast_fireball": SubResource("Animation_8v3t6"),
 "cast_frost": SubResource("Animation_0xixm"),
 "damaged": SubResource("Animation_ulgol"),
+"dash": SubResource("Animation_4i6o1"),
 "dead": SubResource("Animation_so3nw"),
 "fall": SubResource("Animation_5nnar"),
 "idle": SubResource("Animation_1iimq"),
 "jump": SubResource("Animation_5thvj"),
-"move": SubResource("Animation_mv254")
+"move": SubResource("Animation_mv254"),
+"wall_climb": SubResource("Animation_m5llu"),
+"wall_jump": SubResource("Animation_yxl4w"),
+"wall_slide": SubResource("Animation_o1m7j")
 }
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
@@ -455,6 +533,18 @@ script = ExtResource("12_oeuba")
 
 [node name="Damaged" type="Node" parent="StateMachine"]
 script = ExtResource("13_vdguy")
+
+[node name="Wall_Slide" type="Node" parent="StateMachine"]
+script = ExtResource("15_725lw")
+
+[node name="Wall_Climb" type="Node" parent="StateMachine"]
+script = ExtResource("16_0mk32")
+
+[node name="Wall_Jump" type="Node" parent="StateMachine"]
+script = ExtResource("17_ve5nd")
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("18_iy4go")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -81)
