@@ -1,0 +1,325 @@
+[gd_scene load_steps=26 format=3 uid="uid://pdne3m6kthea"]
+
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster.gd" id="1_nf63w"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="2_qw1m8"]
+[ext_resource type="Script" path="res://Enemy/spell_caster_idle.gd" id="3_ute1v"]
+[ext_resource type="Script" path="res://Enemy/spell_caster_wander.gd" id="4_7a44m"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster_pursue.gd" id="5_0wap3"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster_cast_spell.gd" id="6_kcwx6"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="7_oy7wf"]
+[ext_resource type="PackedScene" uid="uid://j4tmoiklso7j" path="res://Spells/fireball.tscn" id="7_s27xr"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="8_b2iyi"]
+[ext_resource type="PackedScene" uid="uid://b7i6kk0kgvgwg" path="res://Spells/frost.tscn" id="8_lc27i"]
+[ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/detector.tscn" id="10_jb2fk"]
+[ext_resource type="Texture2D" uid="uid://bf7tts78gbkgw" path="res://Assets/AnimationSheet_Character.png" id="11_euaae"]
+[ext_resource type="Script" path="res://Enemy/spell_caster_look_around.gd" id="11_xvwt5"]
+[ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_dif5t"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1t2sk"]
+radius = 6.66667
+height = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_awxm6"]
+
+[sub_resource type="Animation" id="Animation_2trfa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qo7vy"]
+resource_name = "cast_spell"
+length = 1.2
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [64, 65, 66, 67, 68, 69, 70, 71]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Attack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"cast_spell"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_animation_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_rdbll"]
+resource_name = "damaged"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [32, 33, 34, 35, 36, 37]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Damaged")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_animation_finished"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_c8cyr"]
+resource_name = "dead"
+length = 1.2
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [56, 57, 58, 59, 60, 61, 62, 63]
+}
+
+[sub_resource type="Animation" id="Animation_d4y2m"]
+resource_name = "walk"
+length = 3.2
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 0, 1, 0, 1, 0, 1, 8, 9, 0, 1, 0, 1, 0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_hj7q8"]
+resource_name = "run"
+length = 1.2
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29, 30, 31]
+}
+
+[sub_resource type="Animation" id="Animation_a6lqf"]
+resource_name = "teleport"
+length = 1.6
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 1, 1.15, 1.3, 1.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [48, 49, 50, 51, 52, 53, 50, 49, 48]
+}
+
+[sub_resource type="Animation" id="Animation_hs7ue"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ur2e"]
+_data = {
+"RESET": SubResource("Animation_2trfa"),
+"attack": SubResource("Animation_qo7vy"),
+"damaged": SubResource("Animation_rdbll"),
+"dead": SubResource("Animation_c8cyr"),
+"idle": SubResource("Animation_d4y2m"),
+"run": SubResource("Animation_hj7q8"),
+"teleport": SubResource("Animation_a6lqf"),
+"walk": SubResource("Animation_hs7ue")
+}
+
+[node name="SpellCaster" type="CharacterBody2D"]
+scale = Vector2(3.5, 3.5)
+collision_layer = 2
+collision_mask = 128
+script = ExtResource("1_nf63w")
+sprite_offset = {
+-1: Vector2(-0.465, -2.06),
+1: Vector2(0.465, -2.06)
+}
+pursuit_speed_multiplier = 2
+default_speed = 40
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
+script = ExtResource("2_qw1m8")
+inital_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_ute1v")
+
+[node name="Timer" type="Timer" parent="StateMachine/Idle"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Wander" type="Node" parent="StateMachine"]
+script = ExtResource("4_7a44m")
+
+[node name="Pursue" type="Node" parent="StateMachine"]
+script = ExtResource("5_0wap3")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("6_kcwx6")
+
+[node name="Fireball" parent="StateMachine/Attack" instance=ExtResource("7_s27xr")]
+collision_mask = 129
+damage = 5
+
+[node name="Frost" parent="StateMachine/Attack" instance=ExtResource("8_lc27i")]
+collision_mask = 129
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("7_oy7wf")
+
+[node name="Damaged" type="Node" parent="StateMachine"]
+script = ExtResource("8_b2iyi")
+
+[node name="Look_Around" type="Node" parent="StateMachine"]
+script = ExtResource("11_xvwt5")
+
+[node name="Timer" type="Timer" parent="StateMachine/Look_Around"]
+wait_time = 1.5
+one_shot = true
+
+[node name="Detector" parent="." instance=ExtResource("10_jb2fk")]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.285714, 1.42857)
+scale = Vector2(0.2, 1.14286)
+
+[node name="SkeletonCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1t2sk")
+
+[node name="AttackCheck" type="ShapeCast2D" parent="."]
+position = Vector2(12.14, 0)
+shape = SubResource("CircleShape2D_awxm6")
+target_position = Vector2(0, 0)
+max_results = 1
+
+[node name="FloorCheck" type="RayCast2D" parent="."]
+position = Vector2(12, 9)
+target_position = Vector2(0, 10)
+collision_mask = 128
+
+[node name="WallCheck" type="RayCast2D" parent="."]
+target_position = Vector2(20, 0)
+collision_mask = 128
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.93, 0.93)
+texture = ExtResource("11_euaae")
+offset = Vector2(0.465, -2.06)
+hframes = 8
+vframes = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_4ur2e")
+}
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = -7.14286
+offset_top = -20.8571
+offset_right = 44.8571
+offset_bottom = 2.14291
+scale = Vector2(0.29, 0.29)
+text = "Health"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusEffectTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="LightningStrike" parent="." instance=ExtResource("12_dif5t")]
+position = Vector2(0, -15.07)
+
+[connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Look_Around/Timer" to="StateMachine/Look_Around" method="_on_timer_timeout"]

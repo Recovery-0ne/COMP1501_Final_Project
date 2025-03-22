@@ -16,10 +16,8 @@ func _update(delta: float):
 		
 func _physics_update(delta: float):
 	super(delta)
-	if enemy._is_facing_wall() or enemy._is_on_ledge():
+	if enemy._is_facing_wall() or enemy._is_on_ledge() or enemy.can_see_target:
 		state_machine.change_state("idle")
-	elif enemy.can_see_target:
-		state_machine.change_state("pursue")
 	else:
 		enemy.set_move()
 	

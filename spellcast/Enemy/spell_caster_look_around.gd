@@ -10,7 +10,7 @@ func _enter():
 func _update(delta: float):
 	super(delta)
 	if enemy.can_see_target:
-		state_machine.change_state("pursue")
+		state_machine.change_state("idle")
 	
 func _exit():
 	super()

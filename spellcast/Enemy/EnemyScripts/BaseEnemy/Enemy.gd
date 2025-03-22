@@ -66,15 +66,11 @@ func damage_target():
 		
 func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
 	super(_damage, _flinch, _apply_frozen_multiplier)
-	if $StateMachine.current_state != states["attack"] and _flinch == true:
+	if _flinch == true and $StateMachine.current_state != states["attack"] and $StateMachine.current_state != states["damaged"]:
 		$StateMachine.change_state("damaged")
-	#elif can_see_target == false:
-		#$StateMachine.change_state("look_around")
 		
 func end_frozen_effect():
 	super()
-	#if $StateMachine.current_state == states["idle"]: 
-		#$StateMachine/Idle/Timer.start()
 
 func on_screen():
 	is_on_screen = true
