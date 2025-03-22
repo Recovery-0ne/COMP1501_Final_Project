@@ -29,3 +29,6 @@ func can_attack():
 		for spell in $StateMachine/Attack.get_children():
 			if not spell.visible: return true
 	return false
+
+func in_attack_range():
+	return position.distance_to(player.position) < attack_range

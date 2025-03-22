@@ -2,17 +2,17 @@
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster.gd" id="1_nf63w"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="2_qw1m8"]
-[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_idle.gd" id="3_6u4ej"]
-[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_wander.gd" id="4_21n4k"]
+[ext_resource type="Script" path="res://Enemy/spell_caster_idle.gd" id="3_ute1v"]
+[ext_resource type="Script" path="res://Enemy/spell_caster_wander.gd" id="4_7a44m"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster_pursue.gd" id="5_0wap3"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster_cast_spell.gd" id="6_kcwx6"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="7_oy7wf"]
 [ext_resource type="PackedScene" uid="uid://j4tmoiklso7j" path="res://Spells/fireball.tscn" id="7_s27xr"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="8_b2iyi"]
 [ext_resource type="PackedScene" uid="uid://b7i6kk0kgvgwg" path="res://Spells/frost.tscn" id="8_lc27i"]
-[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_look_around.gd" id="9_t3i24"]
 [ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/detector.tscn" id="10_jb2fk"]
 [ext_resource type="Texture2D" uid="uid://bf7tts78gbkgw" path="res://Assets/AnimationSheet_Character.png" id="11_euaae"]
+[ext_resource type="Script" path="res://Enemy/spell_caster_look_around.gd" id="11_xvwt5"]
 [ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_dif5t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1t2sk"]
@@ -34,6 +34,51 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qo7vy"]
+resource_name = "cast_spell"
+length = 1.2
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [64, 65, 66, 67, 68, 69, 70, 71]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Attack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"cast_spell"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_animation_end"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_rdbll"]
@@ -155,51 +200,6 @@ tracks/0/keys = {
 "values": [16, 17, 18, 19]
 }
 
-[sub_resource type="Animation" id="Animation_qo7vy"]
-resource_name = "cast_spell"
-length = 1.2
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [64, 65, 66, 67, 68, 69, 70, 71]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../StateMachine/Attack")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.75),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"cast_spell"
-}]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../StateMachine/Attack")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(1.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_animation_end"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4ur2e"]
 _data = {
 "RESET": SubResource("Animation_2trfa"),
@@ -229,7 +229,7 @@ script = ExtResource("2_qw1m8")
 inital_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("3_6u4ej")
+script = ExtResource("3_ute1v")
 
 [node name="Timer" type="Timer" parent="StateMachine/Idle"]
 wait_time = 3.0
@@ -237,7 +237,7 @@ one_shot = true
 autostart = true
 
 [node name="Wander" type="Node" parent="StateMachine"]
-script = ExtResource("4_21n4k")
+script = ExtResource("4_7a44m")
 
 [node name="Pursue" type="Node" parent="StateMachine"]
 script = ExtResource("5_0wap3")
@@ -246,8 +246,11 @@ script = ExtResource("5_0wap3")
 script = ExtResource("6_kcwx6")
 
 [node name="Fireball" parent="StateMachine/Attack" instance=ExtResource("7_s27xr")]
+collision_mask = 129
+damage = 5
 
 [node name="Frost" parent="StateMachine/Attack" instance=ExtResource("8_lc27i")]
+collision_mask = 129
 
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource("7_oy7wf")
@@ -256,7 +259,7 @@ script = ExtResource("7_oy7wf")
 script = ExtResource("8_b2iyi")
 
 [node name="Look_Around" type="Node" parent="StateMachine"]
-script = ExtResource("9_t3i24")
+script = ExtResource("11_xvwt5")
 
 [node name="Timer" type="Timer" parent="StateMachine/Look_Around"]
 wait_time = 1.5

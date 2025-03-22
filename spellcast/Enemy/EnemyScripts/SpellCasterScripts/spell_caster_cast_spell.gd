@@ -24,4 +24,4 @@ func cast_spell():
 	enemy.attack_cooldown_timer.start()
 	
 func _animation_end():
-	state_machine.change_state("pursue")
+	state_machine.change_state("idle")

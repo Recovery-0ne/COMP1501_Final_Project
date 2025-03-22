@@ -56,7 +56,7 @@ func apply_effect(function_name:String):
 	call(function_name)
 		
 func apply_burning():
-	if has_status_effect: return
+	if has_status_effect or dead: return
 	has_status_effect = true
 	burning = true
 	status_effect_duration = randi_range(burn_effect_duration[0],burn_effect_duration[1])
@@ -75,7 +75,7 @@ func take_burn_damage():
 		$StatusEffectTimer.disconnect("timeout", take_burn_damage)
 			
 func apply_freezing():
-	if has_status_effect: return
+	if has_status_effect or dead: return
 	speed = 0
 	anim.speed_scale = 0
 	has_status_effect = true
