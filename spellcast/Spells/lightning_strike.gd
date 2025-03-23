@@ -9,14 +9,15 @@ func enable():
 
 func do_damage():
 	if target.frozen:
-		target.end_frozen_effect() #This needs to go first to eliminate the increased defense
-		target.take_damage(damage+frozen_damage,false)
+		target.end_frozen_effect()
+		target.take_damage(damage+frozen_damage, true, false)
 	elif target.has_status_effect == false:
 		if randi_range(0,4) == 0:
 			target.apply_burning()
-		target.take_damage(damage)
+		target.take_damage(damage, true, false)
 	else:
-		target.take_damage(damage)
+		target.take_damage(damage, true, false)
+		
 	
 	
 func disable():

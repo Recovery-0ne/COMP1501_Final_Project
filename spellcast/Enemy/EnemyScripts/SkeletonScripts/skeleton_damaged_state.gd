@@ -6,8 +6,14 @@ func _enter():
 func _update(delta: float):
 	super(delta)
 	
+func _physics_update(delta: float):
+	super(delta)
+	
 func _exit():
-	super()	
+	super()
 
 func _animation_finished():
-	state_machine.change_state("pursue")
+	if not enemy.can_see_target:
+		state_machine.change_state("look_around")
+	else:
+		state_machine.change_state("pursue")

@@ -20,6 +20,7 @@ func _enter():
 	anim.play(animation_name)
 
 func _update(delta: float): #Write code here that should be used in every state only.
+	if player.frozen or player.dead: return 
 	player.direction = Input.get_axis("left", "right")
 	if player.direction != 0:
 		sprite.flip_h = player.direction < 0

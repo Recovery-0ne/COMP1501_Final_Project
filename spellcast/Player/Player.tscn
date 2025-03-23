@@ -494,7 +494,7 @@ position = Vector2(1, -39)
 collision_mask = 128
 script = ExtResource("1_uytxk")
 default_speed = 500
-default_gravity = 65
+freeze_slow_duration = 2.0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_jpeyr")
@@ -569,8 +569,8 @@ collision_mask = 128
 position = Vector2(0, -81)
 
 [node name="AttackCheck" type="ShapeCast2D" parent="."]
-position = Vector2(48.425, -7.455)
-scale = Vector2(3.205, 3.205)
+position = Vector2(40.305, -7.455)
+scale = Vector2(3.79, 3.79)
 shape = SubResource("CircleShape2D_tfxn8")
 target_position = Vector2(0, 0)
 collision_mask = 2

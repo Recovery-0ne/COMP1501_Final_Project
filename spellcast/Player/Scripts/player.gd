@@ -24,11 +24,12 @@ func damage_target():
 		for i in attack_check.get_collision_count():
 			attack_check.get_collider(i).take_damage(damage)
 			
-func take_damage(_damage:int, _flinch:=true):
-	super(_damage, _flinch)
-	if health == 0:
-		$StateMachine.change_state("dead")
-		$HealthLabel.visible = false
-		dead = true
-	elif _flinch == true and $StateMachine.current_state == states["idle"]:
+func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
+	super(_damage, _flinch, _apply_frozen_multiplier)
+	if _flinch and $StateMachine.current_state == states["idle"]:
 		$StateMachine.change_state("damaged")
+	
+func cast_projectile_spell(_spell, _timer):
+	if not _spell.visible and _timer.is_stopped():
+		_timer.start()
+		_spell._activate(self, get_global_mouse_position())
