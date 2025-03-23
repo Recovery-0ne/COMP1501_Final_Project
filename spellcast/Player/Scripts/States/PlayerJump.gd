@@ -12,6 +12,10 @@ func _update(delta: float):
 		state_machine.change_state("air_attack")
 	elif player.is_on_wall():
 		state_machine.change_state("wall_climb")
+
+
+		
+	
 	
 func _physics_update(delta: float):
 	super(delta)

@@ -18,6 +18,8 @@ func _update(delta: float):
 		state_machine.change_state("idle")
 	elif input > 0:
 		state_machine.change_state("wall_climb")
+	if Input.is_action_pressed("jump"):
+		state_machine.change_state("wall_jump")
 	#elif not player.is_on_wall() or player.direction == wall_normal:
 		#state_machine.change_state("fall")
 

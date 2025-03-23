@@ -3,7 +3,7 @@ extends PlayerState
 func _enter():
 	super()
 	player.velocity.y = -player.jump_velocity
-
+	#player.velocity.x += player.get_wall_normal().x * 1000
 func _update(delta: float):
 	super(delta)
 	if player.velocity.y > 0:
