@@ -2,11 +2,12 @@ extends Entity
 class_name Player
 
 var direction:= 1
-
+var wall_check
 func _init() -> void:
 	self.add_to_group("Player")
 
 func _ready():
+	wall_check = $WallCheck
 	for state in $StateMachine.get_children():
 		state._initialize($StateMachine, self, sprite, anim, state.name.to_lower())
 		states[state.name.to_lower()] = state

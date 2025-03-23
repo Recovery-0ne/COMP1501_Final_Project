@@ -10,46 +10,34 @@ func _enter():
 
 func _update(delta: float):
 	super(delta)
-	player.velocity.x = -wall_normal
 	var input = Input.get_axis("down", "up")
 	
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_just_pressed("jump"):# and player.wall_check.is_colliding():
 		state_machine.change_state("wall_jump")
-	
-	if input > 0 and not Input.is_action_pressed("jump"):
+		return
+	elif player.direction == wall_normal:
+		state_machine.change_state("fall")
+		return
+		
+	if not player.wall_check.is_colliding():
+		player.velocity.y = 0
+		anim.speed_scale = input
+	if input > 0 and player.wall_check.is_colliding():
 		player.velocity.y = -100*input
 		anim.speed_scale = input
-	elif input < 0 and not Input.is_action_pressed("jump"):
+	elif input < 0:
 		state_machine.change_state("wall_slide")
-	elif not Input.is_action_pressed("jump"):
+		return
+	else:
 		player.velocity.y = 0
 		anim.speed_scale = 0
 		
 	if player.is_on_floor():
 		state_machine.change_state("idle")
-		
-	if (Input.is_action_pressed("left") and player.velocity.x > 0) or (Input.is_action_pressed("right") and player.velocity.x < 0):
-		state_machine.change_state("fall")
-	elif not player.is_on_wall():
-		state_machine.change_state("idle")
 
-
-
-	#elif player.direction == wall_normal:
-	#	state_machine.change_state("fall")
-	#elif not player.is_on_wall() or player.direction == wall_normal:
-	#	state_machine.change_state("fall")
-
-	#This code was the reason a lot of things was glitching/breaking for some reason vvv
-	#code made it so aniamtions
-	#player.velocity.y = -100*input
-	#anim.speed_scale = input
-	#This code was the reason a lot of things was glitching/breaking for some reason ^^^
-	
 func _physics_update(delta: float):
 	super(delta)
 	player.move_and_slide()
-
 
 func _exit():
 	super()

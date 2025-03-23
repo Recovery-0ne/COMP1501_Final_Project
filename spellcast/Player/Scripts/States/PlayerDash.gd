@@ -4,22 +4,19 @@ func _enter():
 	animation_name = "dash"
 	super()
 	var input = Input.get_axis("left", "right")
-	#player.velocity.x = player.direction * 800 
-	#player.velocity.y = 0  
-	player.position.x = player.position.x+(100*input)
-	
+	player.velocity.x = 1500*player.direction
+
 func _update(delta: float):
 	super(delta)
-	
-	
-	
+	if player.is_on_wall() and player.wall_check.is_colliding():
+		state_machine.change_state("wall_climb")
+
 func _physics_update(delta: float):
 	super(delta)
-	player.move()
-
+	player.move_and_slide()
 
 func _exit():
 	super()
 
 func _animation_end():
-	state_machine.change_state("move")
+	state_machine.change_state("fall")

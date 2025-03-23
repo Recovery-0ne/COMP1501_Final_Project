@@ -5,7 +5,7 @@ func _enter():
 
 func _update(delta: float):
 	super(delta)
-	if player.direction != 0:
+	if player.direction != 0 and ((player.is_on_wall() and player.direction == (player.get_wall_normal().x/abs(player.get_wall_normal().x))) or not player.is_on_wall()):
 		state_machine.change_state("move")
 	elif Input.is_action_pressed("jump") and player.is_on_floor():
 		state_machine.change_state("jump")

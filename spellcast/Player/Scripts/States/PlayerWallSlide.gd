@@ -10,23 +10,25 @@ func _enter():
 
 func _update(delta: float):
 	super(delta)
-	player.velocity.x = -wall_normal
 	var input = Input.get_axis("down", "up")
 	if player.is_on_floor():
-		sprite.flip_h = wall_normal < 0
-		player.attack_check.position.x = abs(player.attack_check.position.x) * wall_normal
+		sprite.flip_h = player.get_wall_normal().x < 0
+		player.attack_check.position.x = abs(player.attack_check.position.x) * player.get_wall_normal().x
+		player.wall_check.target_position.x = abs(player.wall_check.target_position.x)*player.get_wall_normal().x
 		state_machine.change_state("idle")
+		return
 	elif input > 0:
 		state_machine.change_state("wall_climb")
-	if Input.is_action_pressed("jump"):
+		return
+	elif Input.is_action_pressed("jump"):
 		state_machine.change_state("wall_jump")
-	#elif not player.is_on_wall() or player.direction == wall_normal:
-		#state_machine.change_state("fall")
-
-	if (Input.is_action_pressed("left") and player.velocity.x > 0) or (Input.is_action_pressed("right") and player.velocity.x < 0):
+		return
+	elif player.direction == wall_normal:
 		state_machine.change_state("fall")
-	elif not player.is_on_wall():
+		return
+	elif not player.is_on_wall() and not player.wall_check.is_colliding():
 		state_machine.change_state("idle")
+		return
 
 func _physics_update(delta: float):
 	super(delta)

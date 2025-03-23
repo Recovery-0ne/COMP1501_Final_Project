@@ -10,6 +10,7 @@ func _initialize():
 	current_state._enter()
 
 func change_state(new_state_name: String):
+	#print_debug(current_state.name + "-->" + new_state_name)
 	if current_state.player.frozen or current_state.player.dead: return
 	var new_state = current_state.player.states[new_state_name]
 	current_state._exit()
