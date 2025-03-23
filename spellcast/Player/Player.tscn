@@ -245,9 +245,9 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(1, -39)
-collision_mask = 128
+collision_mask = 130
 script = ExtResource("1_rwj2d")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]

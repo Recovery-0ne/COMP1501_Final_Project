@@ -11,6 +11,7 @@ var speed:= 500
 var gravity:= 65
 var jump_velocity:= 1000
 @onready var attack_check:= $AttackCheck
+@export var checkpoint_position: Vector2
 
 var dead = false
 
@@ -18,6 +19,7 @@ func _init() -> void:
 	self.add_to_group("Player")
 
 func _ready():
+	global_position = checkpoint_position
 	for state in $StateMachine.get_children():
 		state.initialize($StateMachine, self, $Animations, state.name.to_lower())
 		states[state.name.to_lower()] = state
@@ -45,10 +47,20 @@ func take_damage(_damage:int, _flinch:=true):
 		dead = true
 		$StateMachine.change_state("dead")
 		$HealthLabel.visible = false
+		# add signal that waits until death animation finishes:
+		respawn_player()
 	elif _flinch == true:
 		$StateMachine.change_state("damaged")
 	update_health_display()
-		
+
+func respawn_player():
+	dead = false
+	global_position = checkpoint_position
+	$StateMachine.initialize()
+	health = max_health
+	$HealthLabel.visible = true
+	
+	
 func update_health_display():
 	$HealthLabel.text = str(health)
 	
