@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b73flaqv2wyd6"]
+
+[ext_resource type="Shader" path="res://Shaders/ColourSwap.gdshader" id="1_ofkxa"]
+
+[resource]
+shader = ExtResource("1_ofkxa")
+shader_parameter/target_colors = PackedColorArray(0.34902, 0.756863, 0.207843, 1)
+shader_parameter/replace_colors = PackedColorArray(0.440389, 0.508532, 0.954704, 1)
+shader_parameter/tolerance = 0.05
