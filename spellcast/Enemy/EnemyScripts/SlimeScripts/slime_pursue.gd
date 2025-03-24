@@ -16,8 +16,7 @@ func _physics_update(delta: float):
 	enemy.set_move()
 	enemy.change_facing_direction()
 		
-	#After colliding, have the enemy move forward for longer before attacking so that the ShapeCast overlaps the player more
-	if enemy.attack_check.is_colliding():
+	if abs(enemy.position.x - enemy.player.position.x) < 75:
 		state_machine.change_state("attack")
 	elif enemy.position.distance_to(enemy.player.position) < 50 and not enemy.vision.in_vision_cone:
 		state_machine.change_state("look_around")

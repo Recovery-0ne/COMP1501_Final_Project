@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=4 uid="uid://c3ulabo7m34cy"]
 
 [ext_resource type="Texture2D" uid="uid://jflf4m5wg58j" path="res://Assets/TX Village Props.png" id="1_6roy3"]
-[ext_resource type="Script" path="res://shop.gd" id="1_bt2m2"]
+[ext_resource type="Script" path="res://Shop/shop.gd" id="1_bt2m2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r6mxh"]
 texture = ExtResource("1_6roy3")
@@ -7893,6 +7893,8 @@ sources/0 = SubResource("TileSetAtlasSource_0kch6")
 size = Vector2(506.5, 300.5)
 
 [node name="Shop" type="Node2D"]
+z_index = -9
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_bt2m2")
 
 [node name="BaseLayer" type="TileMapLayer" parent="."]

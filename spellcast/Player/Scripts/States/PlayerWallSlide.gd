@@ -4,8 +4,8 @@ var wall_normal = 0
 func _enter():
 	super()
 	wall_normal = player.get_wall_normal().x
-	player.gravity = 0
-	player.velocity.y = 100
+	player.gravity = 10
+	#player.velocity.y = 100
 
 
 func _update(delta: float):
