@@ -1,9 +1,9 @@
 extends PlayerState
 var wall_normal = 0
-var defaultAnimSpeed = 1
+var defaultAnimSpeed
 func _enter():
 	super()
-	var defaultAnimSpeed = anim.speed_scale
+	defaultAnimSpeed = anim.speed_scale
 	wall_normal = player.get_wall_normal().x
 	player.gravity = 0
 	player.velocity.y = 0
