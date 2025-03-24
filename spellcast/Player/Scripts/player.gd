@@ -4,6 +4,8 @@ class_name Player
 var direction:= 1
 @export var checkpoint_position: Vector2
 var wall_check
+var jump_count = 0
+var max_jumps = 2
 
 func _init() -> void:
 	self.add_to_group("Player")

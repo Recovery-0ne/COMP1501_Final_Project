@@ -10,6 +10,7 @@ func _update(delta: float):
 		state_machine.change_state("idle")
 	elif Input.is_action_pressed("jump") and player.is_on_floor():
 		state_machine.change_state("jump")
+		player.jump_count += 1
 	elif Input.is_action_just_pressed("attack"):
 		state_machine.change_state("move_attack")
 	elif Input.is_action_just_pressed("dash"):

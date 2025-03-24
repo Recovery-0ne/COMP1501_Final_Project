@@ -9,6 +9,7 @@ func _update(delta: float):
 		state_machine.change_state("move")
 	elif Input.is_action_pressed("jump") and player.is_on_floor():
 		state_machine.change_state("jump")
+		player.jump_count += 1
 	elif not player.is_on_floor():
 		state_machine.change_state("fall")
 	elif Input.is_action_pressed("fireball"):
