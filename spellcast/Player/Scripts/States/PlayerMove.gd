@@ -8,7 +8,7 @@ func _update(delta: float):
 	super(delta)
 	if player.velocity.x == 0:
 		state_machine.change_state("idle")
-	elif Input.is_action_just_pressed("jump") and player.is_on_floor():
+	elif Input.is_action_pressed("jump") and player.is_on_floor():
 		state_machine.change_state("jump")
 	elif Input.is_action_just_pressed("attack"):
 		state_machine.change_state("move_attack")

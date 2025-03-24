@@ -20,13 +20,11 @@ func _physics_update(delta: float):
 		enemy.velocity = Vector2.ZERO
 		anim.play("jump_land")
 	
-	
 func _exit():
-	has_hit_player = false
 	super()
+	has_hit_player = false
 	
 func slime_jump():
-	print("slime be jumpin")
 	enemy.velocity = Vector2(400 * enemy.facing_dir, -enemy.jump_velocity)
 	
 func prepare_animation_finished():
