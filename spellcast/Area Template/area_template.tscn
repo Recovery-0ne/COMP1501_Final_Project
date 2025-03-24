@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=4 uid="uid://bumlnxcwfugof"]
+[gd_scene load_steps=8 format=4 uid="uid://bumlnxcwfugof"]
 
 [ext_resource type="Texture2D" uid="uid://b70bu57dkmd43" path="res://Assets/Tileset.png" id="1_kmil1"]
-[ext_resource type="PackedScene" uid="uid://c3ulabo7m34cy" path="res://shop.tscn" id="2_c0fvb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6w4x2"]
 texture = ExtResource("1_kmil1")
@@ -301,8 +300,6 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_v5sep")
 
 [node name="AreaTemplate" type="Node"]
-
-[node name="Shop" parent="." instance=ExtResource("2_c0fvb")]
 
 [node name="RockLayer" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)
