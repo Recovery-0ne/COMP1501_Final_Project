@@ -6,11 +6,22 @@ func _enter():
 
 func _update(delta: float):
 	super(delta)
-	if player.velocity.y > 0:
+	if player.velocity.y >= 0:
 		state_machine.change_state("fall")
-	if Input.is_action_just_pressed("attack"):
+	elif Input.is_action_just_pressed("attack"):
 		state_machine.change_state("air_attack")
-	player.move()		
+	elif player.is_on_wall() and player.wall_check.is_colliding():
+		state_machine.change_state("wall_climb")
+	elif Input.is_action_just_pressed("dash"):
+		state_machine.change_state("dash")
+
+
+		
+	
+	
+func _physics_update(delta: float):
+	super(delta)
+	player.move()
 
 func _exit():
 	super()

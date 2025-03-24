@@ -6,10 +6,11 @@ func _enter():
 func _update(delta: float):
 	super(delta)
 	
+func _physics_update(delta: float):
+	super(delta)
+	
 func _exit():
 	super()
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if state_machine.current_state == self:
-		enemy.damage_target()
-		state_machine.change_state("attack_recovery")
+	
+func _animation_finished():
+	state_machine.change_state("pursue")

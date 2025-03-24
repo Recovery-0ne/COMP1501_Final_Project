@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://pwhcfr60yjc2"]
+
+[ext_resource type="PackedScene" uid="uid://udvv0q57vsxm" path="res://Player/Player.tscn" id="1_v26ed"]
+[ext_resource type="PackedScene" uid="uid://pdne3m6kthea" path="res://Enemy/SpellCaster.tscn" id="2_xagr4"]
+[ext_resource type="PackedScene" uid="uid://drhydcmoetxlj" path="res://Enemy/Skeleton.tscn" id="3_n7oqu"]
+[ext_resource type="PackedScene" uid="uid://ls572kqc41a2" path="res://Enemy/SkullWolf.tscn" id="4_3d63a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sw80l"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_afiq8"]
+
+[node name="TestFacility" type="Node"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-153, 265)
+scale = Vector2(100, 1)
+collision_layer = 128
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_sw80l")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_afiq8")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(444, 200)
+scale = Vector2(5.3, 5.375)
+collision_layer = 128
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_sw80l")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D2"]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_afiq8")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(87.9999, 205)
+scale = Vector2(5.3, 5.375)
+collision_layer = 128
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_sw80l")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D3"]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_afiq8")
+
+[node name="Player" parent="." instance=ExtResource("1_v26ed")]
+position = Vector2(-502, 189)
+
+[node name="SpellCaster" parent="." instance=ExtResource("2_xagr4")]
+position = Vector2(-260, 178)
+attack_range = null
+is_boss = null
+flip_on_start = null
+move_dir = null
+default_damage = null
+default_gravity = null
+default_jump_velocity = null
+burn_effect_duration = null
+freeze_slow_duration = null
+
+[node name="Skeleton" parent="." instance=ExtResource("3_n7oqu")]
+position = Vector2(-688, 178)
+max_health = 1
+
+[node name="SkullWolf" parent="." instance=ExtResource("4_3d63a")]
+position = Vector2(292, 193)
+is_boss = null
+flip_on_start = null
+sprite_offset = null
+default_gravity = null
+default_jump_velocity = null
+freeze_slow_duration = null

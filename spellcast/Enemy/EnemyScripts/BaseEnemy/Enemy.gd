@@ -1,18 +1,17 @@
-extends CharacterBody2D
+extends Entity
 class_name Enemy
 
-@export var animated_sprite: AnimatedSprite2D
-
 var player: Player
-#var last_known_player_position:= Vector2.ZERO
-#var looking_for_player:= false
-var states: Dictionary
 
-@export var max_health:= 100
-@onready var health:= max_health
-@export var damage:= 5
-@export var speed:= 15
-@export var gravity:= 2000
+@export var is_boss:bool
+@export var boss_damage_multiplier:=1.5
+@export var boss_health_multiplier:=1.5
+@export var variant_material : Material
+@export var flip_on_start:=false
+
+@export var sprite_offset = {1:Vector2.ZERO, -1:Vector2.ZERO}
+
+@export var pursuit_speed_multiplier:=1
 @export var move_dir:= 1
 @onready var facing_dir:= move_dir
 
@@ -20,23 +19,33 @@ var states: Dictionary
 
 @onready var floor_check:= $FloorCheck
 @onready var wall_check:= $WallCheck
-@onready var attack_check:= $AttackCheck
+@onready var body_collider = $BodyCollider
 
 @onready var start_pos:= position
 
 var can_see_target = false
-#var has_seen_target = false
-var dead:= false
+var is_on_screen = false
 
 func _ready():
-	for state in $StateMachine.get_children():
-		state._initalize($StateMachine, self, animated_sprite, state.name.to_lower())
-		states[state.name.to_lower()] = state
-	$StateMachine._initalize()
-	self.add_to_group("Enemies")
 	player = get_tree().get_nodes_in_group("Player")[0]
 	vision.body = self
 	vision.target = player
+	$LightningStrike.target = self
+	$VisibleOnScreenNotifier2D.connect("screen_entered", on_screen)
+	$VisibleOnScreenNotifier2D.connect("screen_exited", off_screen)
+	for state in $StateMachine.get_children():
+		state._initialize($StateMachine, self, sprite, anim, state.name.to_lower())
+		states[state.name.to_lower()] = state
+	$StateMachine._initialize()
+	self.add_to_group("Enemies")
+	if flip_on_start: 
+		change_direction()
+	if is_boss:
+		default_damage *= boss_damage_multiplier
+		damage = default_damage
+		max_health *= boss_health_multiplier
+		health = max_health
+		sprite.material = variant_material
 	update_health_display()
 
 func _is_facing_wall():
@@ -44,10 +53,6 @@ func _is_facing_wall():
 	
 func _is_on_ledge():
 	return not floor_check.is_colliding()
-	
-func apply_gravity(delta):
-	if not is_on_floor():
-		velocity.y += gravity * delta
 		
 func change_direction():
 	move_dir *= -1
@@ -57,6 +62,10 @@ func change_direction_to(directon: int):
 	if move_dir != directon:
 		move_dir = directon
 		flip_checks()
+		
+func change_direction_to_player():
+	if player.position.x - position.x == 0: return
+	change_direction_to((player.position.x - position.x)/abs(player.position.x - position.x))
 	
 func flip_checks():
 	wall_check.target_position.x *= -1
@@ -66,21 +75,24 @@ func damage_target():
 	if attack_check.is_colliding():
 		player.take_damage(damage)
 		
-func take_damage(_damage:int, _flinch:=true):
-	if dead: return
-	health = clamp(health - _damage, 0, max_health)
-	if health == 0:
-		dead = true
-		$StateMachine.change_state("dead")
-		$HealthLabel.visible = false
-	else:
-		#If an enemy was hit and it can't see the player, it is possible they are behind it
-		if can_see_target == false:
-			change_direction()
-			$StateMachine.change_state("pursue")
-		if $StateMachine.current_state != states["attack"] and _flinch == true:
-			$StateMachine.change_state("damaged")
-	update_health_display()
+func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
+	super(_damage, _flinch, _apply_frozen_multiplier)
+	if _flinch == true and $StateMachine.current_state != states["attack"] and $StateMachine.current_state != states["damaged"]:
+		$StateMachine.change_state("damaged")
 		
-func update_health_display():
-	$HealthLabel.text = str(health)
+func end_frozen_effect():
+	super()
+
+func on_screen():
+	is_on_screen = true
+	
+func off_screen():
+	is_on_screen = false
+	
+func disable_functions_for_dead():
+	vision.process_mode = Node.PROCESS_MODE_DISABLED
+	attack_check.enabled = false
+	floor_check.enabled = false
+	wall_check.enabled = false
+	set_collision_layer_value(2, false)
+	

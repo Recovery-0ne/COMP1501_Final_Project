@@ -6,11 +6,12 @@ func _enter():
 	
 func _update(delta: float):
 	super(delta)
+
+func _physics_update(delta: float):
+	super(delta)
 	
-	if enemy.can_see_target:
+	if enemy.can_see_target and not enemy._is_on_ledge() and not enemy._is_facing_wall():
 		state_machine.change_state("pursue")
-	elif enemy.attack_check.is_colliding():
-		state_machine.change_state("attack")
 	
 func _exit():
 	super()
