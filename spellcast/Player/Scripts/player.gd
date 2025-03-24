@@ -2,11 +2,14 @@ extends Entity
 class_name Player
 
 var direction:= 1
+@export var checkpoint_position: Vector2
 var wall_check
+
 func _init() -> void:
 	self.add_to_group("Player")
 
 func _ready():
+	checkpoint_position = global_position
 	wall_check = $WallCheck
 	for state in $StateMachine.get_children():
 		state._initialize($StateMachine, self, sprite, anim, state.name.to_lower())
@@ -28,6 +31,13 @@ func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
 	super(_damage, _flinch, _apply_frozen_multiplier)
 	if _flinch and $StateMachine.current_state == states["idle"]:
 		$StateMachine.change_state("damaged")
+		
+func respawn_player():
+	dead = false
+	global_position = checkpoint_position
+	$StateMachine._initialize()
+	health = max_health
+	$HealthLabel.visible = true
 	
 func cast_projectile_spell(_spell, _timer):
 	if not _spell.visible and _timer.is_stopped():

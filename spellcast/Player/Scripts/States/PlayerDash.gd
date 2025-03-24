@@ -3,7 +3,6 @@ extends PlayerState
 func _enter():
 	animation_name = "dash"
 	super()
-	var input = Input.get_axis("left", "right")
 	player.velocity.x = 1500*player.direction
 
 func _update(delta: float):
