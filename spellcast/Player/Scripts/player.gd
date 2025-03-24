@@ -37,6 +37,7 @@ func respawn_player():
 	global_position = checkpoint_position
 	$StateMachine._initialize()
 	health = max_health
+	update_health_display()
 	$HealthLabel.visible = true
 	
 func cast_projectile_spell(_spell, _timer):
