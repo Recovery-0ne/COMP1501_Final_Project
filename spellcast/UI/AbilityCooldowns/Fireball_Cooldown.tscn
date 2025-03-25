@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c41h162r5tvjh"]
 
 [ext_resource type="Texture2D" uid="uid://dwmxabv2tnikj" path="res://Assets/FireBall/Sheets/ShootAntecipation-Sheet.png" id="1_7r36v"]
-[ext_resource type="Script" path="res://AbilityCooldowns/ability_cooldown.gd" id="1_8yqc7"]
+[ext_resource type="Script" path="res://UI/AbilityCooldowns/ability_cooldown.gd" id="1_8yqc7"]
 [ext_resource type="Texture2D" uid="uid://cslrm7oud7l5s" path="res://Assets/blank_64x64_image.png" id="2_4velh"]
 
 [node name="FireballCooldown" type="Node2D"]

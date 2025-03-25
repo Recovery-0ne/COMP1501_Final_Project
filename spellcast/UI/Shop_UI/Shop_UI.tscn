@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnaf8w5hco26x"]
+
+[ext_resource type="Script" path="res://UI/Shop_UI/shop_ui.gd" id="1_qqm55"]
+
+[node name="ShopUi" type="CanvasLayer" groups=["Shop_UI"]]
+process_mode = 3
+script = ExtResource("1_qqm55")
+
+[node name="Ability_Selection_Display" type="Node2D" parent="."]
+visible = false
+position = Vector2(64, 68)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Ability_Selection_Display"]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color(0.252028, 0.252028, 0.252028, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ability_Selection_Display"]
+position = Vector2(0, -17.325)
+scale = Vector2(4.509, 3.816)
+hframes = 3
+
+[node name="Ability_Selectors" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="OptionButton" type="OptionButton" parent="Ability_Selectors"]
+offset_left = 58.0
+offset_top = 55.0
+offset_right = 208.0
+offset_bottom = 88.0
+allow_reselect = true
+
+[node name="OptionButton2" type="OptionButton" parent="Ability_Selectors"]
+offset_left = 58.0
+offset_top = 95.0
+offset_right = 208.0
+offset_bottom = 128.0
+allow_reselect = true
+
+[node name="OptionButton3" type="OptionButton" parent="Ability_Selectors"]
+offset_left = 59.0
+offset_top = 135.0
+offset_right = 209.0
+offset_bottom = 168.0
+allow_reselect = true
+
+[node name="OptionButton4" type="OptionButton" parent="Ability_Selectors"]
+offset_left = 59.0
+offset_top = 175.0
+offset_right = 209.0
+offset_bottom = 208.0
+allow_reselect = true
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="item_selected" from="Ability_Selectors/OptionButton" to="." method="_ability_changed" binds= [0]]
+[connection signal="item_selected" from="Ability_Selectors/OptionButton2" to="." method="_ability_changed" binds= [1]]
+[connection signal="item_selected" from="Ability_Selectors/OptionButton3" to="." method="_ability_changed" binds= [2]]
+[connection signal="item_selected" from="Ability_Selectors/OptionButton4" to="." method="_ability_changed" binds= [3]]

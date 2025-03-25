@@ -22,6 +22,7 @@ func set_icon(_color, _transform, _texture, _hframes, _vframes, _frame):
 	$Label.visible = true
 	
 func reset_to_default():
+	$TextureProgressBar.value = 0
 	$ColorRect.color = color
 	$Sprite2D.transform = sprite_transform
 	$Sprite2D.texture = texture
