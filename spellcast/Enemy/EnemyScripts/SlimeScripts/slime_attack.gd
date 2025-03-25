@@ -25,10 +25,10 @@ func _exit():
 	has_hit_player = false
 	
 func slime_jump():
+	can_attack = true 
 	enemy.velocity = Vector2(400 * enemy.facing_dir, -enemy.jump_velocity)
 	
 func prepare_animation_finished():
-	can_attack = true 
 	anim.play("attack")
 	
 func land_animation_finished():

@@ -13,7 +13,6 @@ var player: Player
 
 @export var pursuit_speed_multiplier:=1
 @export var move_dir:= 1
-@onready var facing_dir:= move_dir
 
 @onready var vision:= $Detector
 
@@ -27,17 +26,22 @@ var can_see_target = false
 var is_on_screen = false
 
 func _ready():
+	facing_dir = move_dir
 	player = get_tree().get_nodes_in_group("Player")[0]
 	vision.body = self
 	vision.target = player
+	
 	$LightningStrike.target = self
 	$VisibleOnScreenNotifier2D.connect("screen_entered", on_screen)
 	$VisibleOnScreenNotifier2D.connect("screen_exited", off_screen)
+	
 	for state in $StateMachine.get_children():
 		state._initialize($StateMachine, self, sprite, anim, state.name.to_lower())
 		states[state.name.to_lower()] = state
 	$StateMachine._initialize()
+	
 	self.add_to_group("Enemies")
+	
 	if flip_on_start: 
 		change_direction()
 	if is_boss:

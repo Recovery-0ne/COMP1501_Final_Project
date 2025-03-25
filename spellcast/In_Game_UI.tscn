@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://dte2li7iee18p"]
+
+[ext_resource type="PackedScene" uid="uid://c41h162r5tvjh" path="res://AbilityCooldowns/Fireball_Cooldown.tscn" id="1_ht01g"]
+[ext_resource type="Script" path="res://AbilityCooldowns/In_Game_UI.gd" id="1_ru75n"]
+[ext_resource type="PackedScene" uid="uid://bhipjfcr34gqh" path="res://AbilityCooldowns/Frost_Cooldown.tscn" id="2_rgj0g"]
+[ext_resource type="PackedScene" uid="uid://dp8qrpiwj3f0s" path="res://AbilityCooldowns/Lightning_Strike_Cooldown.tscn" id="3_rp55y"]
+[ext_resource type="PackedScene" uid="uid://bilgp2fofscl4" path="res://AbilityCooldowns/Dash_Cooldown.tscn" id="4_imfig"]
+
+[node name="InGameUi" type="CanvasLayer"]
+script = ExtResource("1_ru75n")
+
+[node name="AbilityIcons" type="HBoxContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -436.0
+offset_top = -79.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="FireballCooldown" parent="AbilityIcons" instance=ExtResource("1_ht01g")]
+position = Vector2(390, 35)
+
+[node name="FrostCooldown" parent="AbilityIcons" instance=ExtResource("2_rgj0g")]
+position = Vector2(310, 35)
+
+[node name="LightningStrikeCooldown" parent="AbilityIcons" instance=ExtResource("3_rp55y")]
+position = Vector2(230, 35)
+
+[node name="DashCooldown" parent="AbilityIcons" instance=ExtResource("4_imfig")]
+position = Vector2(150, 35)

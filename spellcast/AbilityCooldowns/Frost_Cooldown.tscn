@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhipjfcr34gqh"]
+
+[ext_resource type="Script" path="res://AbilityCooldowns/ability_cooldown.gd" id="1_m5ul1"]
+[ext_resource type="Texture2D" uid="uid://dde81665m5gfe" path="res://Assets/Blue Effect Bullet Impact Explosion 32x32.png" id="2_jfy42"]
+[ext_resource type="Texture2D" uid="uid://cslrm7oud7l5s" path="res://Assets/blank_64x64_image.png" id="3_4dylq"]
+
+[node name="FrostCooldown" type="Node2D"]
+script = ExtResource("1_m5ul1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color(8.18223e-07, 0.210273, 0.297351, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("2_jfy42")
+hframes = 20
+vframes = 16
+frame = 20
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 5
+texture_progress = ExtResource("3_4dylq")
+tint_progress = Color(0, 0, 0, 0.388235)
