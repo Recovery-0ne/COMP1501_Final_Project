@@ -5,7 +5,7 @@ var direction:= 1
 @export var checkpoint_position: Vector2
 var wall_check
 
-var ability_method := ["cast_fireball", "cast_frost", "cast_lightning_strike"]
+var ability_method := ["cast_fireball", "cast_frost", "cast_lightning_strike", ""]
 var dash_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb", "dash"]
 var fireball_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
 var frost_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
@@ -23,6 +23,7 @@ func _ready():
 		states[state.name.to_lower()] = state
 	$StateMachine._initialize()
 	update_health_display()
+	swap_abilities()
 		
 func move(multiplier:=1.0):
 	velocity.x = direction * speed * multiplier
@@ -59,12 +60,9 @@ func cast_frost():
 		$Spells/Frost._activate(self, get_global_mouse_position())
 		
 func cast_lightning_strike():
-	print_debug("lightning")
 	if is_lightning_strike_cooldown_done() and not lightning_strike_restricted_states.has($StateMachine.current_state.name.to_lower()):
-		print_debug("can_do")
 		for enemy in get_tree().get_nodes_in_group("Enemies"):
 				if enemy.is_on_screen:
-					print_debug("enemy on screen")
 					enemy.lightning_strike()
 					start_lightning_strike_cooldown()
 		
@@ -77,8 +75,10 @@ func dash():
 		$StateMachine.change_state("dash")
 	
 func swap_abilities():
-	#swap abilities by changing the method that will be called and update when the ability is used
-	pass
+	#TODO swap abilities by changing the method that will be called and update when the ability is used
+	
+	#Update the icons to show the changes
+	get_tree().get_nodes_in_group("UI")[0].update_ability_icons()
 
 func use_ability(ability_num:int):
 	if ability_num <= ability_method.size() and ability_method[ability_num - 1] != "":
