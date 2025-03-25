@@ -5,7 +5,11 @@ var direction:= 1
 @export var checkpoint_position: Vector2
 var wall_check
 
-var ability_method := ["cast_fireball", "cast_frost", "cast_lightning_strike", ""]
+var ability_names := ["Fireball", "Frost", "LightningStrike"]
+var available_abilities := ["", "Fireball", "Frost", "LightningStrike"]
+var ability_methods := ["cast_fireball", "cast_frost", "cast_lightning_strike"]
+var current_ability_methods := ["", "cast_fireball", "", ""]
+
 var dash_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb", "dash"]
 var fireball_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
 var frost_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
@@ -81,7 +85,14 @@ func swap_abilities():
 	get_tree().get_nodes_in_group("UI")[0].update_ability_icons()
 
 func use_ability(ability_num:int):
-	if ability_num <= ability_method.size() and ability_method[ability_num - 1] != "":
-		call(ability_method[ability_num - 1])
+	if current_ability_methods[ability_num - 1] != "":
+		call(current_ability_methods[ability_num - 1])
+		
+func get_nth_current_ability_name_from_method_name(n:int):
+	return ability_names[ability_methods.find(current_ability_methods[n])]
 	
+func get_ability_method_from_name(ability_name:String):
+	return ability_methods[ability_names.find(ability_name)]
 	
+func change_ability(current_ability_index, available_ability_index):
+	current_ability_methods[current_ability_index] = get_ability_method_from_name(available_abilities[available_ability_index])

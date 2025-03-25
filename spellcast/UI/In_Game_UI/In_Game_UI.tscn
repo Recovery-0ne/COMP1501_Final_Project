@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://dte2li7iee18p"]
 
-[ext_resource type="PackedScene" uid="uid://c41h162r5tvjh" path="res://AbilityCooldowns/Fireball_Cooldown.tscn" id="1_ht01g"]
-[ext_resource type="Script" path="res://AbilityCooldowns/In_Game_UI.gd" id="1_ru75n"]
-[ext_resource type="PackedScene" uid="uid://bhipjfcr34gqh" path="res://AbilityCooldowns/Frost_Cooldown.tscn" id="2_rgj0g"]
-[ext_resource type="PackedScene" uid="uid://dp8qrpiwj3f0s" path="res://AbilityCooldowns/Lightning_Strike_Cooldown.tscn" id="3_rp55y"]
-[ext_resource type="PackedScene" uid="uid://bilgp2fofscl4" path="res://AbilityCooldowns/Dash_Cooldown.tscn" id="4_imfig"]
-[ext_resource type="PackedScene" uid="uid://cihayvgfownob" path="res://AbilityCooldowns/Ability_Icon.tscn" id="5_tf2i2"]
+[ext_resource type="PackedScene" uid="uid://c41h162r5tvjh" path="res://UI/AbilityCooldowns/Fireball_Cooldown.tscn" id="1_ht01g"]
+[ext_resource type="Script" path="res://UI/In_Game_UI/In_Game_UI.gd" id="1_ru75n"]
+[ext_resource type="PackedScene" uid="uid://bhipjfcr34gqh" path="res://UI/AbilityCooldowns/Frost_Cooldown.tscn" id="2_rgj0g"]
+[ext_resource type="PackedScene" uid="uid://dp8qrpiwj3f0s" path="res://UI/AbilityCooldowns/Lightning_Strike_Cooldown.tscn" id="3_rp55y"]
+[ext_resource type="PackedScene" uid="uid://bilgp2fofscl4" path="res://UI/AbilityCooldowns/Dash_Cooldown.tscn" id="4_imfig"]
+[ext_resource type="PackedScene" uid="uid://cihayvgfownob" path="res://UI/AbilityCooldowns/Ability_Icon.tscn" id="5_tf2i2"]
 
 [node name="InGameUi" type="CanvasLayer"]
 script = ExtResource("1_ru75n")
