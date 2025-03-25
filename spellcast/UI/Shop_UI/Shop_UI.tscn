@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" path="res://UI/Shop_UI/shop_ui.gd" id="1_qqm55"]
 
-[node name="ShopUi" type="CanvasLayer"]
+[node name="ShopUi" type="CanvasLayer" groups=["Shop_UI"]]
+process_mode = 3
 script = ExtResource("1_qqm55")
 
 [node name="Ability_Selection_Display" type="Node2D" parent="."]
@@ -33,24 +34,28 @@ offset_left = 58.0
 offset_top = 55.0
 offset_right = 208.0
 offset_bottom = 88.0
+allow_reselect = true
 
 [node name="OptionButton2" type="OptionButton" parent="Ability_Selectors"]
 offset_left = 58.0
 offset_top = 95.0
 offset_right = 208.0
 offset_bottom = 128.0
+allow_reselect = true
 
 [node name="OptionButton3" type="OptionButton" parent="Ability_Selectors"]
 offset_left = 59.0
 offset_top = 135.0
 offset_right = 209.0
 offset_bottom = 168.0
+allow_reselect = true
 
 [node name="OptionButton4" type="OptionButton" parent="Ability_Selectors"]
 offset_left = 59.0
 offset_top = 175.0
 offset_right = 209.0
 offset_bottom = 208.0
+allow_reselect = true
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="item_selected" from="Ability_Selectors/OptionButton" to="." method="_ability_changed" binds= [0]]

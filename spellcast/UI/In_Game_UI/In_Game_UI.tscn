@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bilgp2fofscl4" path="res://UI/AbilityCooldowns/Dash_Cooldown.tscn" id="4_imfig"]
 [ext_resource type="PackedScene" uid="uid://cihayvgfownob" path="res://UI/AbilityCooldowns/Ability_Icon.tscn" id="5_tf2i2"]
 
-[node name="InGameUi" type="CanvasLayer"]
+[node name="InGameUi" type="CanvasLayer" groups=["In_Game_UI"]]
+process_mode = 3
 script = ExtResource("1_ru75n")
 
 [node name="AbilityIcons" type="HBoxContainer" parent="."]

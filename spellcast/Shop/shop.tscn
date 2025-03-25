@@ -7893,6 +7893,7 @@ sources/0 = SubResource("TileSetAtlasSource_0kch6")
 size = Vector2(506.5, 300.5)
 
 [node name="Shop" type="Node2D"]
+process_mode = 3
 z_index = -9
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_bt2m2")
@@ -7928,10 +7929,12 @@ tile_map_data = PackedByteArray("AAAEAP7/AAASAAIAAAAEAP//AAASAAMAAAAFAP7/AAATAAI
 tile_set = SubResource("TileSet_b566s")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 16
+process_mode = 3
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(43, -132)
 shape = SubResource("RectangleShape2D_837o7")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
