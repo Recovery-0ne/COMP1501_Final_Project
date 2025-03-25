@@ -5,6 +5,12 @@ var direction:= 1
 @export var checkpoint_position: Vector2
 var wall_check
 
+var ability_method := ["cast_fireball", "cast_frost", "cast_lightning_strike"]
+var dash_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb", "dash"]
+var fireball_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
+var frost_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
+var lightning_strike_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
+
 func _init() -> void:
 	self.add_to_group("Player")
 
@@ -43,18 +49,39 @@ func respawn_player():
 	$HealthLabel.visible = true
 		
 func cast_fireball():
-	if not $StateMachine/Cast_Fireball/Fireball.visible and $FireballCooldownTimer.is_stopped():
+	if not $Spells/Fireball.visible and $FireballCooldownTimer.is_stopped() and not fireball_restricted_states.has($StateMachine.current_state.name.to_lower()):
 		$FireballCooldownTimer.start()
-		$StateMachine/Cast_Fireball/Fireball._activate(self, get_global_mouse_position())
+		$Spells/Fireball._activate(self, get_global_mouse_position())
 
 func cast_frost():
-	if not $StateMachine/Cast_Frost/Frost.visible and $FrostCooldownTimer.is_stopped():
+	if $FrostCooldownTimer.is_stopped() and not frost_restricted_states.has($StateMachine.current_state.name.to_lower()):
 		$FrostCooldownTimer.start()
-		$StateMachine/Cast_Frost/Frost._activate(self, get_global_mouse_position())
+		$Spells/Frost._activate(self, get_global_mouse_position())
+		
+func cast_lightning_strike():
+	print_debug("lightning")
+	if is_lightning_strike_cooldown_done() and not lightning_strike_restricted_states.has($StateMachine.current_state.name.to_lower()):
+		print_debug("can_do")
+		for enemy in get_tree().get_nodes_in_group("Enemies"):
+				if enemy.is_on_screen:
+					print_debug("enemy on screen")
+					enemy.lightning_strike()
+					start_lightning_strike_cooldown()
 		
 func can_dash() -> bool:
-	return $DashCooldownTimer.is_stopped()
+	return $DashCooldownTimer.is_stopped() and not dash_restricted_states.has($StateMachine.current_state.name.to_lower())
 	
 func dash():
-	$DashCooldownTimer.start()
-	$StateMachine.change_state("dash")
+	if can_dash():
+		$DashCooldownTimer.start()
+		$StateMachine.change_state("dash")
+	
+func swap_abilities():
+	#swap abilities by changing the method that will be called and update when the ability is used
+	pass
+
+func use_ability(ability_num:int):
+	if ability_num <= ability_method.size() and ability_method[ability_num - 1] != "":
+		call(ability_method[ability_num - 1])
+	
+	

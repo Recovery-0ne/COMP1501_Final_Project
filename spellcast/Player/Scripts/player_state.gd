@@ -21,6 +21,7 @@ func _enter():
 
 func _update(delta: float): #Write code here that should be used in every state only.
 	if player.frozen or player.dead: return 
+	
 	player.direction = Input.get_axis("left", "right")
 	if player.direction != 0:
 		player.facing_dir = player.direction
@@ -28,11 +29,16 @@ func _update(delta: float): #Write code here that should be used in every state 
 		player.attack_check.position.x = abs(player.attack_check.position.x) * player.direction
 		player.wall_check.target_position.x = abs(player.wall_check.target_position.x)*player.direction
 		
-	if Input.is_action_just_pressed("lightning") and player.is_lightning_strike_cooldown_done():
-		for enemy in get_tree().get_nodes_in_group("Enemies"):
-			if enemy.is_on_screen:
-				enemy.lightning_strike()
-				player.start_lightning_strike_cooldown()
+	if Input.is_action_just_pressed("ability_1"):
+		player.use_ability(1)
+	elif Input.is_action_just_pressed("ability_2"):
+		player.use_ability(2)
+	elif Input.is_action_just_pressed("ability_3"):
+		player.use_ability(3)
+	elif Input.is_action_just_pressed("ability_4"):
+		player.use_ability(4)
+	elif Input.is_action_just_pressed("dash"):
+		player.dash()
 	
 func _physics_update(delta: float):
 	player.apply_gravity()

@@ -14,8 +14,6 @@ func _update(delta: float):
 		state_machine.change_state("fall")
 	elif Input.is_action_just_pressed("attack"):
 		state_machine.change_state("air_attack")
-	elif Input.is_action_just_pressed("dash") and player.can_dash():
-		player.dash()
 
 	
 func _physics_update(delta: float):
