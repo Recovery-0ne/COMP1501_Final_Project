@@ -12,8 +12,8 @@ func _update(delta: float):
 		state_machine.change_state("jump")
 	elif Input.is_action_just_pressed("attack"):
 		state_machine.change_state("move_attack")
-	elif Input.is_action_just_pressed("dash"):
-		state_machine.change_state("dash")
+	elif Input.is_action_just_pressed("dash") and player.can_dash():
+		player.dash()
 
 		
 

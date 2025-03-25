@@ -9,6 +9,7 @@ func _init() -> void:
 	self.add_to_group("Player")
 
 func _ready():
+	facing_dir = direction
 	checkpoint_position = global_position
 	wall_check = $WallCheck
 	for state in $StateMachine.get_children():
@@ -33,14 +34,27 @@ func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
 		$StateMachine.change_state("damaged")
 		
 func respawn_player():
+	remove_all_status_conditions()
 	dead = false
 	global_position = checkpoint_position
 	$StateMachine._initialize()
 	health = max_health
 	update_health_display()
 	$HealthLabel.visible = true
+		
+func cast_fireball():
+	if not $StateMachine/Cast_Fireball/Fireball.visible and $FireballCooldownTimer.is_stopped():
+		$FireballCooldownTimer.start()
+		$StateMachine/Cast_Fireball/Fireball._activate(self, get_global_mouse_position())
+
+func cast_frost():
+	if not $StateMachine/Cast_Frost/Frost.visible and $FrostCooldownTimer.is_stopped():
+		$FrostCooldownTimer.start()
+		$StateMachine/Cast_Frost/Frost._activate(self, get_global_mouse_position())
+		
+func can_dash() -> bool:
+	return $DashCooldownTimer.is_stopped()
 	
-func cast_projectile_spell(_spell, _timer):
-	if not _spell.visible and _timer.is_stopped():
-		_timer.start()
-		_spell._activate(self, get_global_mouse_position())
+func dash():
+	$DashCooldownTimer.start()
+	$StateMachine.change_state("dash")

@@ -18,6 +18,8 @@ var states: Dictionary
 @export var default_jump_velocity:= 1000
 @onready var jump_velocity:= default_jump_velocity
 
+var facing_dir:int
+
 var has_status_effect:= false
 var status_effect_duration:float #Depending on the effect, this could be a max number of occurances or a time
 
@@ -71,9 +73,12 @@ func take_burn_damage():
 		decrease_health(1)
 		$StatusEffectTimer.start()
 	else:
-		has_status_effect = false
-		burning = false
-		$StatusEffectTimer.disconnect("timeout", take_burn_damage)
+		end_burning_effect()
+		
+func end_burning_effect():
+	has_status_effect = false
+	burning = false
+	$StatusEffectTimer.disconnect("timeout", take_burn_damage)
 			
 func apply_freezing():
 	if has_status_effect or dead: return
@@ -103,3 +108,8 @@ func is_lightning_strike_cooldown_done():
 	
 func start_lightning_strike_cooldown():
 	$LightningStrikeCooldownTimer.start()
+	
+func remove_all_status_conditions():
+	if not has_status_effect: return
+	if burning: end_burning_effect()
+	elif frozen: end_frozen_effect()

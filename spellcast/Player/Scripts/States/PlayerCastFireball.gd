@@ -1,5 +1,4 @@
 extends PlayerState
-@export var spell:Node2D
 
 func _enter():
 	super()
@@ -14,5 +13,5 @@ func _exit():
 	super()
 	
 func _animation_finished():
-	player.cast_projectile_spell(spell, $Cast_Timer)
+	player.call(name.to_lower())
 	state_machine.change_state("idle")

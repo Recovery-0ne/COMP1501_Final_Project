@@ -526,26 +526,16 @@ script = ExtResource("5_kjl3f")
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("6_su17k")
 
-[node name="Cast_Fireball" type="Node" parent="StateMachine" node_paths=PackedStringArray("spell")]
+[node name="Cast_Fireball" type="Node" parent="StateMachine"]
 script = ExtResource("7_em0s2")
-spell = NodePath("Fireball")
 
 [node name="Fireball" parent="StateMachine/Cast_Fireball" instance=ExtResource("8_2x3cu")]
 position = Vector2(15, -20)
 
-[node name="Cast_Timer" type="Timer" parent="StateMachine/Cast_Fireball"]
-wait_time = 3.0
-one_shot = true
-
-[node name="Cast_Frost" type="Node" parent="StateMachine" node_paths=PackedStringArray("spell")]
+[node name="Cast_Frost" type="Node" parent="StateMachine"]
 script = ExtResource("7_em0s2")
-spell = NodePath("Frost")
 
 [node name="Frost" parent="StateMachine/Cast_Frost" instance=ExtResource("9_2xb0b")]
-
-[node name="Cast_Timer" type="Timer" parent="StateMachine/Cast_Frost"]
-wait_time = 3.0
-one_shot = true
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("9_eyi1w")
@@ -618,6 +608,18 @@ libraries = {
 }
 
 [node name="StatusEffectTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="FireballCooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="FrostCooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
 one_shot = true
 
 [node name="LightningStrikeCooldownTimer" type="Timer" parent="."]

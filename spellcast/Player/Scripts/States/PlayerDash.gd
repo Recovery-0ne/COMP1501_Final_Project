@@ -1,9 +1,8 @@
 extends PlayerState
 
 func _enter():
-	animation_name = "dash"
 	super()
-	player.velocity.x = 1500*player.direction
+	player.velocity.x = 1500 * player.facing_dir
 
 func _update(delta: float):
 	super(delta)

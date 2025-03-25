@@ -23,6 +23,7 @@ func _update(delta: float): #Write code here that should be used in every state 
 	if player.frozen or player.dead: return 
 	player.direction = Input.get_axis("left", "right")
 	if player.direction != 0:
+		player.facing_dir = player.direction
 		sprite.flip_h = player.direction < 0
 		player.attack_check.position.x = abs(player.attack_check.position.x) * player.direction
 		player.wall_check.target_position.x = abs(player.wall_check.target_position.x)*player.direction

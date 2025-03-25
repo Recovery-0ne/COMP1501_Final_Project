@@ -17,8 +17,6 @@ func _update(delta: float):
 		state_machine.change_state("cast_frost")
 	elif Input.is_action_pressed("attack"):
 		state_machine.change_state("attack")
-
-
 		
 func _physics_update(delta:float):
 	super(delta)
