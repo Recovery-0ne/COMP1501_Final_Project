@@ -12,8 +12,6 @@ func _update(delta: float):
 		state_machine.change_state("air_attack")
 	elif player.wall_check.is_colliding():
 		state_machine.change_state("wall_climb")
-	elif Input.is_action_just_pressed("dash") and player.can_dash():
-		player.dash()
 	
 func _physics_update(delta: float):
 	super(delta)
