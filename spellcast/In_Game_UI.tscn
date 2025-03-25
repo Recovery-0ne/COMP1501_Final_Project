@@ -23,15 +23,19 @@ grow_vertical = 0
 
 [node name="Ability_Icon_1" parent="AbilityIcons" instance=ExtResource("5_tf2i2")]
 position = Vector2(390, 35)
+key = "Q"
 
 [node name="Ability_Icon_2" parent="AbilityIcons" instance=ExtResource("5_tf2i2")]
 position = Vector2(310, 35)
+key = "E"
 
 [node name="Ability_Icon_3" parent="AbilityIcons" instance=ExtResource("5_tf2i2")]
 position = Vector2(230, 35)
+key = "R"
 
 [node name="Ability_Icon_4" parent="AbilityIcons" instance=ExtResource("5_tf2i2")]
 position = Vector2(150, 35)
+key = "F"
 
 [node name="DashIcon" type="HBoxContainer" parent="."]
 layout_direction = 2
@@ -44,6 +48,7 @@ grow_vertical = 0
 
 [node name="DashCooldown" parent="DashIcon" instance=ExtResource("4_imfig")]
 position = Vector2(46, 35)
+key = "Shift"
 
 [node name="Ability_Icon_Templates" type="HBoxContainer" parent="."]
 visible = false
