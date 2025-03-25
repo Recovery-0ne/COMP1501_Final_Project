@@ -1,8 +1,8 @@
 extends Entity
 class_name Player
 
-var direction:= 1
 @export var checkpoint_position: Vector2
+var direction:= 1
 var wall_check
 
 var ability_names := ["Fireball", "Frost", "LightningStrike"]

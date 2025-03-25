@@ -18,14 +18,5 @@ func update_options():
 func _on_visibility_changed() -> void:
 	update_options()
 	
-func _ability_one_changed(index:int):
-	player.change_ability(0,index)
-
-func _ability_two_changed(index:int):
-	player.change_ability(1,index)
-	
-func _ability_three_changed(index:int):
-	player.change_ability(2,index)
-	
-func _ability_four_changed(index:int):
-	player.change_ability(3,index)
+func _ability_changed(index:int, slot:int):
+	player.change_ability(slot,index)
