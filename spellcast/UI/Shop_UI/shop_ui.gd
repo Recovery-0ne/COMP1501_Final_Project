@@ -26,16 +26,17 @@ func update_options():
 		var ability_method = player.get_ability_method_from_name(ability_name)
 		if not player.current_ability_methods.has(ability_method):
 			unchosen_abilities.append(player.available_abilities[i])
-	for option in $Ability_Selectors.get_children():
-		option.clear()
-		for i in unchosen_abilities:
-			option.add_item(i)
+	for i in range(0, $Ability_Selectors.get_child_count()):
+		$Ability_Selectors.get_children()[i].clear()
+		$Ability_Selectors.get_children()[i].add_item(player.get_nth_current_ability_name_from_method_name(i))
+		for j in unchosen_abilities:
+			$Ability_Selectors.get_children()[i].add_item(j)
 	
 func _on_visibility_changed() -> void:
 	update_options()
 	
 func _ability_changed(index:int, slot:int):
-	index = player.available_abilities.find(unchosen_abilities[index])
+	index = player.available_abilities.find(unchosen_abilities[index-1])
 	player.change_ability(slot,index)
 	update_options()
 	get_tree().get_first_node_in_group("In_Game_UI").update_ability_icons()
