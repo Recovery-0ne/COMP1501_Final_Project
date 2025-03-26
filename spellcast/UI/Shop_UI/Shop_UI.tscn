@@ -29,7 +29,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="OptionButton" type="OptionButton" parent="Ability_Selectors"]
+[node name="OptionButton1" type="OptionButton" parent="Ability_Selectors"]
 layout_mode = 0
 offset_left = 58.0
 offset_top = 55.0
@@ -58,7 +58,7 @@ offset_right = 209.0
 offset_bottom = 208.0
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="item_selected" from="Ability_Selectors/OptionButton" to="." method="_ability_changed" binds= [0]]
+[connection signal="item_selected" from="Ability_Selectors/OptionButton1" to="." method="_ability_changed" binds= [0]]
 [connection signal="item_selected" from="Ability_Selectors/OptionButton2" to="." method="_ability_changed" binds= [1]]
 [connection signal="item_selected" from="Ability_Selectors/OptionButton3" to="." method="_ability_changed" binds= [2]]
 [connection signal="item_selected" from="Ability_Selectors/OptionButton4" to="." method="_ability_changed" binds= [3]]

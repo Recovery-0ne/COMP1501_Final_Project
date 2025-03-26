@@ -30,12 +30,16 @@ func update_options():
 		$Ability_Selectors.get_children()[i].clear()
 		$Ability_Selectors.get_children()[i].add_item(player.get_nth_current_ability_name_from_method_name(i))
 		for j in unchosen_abilities:
+			if j == "" and $Ability_Selectors.get_children()[i].get_item_text(0) == "":
+				continue
 			$Ability_Selectors.get_children()[i].add_item(j)
 	
 func _on_visibility_changed() -> void:
 	update_options()
 	
 func _ability_changed(index:int, slot:int):
+	if $Ability_Selectors.get_child(slot).get_item_text(0) == "":
+		index += 1
 	index = player.available_abilities.find(unchosen_abilities[index-1])
 	player.change_ability(slot,index)
 	update_options()
