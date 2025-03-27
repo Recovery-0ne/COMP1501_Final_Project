@@ -5,11 +5,12 @@ class_name Player
 var direction:= 1
 var wall_check
 
-var ability_names := ["Fireball", "Frost", "LightningStrike"]
-var available_abilities := ["", "Fireball", "Frost", "LightningStrike"]
-var ability_methods := ["cast_fireball", "cast_frost", "cast_lightning_strike"]
-var current_ability_methods := ["cast_fireball", "", "", ""]
+var ability_names := ["Fireball", "Frost", "LightningStrike"] #Store all names of abilities
+var available_abilities := ["", "Fireball", "Frost", "LightningStrike"] #Store all names of unlocked abilities. Empty string represents no ability
+var ability_methods := ["cast_fireball", "cast_frost", "cast_lightning_strike"] #Store method names of all abilites (indices should match the names array)
+var current_ability_methods := ["cast_fireball", "", "", ""] #Store method names of the currently equipped abilities
 
+#Store the names of states that each ability can't be used in
 var dash_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb", "dash"]
 var fireball_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
 var frost_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
