@@ -6,7 +6,7 @@ func _enter():
 
 func _update(delta: float):
 	super(delta)
-	if player.is_on_wall() and player.wall_check.is_colliding():
+	if player.wall_check.is_colliding():
 		state_machine.change_state("wall_climb")
 
 func _physics_update(delta: float):

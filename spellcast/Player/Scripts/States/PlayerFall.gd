@@ -16,8 +16,10 @@ func _physics_update(delta: float):
 	super(delta)
 	if player.position.y > 1500:
 		player.respawn_player()
-	if player.direction != 0: player.move()
-	else: player.move_and_slide()
+	if player.direction == 0 and player.velocity.x != 0:
+		player.move_and_slide()
+	else:
+		player.move()
 
 func _exit():
 	super()

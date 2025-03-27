@@ -15,8 +15,9 @@ func _update(delta: float):
 	
 func _physics_update(delta: float):
 	super(delta)
-	if player.direction != 0: player.move()
-	else: player.move_and_slide()
+	#if player.direction != 0: player.move()
+	#else: player.move_and_slide()
+	player.move()
 	
 func _exit():
 	super()
