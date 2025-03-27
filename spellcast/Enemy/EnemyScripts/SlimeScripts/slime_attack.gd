@@ -12,10 +12,10 @@ func _update(delta: float):
 	
 func _physics_update(delta: float):
 	super(delta)
-	if (can_attack and enemy.attack_check.is_colliding() and not has_hit_player):
+	if can_attack and enemy.attack_check.is_colliding() and not has_hit_player:
 		enemy.damage_target()
 		has_hit_player = true
-	elif (can_attack and enemy.is_on_floor()):
+	elif can_attack and enemy.is_on_floor():
 		can_attack = false 
 		enemy.velocity = Vector2.ZERO
 		anim.play("jump_land")
