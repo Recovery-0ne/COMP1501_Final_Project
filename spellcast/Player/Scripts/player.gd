@@ -28,6 +28,12 @@ func _ready():
 		states[state.name.to_lower()] = state
 	$StateMachine._initialize()
 	update_health_display()
+	
+func flip_to(dir:int):
+	facing_dir = dir
+	sprite.flip_h = dir < 0
+	attack_check.position.x = abs(attack_check.position.x) * dir
+	wall_check.target_position.x = abs(wall_check.target_position.x) * dir
 		
 func move(multiplier:=1.0):
 	velocity.x = direction * speed * multiplier

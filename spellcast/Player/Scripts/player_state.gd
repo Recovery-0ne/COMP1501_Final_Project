@@ -24,11 +24,10 @@ func _update(delta: float): #Write code here that should be used in every state 
 	
 	player.direction = Input.get_axis("left", "right")
 	if player.direction != 0:
-		player.facing_dir = player.direction
-		sprite.flip_h = player.direction < 0
-		player.attack_check.position.x = abs(player.attack_check.position.x) * player.direction
-		player.wall_check.target_position.x = abs(player.wall_check.target_position.x)*player.direction
+		player.flip_to(player.direction)
 		
+	#Get ability input and call appropriate method
+	#Abilities will only be called when in states that are not included in their restriced states array
 	if Input.is_action_just_pressed("ability_1"):
 		player.use_ability(1)
 	elif Input.is_action_just_pressed("ability_2"):
