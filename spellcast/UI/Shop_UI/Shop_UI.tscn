@@ -6,6 +6,14 @@
 process_mode = 3
 script = ExtResource("1_qqm55")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.239216, 0.239216, 0.239216, 0.631373)
+
 [node name="Ability_Selection_Display" type="Node2D" parent="."]
 visible = false
 position = Vector2(64, 68)
@@ -56,6 +64,13 @@ offset_left = 59.0
 offset_top = 175.0
 offset_right = 209.0
 offset_bottom = 208.0
+
+[node name="Ability_Unlocks" type="Node2D" parent="."]
+position = Vector2(20.725, 381.485)
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="item_selected" from="Ability_Selectors/OptionButton1" to="." method="_ability_changed" binds= [0]]
 [connection signal="item_selected" from="Ability_Selectors/OptionButton2" to="." method="_ability_changed" binds= [1]]

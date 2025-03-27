@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://fvji4231vemn"]
+
+[ext_resource type="Texture2D" uid="uid://cslrm7oud7l5s" path="res://Assets/blank_64x64_image.png" id="1_yifxa"]
+[ext_resource type="Script" path="res://UI/Shop_UI/ability_unlock_button.gd" id="2_yor1v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ag20b"]
+font_size = 10
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(0, 0, 0, 1)
+
+[node name="AbilityUnlockButton" type="TextureButton"]
+offset_right = 64.0
+offset_bottom = 64.0
+texture_normal = ExtResource("1_yifxa")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_yor1v")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "NULL"
+label_settings = SubResource("LabelSettings_ag20b")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[connection signal="button_up" from="." to="." method="_on_button_up"]
