@@ -21,34 +21,35 @@ func set_active_state(active_state:bool):
 		option.disabled = !active_state
 	#Make sure the dropdowns are updated
 	update_options()
+	print_debug($Ability_Unlocks.get_children()[0].position)
 	
 func set_shop_abilities():
 	var column = 0
-	var row = 1
-	for i in range(0, player.ability_names.size() + 5):
+	var row = 0
+	for i in range(0, player.ability_names.size()):
 		var button = load("res://UI/Shop_UI/ability_unlock_button.tscn")
 		button = button.instantiate()
 		$Ability_Unlocks.add_child(button)
-		if i < player.ability_names.size():
-			#THIS WORKS, BUT DOESN"T GET THE FRAME OF THE IMAGE
-			button.name = player.ability_names[i]
-			##Get the name of the name of the template for the ability icon
-			#var template_name = player.ability_names[i] + "Cooldown"
-			##Get the template node using the name
-			#var template = get_tree().get_first_node_in_group("In_Game_UI").find_child("Ability_Icon_Templates").find_child(template_name)
-			#button.texture_normal = template.texture
-			
-			button.find_child("Label").text = player.ability_names[i]
-		button.position = Vector2(column * (button.size.x*1.35), (row - 1) * (button.size.y*1.35))
+		#Change the name of the button to the name of the ability so that when it's pressed, we can tell what ability is being bought
+		button.name = player.ability_names[i]
+		#Get the name of the name of the template for the ability icon
+		var template_name = player.ability_names[i] + "Cooldown"
+		#Get the template node using the name
+		var template = get_tree().get_first_node_in_group("In_Game_UI").find_child("Ability_Icon_Templates").find_child(template_name)
+		if template != null:
+			#Pass the template values so the icon can copy it
+			button.set_icon(template.color, template.sprite_transform, template.texture, template.hframes, template.vframes, template.frame)
+	
+		#Set the position based on the size of the buttons and the current row and column
+		button.position = Vector2(column * (button.size.x*1.35), row * (button.size.y*1.35))
+		
+		#Update row and column for the next ability button
 		column += 1
-		var index = i+1
-		while index % ability_rows == 0:
+		if (i+1) % ability_rows == 0:
 			column = 0
 			row += 1
-			index /= ability_rows
 	
 func buy_ability(ability_name:String):
-	print_debug("BUY: "+ability_name)
 	#If an ability is bought, it should be made available and the dropdowns should be updated so that the ability can be chosen
 	player.available_abilities.append(ability_name)
 	update_options()

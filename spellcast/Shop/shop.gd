@@ -1,6 +1,5 @@
 extends Node2D
 
-#@onready var player = get_node("/root/AreaTemplate/Player")
 var player_offset = -34
 var player_can_access_shop = false
 
