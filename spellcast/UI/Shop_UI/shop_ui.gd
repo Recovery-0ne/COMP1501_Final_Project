@@ -2,22 +2,52 @@ extends CanvasLayer
 
 var player: Player
 var unchosen_abilities:Array
+var ability_rows:=4
 
 func _ready() -> void:
 	player = get_tree().get_nodes_in_group("Player")[0]
+	set_shop_abilities()
 	set_active_state(false)
 	
 func set_active_state(active_state:bool):
 	#When the shop is open, the rest of the game should be paused
 	#Anything that shouldn't be paused will need to have the process mode changed
 	get_tree().paused = active_state
-	#Set the visibility
+	#Set the visibility of all UI
+	get_tree().get_first_node_in_group("In_Game_UI").set_active_state(!active_state)
 	visible = active_state
 	#Activate/Deactivate the dropdowns
 	for option in $Ability_Selectors.get_children():
 		option.disabled = !active_state
 	#Make sure the dropdowns are updated
 	update_options()
+	print_debug($Ability_Unlocks.get_children()[0].position)
+	
+func set_shop_abilities():
+	var column = 0
+	var row = 0
+	for i in range(0, player.ability_names.size()):
+		var button = load("res://UI/Shop_UI/ability_unlock_button.tscn")
+		button = button.instantiate()
+		$Ability_Unlocks.add_child(button)
+		#Change the name of the button to the name of the ability so that when it's pressed, we can tell what ability is being bought
+		button.name = player.ability_names[i]
+		#Get the name of the name of the template for the ability icon
+		var template_name = player.ability_names[i] + "Cooldown"
+		#Get the template node using the name
+		var template = get_tree().get_first_node_in_group("In_Game_UI").find_child("Ability_Icon_Templates").find_child(template_name)
+		if template != null:
+			#Pass the template values so the icon can copy it
+			button.set_icon(template.color, template.sprite_transform, template.texture, template.hframes, template.vframes, template.frame)
+	
+		#Set the position based on the size of the buttons and the current row and column
+		button.position = Vector2(column * (button.size.x*1.35), row * (button.size.y*1.35))
+		
+		#Update row and column for the next ability button
+		column += 1
+		if (i+1) % ability_rows == 0:
+			column = 0
+			row += 1
 	
 func buy_ability(ability_name:String):
 	#If an ability is bought, it should be made available and the dropdowns should be updated so that the ability can be chosen

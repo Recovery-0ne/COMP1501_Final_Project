@@ -11,6 +11,10 @@ func _ready() -> void:
 	dash_timer = player.find_child("DashCooldownTimer")
 	update_ability_icons()
 	
+func set_active_state(active_state:bool):
+	#Set the visibility
+	visible = active_state
+	
 func _process(delta: float) -> void:
 	update_ability_icon_progress()
 	
