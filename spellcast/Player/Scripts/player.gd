@@ -8,6 +8,7 @@ var wall_check
 
 var player_money = 0
 
+
 var ability_names := ["Fireball", "Frost", "LightningStrike"] #Store all names of abilities
 var available_abilities := [""] #Store all names of unlocked abilities. Empty string represents no ability
 var ability_methods := ["cast_fireball", "cast_frost", "cast_lightning_strike"] #Store method names of all abilites (indices should match the names array)
@@ -23,6 +24,7 @@ var lightning_strike_restricted_states := ["attack", "air_attack", "move_attack"
 var ability_descriptions = {"Fireball":"Cast a fireball in the direction of your cursor. Deals little damage on hit, but has a 100% chance to apply burning to the opponent.", 
 							"Frost":"Cast a ball of ice in the direction of your cursor. Deals little damage on hit, but has a 100% chance to apply freezing to the opponent.", 
 							"LightningStrike":"Strike all opponents on the screen with a bolt of lightning. If the target is frozen, deal 50% more damage and remove the frozen effect. Otherwise, deal base damage with a 25% chance to apply burning."}
+var ability_prices = {"Fireball":50,"Frost":50,"LightningStrike":150}
 
 func _init() -> void:
 	self.add_to_group("Player")
@@ -36,7 +38,14 @@ func _ready():
 		states[state.name.to_lower()] = state
 	$StateMachine._initialize()
 	update_health_display()
-	
+
+func set_money(amount):
+	player_money = amount
+	var ui = get_tree().get_first_node_in_group("In_Game_UI")
+	ui.find_child("PlayerMoney").text = "Money: "+str(player_money)
+	ui = get_tree().get_first_node_in_group("Shop_UI")
+	ui.find_child("PlayerMoney").text = "Money: "+str(player_money)
+
 func flip_to(dir:int):
 	facing_dir = dir
 	sprite.flip_h = dir < 0
