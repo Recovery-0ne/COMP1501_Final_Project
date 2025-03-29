@@ -1,12 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://fvji4231vemn"]
 
-[ext_resource type="Script" path="res://UI/Shop_UI/ability_unlock_button.gd" id="2_yor1v"]
+[ext_resource type="Script" path="res://UI/Shop_UI/ability_info_button.gd" id="1_1t1x1"]
 
 [node name="AbilityUnlockButton" type="Button"]
 z_index = 100
 offset_right = 64.0
 offset_bottom = 64.0
-script = ExtResource("2_yor1v")
+script = ExtResource("1_1t1x1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

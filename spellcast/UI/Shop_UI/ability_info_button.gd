@@ -11,5 +11,4 @@ func set_icon(_color, _transform, _texture, _hframes, _vframes, _frame):
 	$Sprite2D.frame = _frame
 
 func _on_button_up() -> void:
-	get_tree().get_first_node_in_group("Shop_UI").buy_ability(name)
-	disabled = true
+	get_tree().get_first_node_in_group("Shop_UI").popup(name)
