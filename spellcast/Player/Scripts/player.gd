@@ -4,6 +4,8 @@ class_name Player
 @export var checkpoint_position: Vector2
 var direction:= 1
 var wall_check
+var jump_count = 0
+var max_jumps = 2
 
 var ability_names := ["Fireball", "Frost", "LightningStrike"] #Store all names of abilities
 var available_abilities := [""] #Store all names of unlocked abilities. Empty string represents no ability
