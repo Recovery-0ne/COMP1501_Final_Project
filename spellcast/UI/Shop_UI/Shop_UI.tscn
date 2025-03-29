@@ -1,10 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnaf8w5hco26x"]
+[gd_scene load_steps=3 format=3 uid="uid://bnaf8w5hco26x"]
 
 [ext_resource type="Script" path="res://UI/Shop_UI/shop_ui.gd" id="1_qqm55"]
+[ext_resource type="PackedScene" uid="uid://dnuc3uqmd1srt" path="res://UI/Shop_UI/ability_description_popup.tscn" id="2_5k4q7"]
 
 [node name="ShopUi" type="CanvasLayer" groups=["Shop_UI"]]
 process_mode = 3
 script = ExtResource("1_qqm55")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -12,6 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.239216, 0.239216, 0.239216, 0.631373)
 
 [node name="Ability_Selectors" type="Control" parent="."]
@@ -60,6 +70,12 @@ offset_right = 30.0
 offset_bottom = 34.0
 mouse_filter = 2
 
+[node name="Popup" parent="." instance=ExtResource("2_5k4q7")]
+visible = false
+z_index = 500
+mouse_filter = 0
+
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]
 [connection signal="item_selected" from="Ability_Selectors/OptionButton1" to="." method="_ability_changed" binds= [0]]
 [connection signal="item_selected" from="Ability_Selectors/OptionButton2" to="." method="_ability_changed" binds= [1]]
 [connection signal="item_selected" from="Ability_Selectors/OptionButton3" to="." method="_ability_changed" binds= [2]]

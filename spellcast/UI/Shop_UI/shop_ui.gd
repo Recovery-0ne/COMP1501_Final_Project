@@ -21,13 +21,12 @@ func set_active_state(active_state:bool):
 		option.disabled = !active_state
 	#Make sure the dropdowns are updated
 	update_options()
-	print_debug($Ability_Unlocks.get_children()[0].position)
 	
 func set_shop_abilities():
 	var column = 0
 	var row = 0
 	for i in range(0, player.ability_names.size()):
-		var button = load("res://UI/Shop_UI/ability_unlock_button.tscn")
+		var button = load("res://UI/Shop_UI/ability_info_button.tscn")
 		button = button.instantiate()
 		$Ability_Unlocks.add_child(button)
 		#Change the name of the button to the name of the ability so that when it's pressed, we can tell what ability is being bought
@@ -53,6 +52,17 @@ func buy_ability(ability_name:String):
 	#If an ability is bought, it should be made available and the dropdowns should be updated so that the ability can be chosen
 	player.available_abilities.append(ability_name)
 	update_options()
+	
+func popup(ability_name:String):
+	$Popup.set_popup(ability_name, player.ability_descriptions[ability_name])
+	$Popup.position = $ColorRect.get_global_mouse_position()
+	$Popup.visible = true
+	
+func _input(event):
+	if (event is InputEventMouseButton) and event.pressed:
+		var local_event = $ColorRect.make_input_local(event)
+		if !$Popup.get_rect().has_point(local_event.position):
+			$Popup.deactivate()
 	
 func update_options():
 	#Erase the unchosen_abilities array, so we can build a new one that reflects the current state
@@ -94,3 +104,7 @@ func _ability_changed(index:int, slot:int):
 	update_options()
 	#Update the ability icons to reflect the changes made to the equipped abilities
 	get_tree().get_first_node_in_group("In_Game_UI").update_ability_icons()
+
+
+func _on_control_gui_input(event: InputEvent) -> void:
+	_input(event)
