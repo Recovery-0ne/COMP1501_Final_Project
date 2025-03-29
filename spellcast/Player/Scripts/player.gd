@@ -1,6 +1,7 @@
 extends Entity
 class_name Player
 
+@onready var sound_manager := $Sounds
 @export var checkpoint_position: Vector2
 var direction:= 1
 var wall_check
@@ -8,7 +9,7 @@ var jump_count = 0
 var max_jumps = 2
 
 var ability_names := ["Fireball", "Frost", "LightningStrike"] #Store all names of abilities
-var available_abilities := [""] #Store all names of unlocked abilities. Empty string represents no ability
+var available_abilities := ["","Fireball", "Frost", "LightningStrike"] #Store all names of unlocked abilities. Empty string represents no ability
 var ability_methods := ["cast_fireball", "cast_frost", "cast_lightning_strike"] #Store method names of all abilites (indices should match the names array)
 var current_ability_methods := ["", "", "", ""] #Store method names of the currently equipped abilities
 
@@ -47,6 +48,7 @@ func move(multiplier:=1.0):
 	move_and_slide()
 
 func damage_target():
+	sound_manager.play("attack")
 	if attack_check.is_colliding():
 		#Damage all colliding objects
 		for i in attack_check.get_collision_count():
@@ -70,18 +72,24 @@ func cast_fireball():
 	if not $Spells/Fireball.visible and $FireballCooldownTimer.is_stopped() and not fireball_restricted_states.has($StateMachine.current_state.name.to_lower()):
 		$FireballCooldownTimer.start()
 		$Spells/Fireball._activate(self, get_global_mouse_position())
+		sound_manager.play("fireball")
 
 func cast_frost():
 	if $FrostCooldownTimer.is_stopped() and not frost_restricted_states.has($StateMachine.current_state.name.to_lower()):
 		$FrostCooldownTimer.start()
 		$Spells/Frost._activate(self, get_global_mouse_position())
+		sound_manager.play("frost")
 		
 func cast_lightning_strike():
+	var hit_an_enemy = false
 	if is_lightning_strike_cooldown_done() and not lightning_strike_restricted_states.has($StateMachine.current_state.name.to_lower()):
 		for enemy in get_tree().get_nodes_in_group("Enemies"):
-				if enemy.is_on_screen:
+				if enemy.is_on_screen and not enemy.dead:
 					enemy.lightning_strike()
-					start_lightning_strike_cooldown()
+					hit_an_enemy = true
+	if hit_an_enemy:
+		start_lightning_strike_cooldown()
+		sound_manager.play("lightning")
 		
 func can_dash() -> bool:
 	return $DashCooldownTimer.is_stopped() and not dash_restricted_states.has($StateMachine.current_state.name.to_lower())

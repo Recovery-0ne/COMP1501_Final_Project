@@ -2,6 +2,7 @@ extends PlayerState
 
 func _enter():
 	super()
+	player.sound_manager.play("hurt")
 	
 func _update(delta: float):
 	super(delta)

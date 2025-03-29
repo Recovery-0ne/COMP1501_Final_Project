@@ -5,7 +5,7 @@ func _enter():
 	super()
 	wall_normal = player.get_wall_normal().x
 	player.gravity = 15
-
+	player.sound_manager.play("slide")
 
 func _update(delta: float):
 	super(delta)
@@ -30,3 +30,4 @@ func _exit():
 	super()
 	player.gravity = player.default_gravity
 	player.velocity.y = 0
+	player.sound_manager.stop("slide")

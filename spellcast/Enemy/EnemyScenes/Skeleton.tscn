@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="8_8qg5g"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="9_2cmh8"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_look_around.gd" id="9_i0e52"]
-[ext_resource type="Texture2D" uid="uid://brx7gdwx5ed6" path="res://Assets/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="12_31pwv"]
+[ext_resource type="Texture2D" uid="uid://brx7gdwx5ed6" path="res://Assets/Sprites/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="12_31pwv"]
 [ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_dc0i1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1t2sk"]

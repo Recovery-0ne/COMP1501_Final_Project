@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bilgp2fofscl4"]
 
 [ext_resource type="Script" path="res://UI/AbilityCooldowns/ability_cooldown.gd" id="1_fs2ld"]
-[ext_resource type="Texture2D" uid="uid://0txijt2h7d3x" path="res://Assets/rpgiab_icon_pack_v1.3/32x32/arrow_speed.png" id="2_kdd6v"]
-[ext_resource type="Texture2D" uid="uid://cslrm7oud7l5s" path="res://Assets/blank_64x64_image.png" id="3_ws724"]
+[ext_resource type="Texture2D" uid="uid://0txijt2h7d3x" path="res://Assets/Sprites/rpgiab_icon_pack_v1.3/32x32/arrow_speed.png" id="2_kdd6v"]
+[ext_resource type="Texture2D" uid="uid://cslrm7oud7l5s" path="res://Assets/Sprites/blank_64x64_image.png" id="3_ws724"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_anu2j"]
 font_size = 20

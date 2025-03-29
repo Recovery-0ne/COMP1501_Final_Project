@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="8_b2iyi"]
 [ext_resource type="PackedScene" uid="uid://b7i6kk0kgvgwg" path="res://Spells/frost.tscn" id="8_lc27i"]
 [ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/Detection/detector.tscn" id="10_jb2fk"]
-[ext_resource type="Texture2D" uid="uid://bf7tts78gbkgw" path="res://Assets/AnimationSheet_Character.png" id="11_euaae"]
+[ext_resource type="Texture2D" uid="uid://bf7tts78gbkgw" path="res://Assets/Sprites/AnimationSheet_Character.png" id="11_euaae"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster_look_around.gd" id="11_xvwt5"]
 [ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_dif5t"]
 

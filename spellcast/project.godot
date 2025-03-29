@@ -13,7 +13,7 @@ config_version=5
 config/name="Spellcast"
 run/main_scene="res://game_scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://Assets/icon.svg"
+config/icon="res://Assets/Sprites/icon.svg"
 
 [global_group]
 

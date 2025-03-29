@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=4 uid="uid://c3ulabo7m34cy"]
 
-[ext_resource type="Texture2D" uid="uid://jflf4m5wg58j" path="res://Assets/TX Village Props.png" id="1_6roy3"]
+[ext_resource type="Texture2D" uid="uid://jflf4m5wg58j" path="res://Assets/Sprites/TX Village Props.png" id="1_6roy3"]
 [ext_resource type="Script" path="res://Shop/shop.gd" id="1_bt2m2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r6mxh"]

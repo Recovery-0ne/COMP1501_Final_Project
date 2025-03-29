@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://udvv0q57vsxm"]
+[gd_scene load_steps=50 format=3 uid="uid://udvv0q57vsxm"]
 
 [ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_uytxk"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerStateMachine.gd" id="2_jpeyr"]
@@ -17,7 +17,18 @@
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerWallClimb.gd" id="16_0mk32"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerWallJump.gd" id="17_ve5nd"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerDash.gd" id="18_iy4go"]
-[ext_resource type="Texture2D" uid="uid://mxabjsvr2h0h" path="res://Assets/adventurer-v1.5-Sheet.png" id="56_sfjbp"]
+[ext_resource type="Script" path="res://Player/player_sounds.gd" id="19_cmlnt"]
+[ext_resource type="AudioStream" uid="uid://bdnast1wlvk8u" path="res://Assets/Audio/SFX/390757__d00121058__fx_004_footstep_gravel_r.wav" id="20_a2f2x"]
+[ext_resource type="AudioStream" uid="uid://di7ouebtvgm8n" path="res://Assets/Audio/SFX/670077__memerunknown__afterjump.wav" id="21_6t4p2"]
+[ext_resource type="AudioStream" uid="uid://lgbepjohpg0u" path="res://Assets/Audio/SFX/683928__geoff-bremner-audio__whoosh-4.wav" id="21_6056n"]
+[ext_resource type="AudioStream" uid="uid://bpodpbmthmhp1" path="res://Assets/Audio/SFX/420668__sypherzent__basic-melee-swing-miss-whoosh.wav" id="21_ak4pt"]
+[ext_resource type="AudioStream" uid="uid://dihqfvtcco3kk" path="res://Assets/Audio/SFX/431174__highpixel__fireball-explosion.wav" id="22_3yg7g"]
+[ext_resource type="AudioStream" uid="uid://bb0xi8xknnwmw" path="res://Assets/Audio/SFX/477716__joao_janz__light-wood-surface-scratching-1_2.wav" id="22_5c050"]
+[ext_resource type="AudioStream" uid="uid://d0g3h2gdbcb4e" path="res://Assets/Audio/SFX/738050__sadiquecat__wd40-quarter-full-finger-tapping-8.wav" id="23_ifblp"]
+[ext_resource type="AudioStream" uid="uid://cjsi6drqkyx75" path="res://Assets/Audio/SFX/524305__bertsz__wet-spell-shoot.wav" id="24_65d5b"]
+[ext_resource type="AudioStream" uid="uid://bwdrj8cvxdy1f" path="res://Assets/Audio/SFX/458867__raclure__damage-sound-effect.mp3" id="25_4do21"]
+[ext_resource type="AudioStream" uid="uid://bd5xhx6mtofxm" path="res://Assets/Audio/SFX/159769__timgormly__thunder_os_1.wav" id="29_g2p2a"]
+[ext_resource type="Texture2D" uid="uid://mxabjsvr2h0h" path="res://Assets/Sprites/adventurer-v1.5-Sheet.png" id="56_sfjbp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tfxn8"]
 
@@ -495,6 +506,10 @@ script = ExtResource("4_5grct")
 wait_time = 0.05
 one_shot = true
 
+[node name="StepTimer" type="Timer" parent="StateMachine/Move"]
+wait_time = 0.4
+one_shot = true
+
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("5_kjl3f")
 
@@ -521,6 +536,10 @@ script = ExtResource("15_725lw")
 
 [node name="Wall_Climb" type="Node" parent="StateMachine"]
 script = ExtResource("16_0mk32")
+
+[node name="SoundTimer" type="Timer" parent="StateMachine/Wall_Climb"]
+wait_time = 0.4
+one_shot = true
 
 [node name="Wall_Jump" type="Node" parent="StateMachine"]
 script = ExtResource("17_ve5nd")
@@ -597,4 +616,62 @@ one_shot = true
 [node name="Fireball" parent="Spells" instance=ExtResource("8_2x3cu")]
 position = Vector2(15, -20)
 
+[node name="Sounds" type="Node" parent="."]
+script = ExtResource("19_cmlnt")
+sounds = {
+"attack": NodePath("Attack"),
+"climb": NodePath("Climb"),
+"dash": NodePath("Dash"),
+"fireball": NodePath("Fireball"),
+"frost": NodePath("Frost"),
+"hurt": NodePath("Hurt"),
+"jump": NodePath("Jump"),
+"land": NodePath("Land"),
+"lightning": NodePath("Lightning"),
+"slide": NodePath("Slide"),
+"walk": NodePath("Step")
+}
+
+[node name="Step" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("20_a2f2x")
+volume_db = -5.0
+autoplay = true
+
+[node name="Jump" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("21_6t4p2")
+volume_db = 10.0
+
+[node name="Land" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("20_a2f2x")
+volume_db = 8.0
+
+[node name="Dash" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("21_6056n")
+
+[node name="Climb" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("23_ifblp")
+volume_db = -7.0
+
+[node name="Slide" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("22_5c050")
+pitch_scale = 0.65
+
+[node name="Hurt" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("25_4do21")
+
+[node name="Attack" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("21_ak4pt")
+
+[node name="Fireball" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("22_3yg7g")
+
+[node name="Frost" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("24_65d5b")
+
+[node name="Lightning" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("29_g2p2a")
+volume_db = 5.0
+
 [connection signal="timeout" from="StateMachine/Move/CoyoteTimer" to="StateMachine/Move" method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Move/StepTimer" to="StateMachine/Move" method="_on_step_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Wall_Climb/SoundTimer" to="StateMachine/Wall_Climb" method="_on_sound_timer_timeout"]
