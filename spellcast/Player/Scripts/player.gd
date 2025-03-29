@@ -5,6 +5,9 @@ class_name Player
 var direction:= 1
 var wall_check
 
+
+var player_money = 0
+
 var ability_names := ["Fireball", "Frost", "LightningStrike"] #Store all names of abilities
 var available_abilities := [""] #Store all names of unlocked abilities. Empty string represents no ability
 var ability_methods := ["cast_fireball", "cast_frost", "cast_lightning_strike"] #Store method names of all abilites (indices should match the names array)

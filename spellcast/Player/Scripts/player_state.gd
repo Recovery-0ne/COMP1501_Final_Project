@@ -9,6 +9,7 @@ var anim: AnimationPlayer
 var animation_name: String
 var timer:Timer
 
+
 func _initialize(_state_machine: StateMachine, _player: Player, _sprite: Sprite2D, _anim: AnimationPlayer, _animation_name: String):
 	state_machine = _state_machine
 	player = _player
