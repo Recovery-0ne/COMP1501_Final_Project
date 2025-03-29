@@ -491,6 +491,10 @@ script = ExtResource("3_ondre")
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource("4_5grct")
 
+[node name="CoyoteTimer" type="Timer" parent="StateMachine/Move"]
+wait_time = 0.05
+one_shot = true
+
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("5_kjl3f")
 
@@ -540,7 +544,7 @@ target_position = Vector2(0, 0)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -8.5)
+position = Vector2(-0.5, -8.09)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_q64bo")
 
@@ -592,3 +596,5 @@ one_shot = true
 
 [node name="Fireball" parent="Spells" instance=ExtResource("8_2x3cu")]
 position = Vector2(15, -20)
+
+[connection signal="timeout" from="StateMachine/Move/CoyoteTimer" to="StateMachine/Move" method="_on_coyote_timer_timeout"]
