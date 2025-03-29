@@ -6,10 +6,11 @@ func _enter():
 	if enemy._is_facing_wall() or enemy._is_on_ledge():
 		enemy.change_direction()
 	enemy.set_move()
-	enemy.change_facing_direction()
-	#Force the raycasts to update to make sure that if we turned away from any walls/ledges, the enemy know immediately
+	enemy.change_facing_direction_to(enemy.move_dir)
+	#Force the raycasts to update to make sure that if we turned away from any walls/ledges, the enemy knows immediately
 	enemy.wall_check.force_raycast_update()
 	enemy.floor_check.force_raycast_update()
+	enemy.force_vision_update()
 	
 func _update(delta: float):
 	super(delta)

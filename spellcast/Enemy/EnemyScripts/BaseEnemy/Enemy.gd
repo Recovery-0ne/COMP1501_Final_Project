@@ -9,13 +9,12 @@ var player: Player
 @export var variant_material : Material
 @export var flip_on_start:=false
 
-@export var sprite_offset = {1:Vector2.ZERO, -1:Vector2.ZERO}
+@export var sprite_offset = {1:Vector2.ZERO, -1:Vector2.ZERO} #keys are the directions
 
 @export var pursuit_speed_multiplier:=1
 @export var move_dir:= 1
-@onready var facing_dir:= move_dir
 
-@onready var vision:= $Detector
+@onready var vision : Vision = $Detector
 
 @onready var floor_check:= $FloorCheck
 @onready var wall_check:= $WallCheck
@@ -27,17 +26,22 @@ var can_see_target = false
 var is_on_screen = false
 
 func _ready():
+	facing_dir = move_dir
 	player = get_tree().get_nodes_in_group("Player")[0]
 	vision.body = self
 	vision.target = player
+	
 	$LightningStrike.target = self
 	$VisibleOnScreenNotifier2D.connect("screen_entered", on_screen)
 	$VisibleOnScreenNotifier2D.connect("screen_exited", off_screen)
+	
 	for state in $StateMachine.get_children():
 		state._initialize($StateMachine, self, sprite, anim, state.name.to_lower())
 		states[state.name.to_lower()] = state
 	$StateMachine._initialize()
+	
 	self.add_to_group("Enemies")
+	
 	if flip_on_start: 
 		change_direction()
 	if is_boss:
@@ -53,6 +57,9 @@ func _is_facing_wall():
 	
 func _is_on_ledge():
 	return not floor_check.is_colliding()
+	
+func will_target_player():
+	return can_see_target and not _is_facing_wall() and not _is_on_ledge()
 		
 func change_direction():
 	move_dir *= -1
@@ -70,6 +77,9 @@ func change_direction_to_player():
 func flip_checks():
 	wall_check.target_position.x *= -1
 	floor_check.position.x *= -1
+	
+func force_vision_update():
+	can_see_target = vision._can_see_target()
 	
 func damage_target():
 	if attack_check.is_colliding():

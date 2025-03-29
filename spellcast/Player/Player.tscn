@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://udvv0q57vsxm"]
+[gd_scene load_steps=39 format=3 uid="uid://udvv0q57vsxm"]
 
 [ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_uytxk"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerStateMachine.gd" id="2_jpeyr"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerMove.gd" id="4_5grct"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerJump.gd" id="5_kjl3f"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerFall.gd" id="6_su17k"]
-[ext_resource type="Script" path="res://Player/Scripts/States/PlayerCastFireball.gd" id="7_em0s2"]
 [ext_resource type="PackedScene" uid="uid://j4tmoiklso7j" path="res://Spells/fireball.tscn" id="8_2x3cu"]
 [ext_resource type="PackedScene" uid="uid://b7i6kk0kgvgwg" path="res://Spells/frost.tscn" id="9_2xb0b"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerAttack.gd" id="9_eyi1w"]
@@ -222,20 +221,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [93, 94, 95, 88]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../StateMachine/Cast_Fireball")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.67),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_animation_finished"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_0xixm"]
 resource_name = "cast_frost"
@@ -251,20 +236,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [93, 94, 95, 88]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../StateMachine/Cast_Frost")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.67),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_animation_finished"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_ulgol"]
@@ -526,27 +497,6 @@ script = ExtResource("5_kjl3f")
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("6_su17k")
 
-[node name="Cast_Fireball" type="Node" parent="StateMachine" node_paths=PackedStringArray("spell")]
-script = ExtResource("7_em0s2")
-spell = NodePath("Fireball")
-
-[node name="Fireball" parent="StateMachine/Cast_Fireball" instance=ExtResource("8_2x3cu")]
-position = Vector2(15, -20)
-
-[node name="Cast_Timer" type="Timer" parent="StateMachine/Cast_Fireball"]
-wait_time = 3.0
-one_shot = true
-
-[node name="Cast_Frost" type="Node" parent="StateMachine" node_paths=PackedStringArray("spell")]
-script = ExtResource("7_em0s2")
-spell = NodePath("Frost")
-
-[node name="Frost" parent="StateMachine/Cast_Frost" instance=ExtResource("9_2xb0b")]
-
-[node name="Cast_Timer" type="Timer" parent="StateMachine/Cast_Frost"]
-wait_time = 3.0
-one_shot = true
-
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("9_eyi1w")
 
@@ -620,6 +570,25 @@ libraries = {
 [node name="StatusEffectTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="FireballCooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="FrostCooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [node name="LightningStrikeCooldownTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="Spells" type="Node" parent="."]
+
+[node name="Frost" parent="Spells" instance=ExtResource("9_2xb0b")]
+
+[node name="Fireball" parent="Spells" instance=ExtResource("8_2x3cu")]
+position = Vector2(15, -20)

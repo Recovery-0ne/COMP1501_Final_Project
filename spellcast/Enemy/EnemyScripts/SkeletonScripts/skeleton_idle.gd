@@ -1,7 +1,10 @@
 extends EnemyState
 
+var saw_player_on_entering_idle:= false
+
 func _enter():
 	super()
+	saw_player_on_entering_idle = enemy.can_see_target
 	$Timer.start()
 	
 func _update(delta: float):
@@ -9,9 +12,10 @@ func _update(delta: float):
 
 func _physics_update(delta: float):
 	super(delta)
-	
-	if enemy.can_see_target and not enemy._is_on_ledge() and not enemy._is_facing_wall():
+	if enemy.will_target_player():
 		state_machine.change_state("pursue")
+	elif not enemy.can_see_target and saw_player_on_entering_idle:
+		state_machine.change_state("look_around")
 	
 func _exit():
 	super()

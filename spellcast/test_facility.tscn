@@ -23,7 +23,7 @@ scale = Vector2(20, 20)
 mesh = SubResource("QuadMesh_afiq8")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(444, 200)
+position = Vector2(-828, 207)
 scale = Vector2(5.3, 5.375)
 collision_layer = 128
 collision_mask = 0
@@ -37,7 +37,7 @@ scale = Vector2(20, 20)
 mesh = SubResource("QuadMesh_afiq8")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(87.9999, 205)
+position = Vector2(314, 198)
 scale = Vector2(5.3, 5.375)
 collision_layer = 128
 collision_mask = 0
@@ -51,4 +51,4 @@ scale = Vector2(20, 20)
 mesh = SubResource("QuadMesh_afiq8")
 
 [node name="Player" parent="." instance=ExtResource("1_v26ed")]
-position = Vector2(-502, 189)
+position = Vector2(-433, 198)

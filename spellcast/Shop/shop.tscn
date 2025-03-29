@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://c3ulabo7m34cy"]
+[gd_scene load_steps=17 format=4 uid="uid://c3ulabo7m34cy"]
 
 [ext_resource type="Texture2D" uid="uid://jflf4m5wg58j" path="res://Assets/TX Village Props.png" id="1_6roy3"]
 [ext_resource type="Script" path="res://Shop/shop.gd" id="1_bt2m2"]
@@ -7892,7 +7892,13 @@ sources/0 = SubResource("TileSetAtlasSource_0kch6")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_837o7"]
 size = Vector2(506.5, 300.5)
 
+[sub_resource type="LabelSettings" id="LabelSettings_mb70i"]
+font_size = 32
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Shop" type="Node2D"]
+process_mode = 3
 z_index = -9
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_bt2m2")
@@ -7928,10 +7934,39 @@ tile_map_data = PackedByteArray("AAAEAP7/AAASAAIAAAAEAP//AAASAAMAAAAFAP7/AAATAAI
 tile_set = SubResource("TileSet_b566s")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 16
+process_mode = 3
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(43, -132)
 shape = SubResource("RectangleShape2D_837o7")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -33.3333
+offset_top = -325.333
+offset_right = 30.6667
+offset_bottom = -261.333
+color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tab
+"
+label_settings = SubResource("LabelSettings_mb70i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

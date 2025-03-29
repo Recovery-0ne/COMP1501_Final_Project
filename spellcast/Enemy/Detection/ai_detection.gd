@@ -1,4 +1,5 @@
 extends Node2D
+class_name Vision
 
 var target : Node2D
 var body : Node2D

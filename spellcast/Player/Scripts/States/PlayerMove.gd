@@ -13,11 +13,6 @@ func _update(delta: float):
 		player.jump_count += 1
 	elif Input.is_action_just_pressed("attack"):
 		state_machine.change_state("move_attack")
-	elif Input.is_action_just_pressed("dash"):
-		state_machine.change_state("dash")
-
-		
-
 	
 func _physics_update(delta: float):
 	super(delta)
