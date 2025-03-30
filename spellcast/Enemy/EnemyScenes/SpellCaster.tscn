@@ -232,7 +232,6 @@ sprite_offset = {
 pursuit_speed_multiplier = 2
 max_health = 80
 default_speed = 40
-freeze_slow_duration = 2.0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("2_qw1m8")

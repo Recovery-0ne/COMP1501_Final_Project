@@ -6,6 +6,8 @@ func _enter():
 	
 func _update(delta: float):
 	super(delta)
+	if enemy.is_on_floor():
+		enemy.velocity = Vector2.ZERO
 	
 func _physics_update(delta: float):
 	super(delta)
