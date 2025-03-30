@@ -8,7 +8,7 @@ var jump_count = 0
 var max_jumps = 2
 
 var ability_names := ["Fireball", "Frost", "LightningStrike"] #Store all names of abilities
-var available_abilities := ["","Fireball", "Frost", "LightningStrike"] #Store all names of unlocked abilities. Empty string represents no ability
+var available_abilities := [""] #Store all names of unlocked abilities. Empty string represents no ability
 var ability_methods := ["cast_fireball", "cast_frost", "cast_lightning_strike"] #Store method names of all abilites (indices should match the names array)
 var current_ability_methods := ["", "", "", ""] #Store method names of the currently equipped abilities
 

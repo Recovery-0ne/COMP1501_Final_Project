@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmbot0i2xfte3"]
+
+[ext_resource type="Texture2D" uid="uid://thuoeo0yptg0" path="res://Assets/Sprites/ShopNPC/Idle.png" id="1_ndq5w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2deh0"]
+atlas = ExtResource("1_ndq5w")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmnkj"]
+atlas = ExtResource("1_ndq5w")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hc2yr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2deh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmnkj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Npc" type="AnimatedSprite2D"]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_hc2yr")
+autoplay = "default"
+frame_progress = 0.322979
