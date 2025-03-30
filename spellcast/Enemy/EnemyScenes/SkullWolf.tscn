@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_look_around.gd" id="10_u5b6j"]
 [ext_resource type="Material" uid="uid://byfawqk2e8tyv" path="res://Shaders/GreySkullWolf.tres" id="12_5q7dh"]
 [ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_et6r1"]
-[ext_resource type="Script" path="res://sound_manager.gd" id="14_8j1yo"]
+[ext_resource type="Script" path="res://Audio/sound_manager.gd" id="14_8j1yo"]
 [ext_resource type="AudioStream" uid="uid://b0cd3bu1yjk7j" path="res://Assets/Audio/SFX/Skeleton/737238__sadiquecat__gritty-woosh.wav" id="15_k4s06"]
 [ext_resource type="AudioStream" uid="uid://cefwj6qtsuhsk" path="res://Assets/Audio/SFX/Skull_Wolf/579066__nomiqbomi__noise-swoosh-8-lr.mp3" id="15_r0p3r"]
 [ext_resource type="AudioStream" uid="uid://cmnjnwy57qk36" path="res://Assets/Audio/SFX/Skeleton/369958__mischy__raschel_kurz_2.wav" id="17_8oygn"]

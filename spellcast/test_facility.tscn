@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://pwhcfr60yjc2"]
 
 [ext_resource type="PackedScene" uid="uid://udvv0q57vsxm" path="res://Player/Player.tscn" id="1_v26ed"]
-[ext_resource type="PackedScene" uid="uid://ls572kqc41a2" path="res://Enemy/EnemyScenes/SkullWolf.tscn" id="2_81o15"]
+[ext_resource type="PackedScene" uid="uid://pdne3m6kthea" path="res://Enemy/EnemyScenes/SpellCaster.tscn" id="2_uk3dx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sw80l"]
 
@@ -54,4 +54,4 @@ mesh = SubResource("QuadMesh_afiq8")
 [node name="Player" parent="." instance=ExtResource("1_v26ed")]
 position = Vector2(-433, 198)
 
-[node name="SkullWolf" parent="." instance=ExtResource("2_81o15")]
+[node name="SpellCaster" parent="." instance=ExtResource("2_uk3dx")]

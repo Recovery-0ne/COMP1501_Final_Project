@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerWallClimb.gd" id="16_0mk32"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerWallJump.gd" id="17_ve5nd"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerDash.gd" id="18_iy4go"]
-[ext_resource type="Script" path="res://sound_manager.gd" id="19_cmlnt"]
+[ext_resource type="Script" path="res://Audio/sound_manager.gd" id="19_cmlnt"]
 [ext_resource type="AudioStream" uid="uid://bdnast1wlvk8u" path="res://Assets/Audio/SFX/Player/390757__d00121058__fx_004_footstep_gravel_r.wav" id="20_a2f2x"]
 [ext_resource type="AudioStream" uid="uid://di7ouebtvgm8n" path="res://Assets/Audio/SFX/Player/670077__memerunknown__afterjump.wav" id="21_6t4p2"]
 [ext_resource type="AudioStream" uid="uid://lgbepjohpg0u" path="res://Assets/Audio/SFX/Player/683928__geoff-bremner-audio__whoosh-4.wav" id="21_6056n"]

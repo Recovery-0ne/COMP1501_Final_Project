@@ -22,6 +22,7 @@ func cast_spell():
 	var i = randi_range(0, available_spells.size() - 1)
 	available_spells[i]._activate(enemy, enemy.player.position)
 	enemy.attack_cooldown_timer.start()
+	enemy.sound_manager.play(available_spells[i].name.to_lower())
 	
 func _animation_end():
 	state_machine.change_state("look_around")
