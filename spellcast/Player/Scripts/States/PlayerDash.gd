@@ -3,6 +3,7 @@ extends PlayerState
 func _enter():
 	super()
 	player.velocity.x = 1500 * player.facing_dir
+	player.sound_manager.play("dash")
 
 func _update(delta: float):
 	super(delta)

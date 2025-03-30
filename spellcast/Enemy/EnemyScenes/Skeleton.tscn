@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://drhydcmoetxlj"]
+[gd_scene load_steps=27 format=3 uid="uid://drhydcmoetxlj"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton.gd" id="1_0cshr"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_wander.gd" id="2_5do2f"]
@@ -11,8 +11,12 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="8_8qg5g"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="9_2cmh8"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_look_around.gd" id="9_i0e52"]
-[ext_resource type="Texture2D" uid="uid://brx7gdwx5ed6" path="res://Assets/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="12_31pwv"]
+[ext_resource type="Texture2D" uid="uid://brx7gdwx5ed6" path="res://Assets/Sprites/Fantasy Skeleton Enemies/Skeleton Warrior.png" id="12_31pwv"]
 [ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_dc0i1"]
+[ext_resource type="Script" path="res://Audio/sound_manager.gd" id="14_w6q3d"]
+[ext_resource type="AudioStream" uid="uid://bobnpqxiq08p1" path="res://Assets/Audio/SFX/Skeleton/579802__hudbud321__bones-breaking.mp3" id="15_mfrbk"]
+[ext_resource type="AudioStream" uid="uid://b0cd3bu1yjk7j" path="res://Assets/Audio/SFX/Skeleton/737238__sadiquecat__gritty-woosh.wav" id="16_b5mic"]
+[ext_resource type="AudioStream" uid="uid://cmnjnwy57qk36" path="res://Assets/Audio/SFX/Skeleton/369958__mischy__raschel_kurz_2.wav" id="17_8mxr7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1t2sk"]
 radius = 6.66667
@@ -203,8 +207,16 @@ autostart = true
 [node name="Wander" type="Node" parent="StateMachine"]
 script = ExtResource("2_5do2f")
 
+[node name="SoundTimer" type="Timer" parent="StateMachine/Wander"]
+wait_time = 0.6
+one_shot = true
+
 [node name="Pursue" type="Node" parent="StateMachine"]
 script = ExtResource("5_pj0ix")
+
+[node name="SoundTimer" type="Timer" parent="StateMachine/Pursue"]
+wait_time = 0.4
+one_shot = true
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("6_kcfp7")
@@ -274,5 +286,31 @@ one_shot = true
 [node name="LightningStrike" parent="." instance=ExtResource("12_dc0i1")]
 position = Vector2(0, -15.07)
 
+[node name="Sounds" type="Node2D" parent="."]
+script = ExtResource("14_w6q3d")
+sounds = {
+"attack": NodePath("Attack"),
+"hurt": NodePath("Hurt"),
+"walk": NodePath("Walk")
+}
+
+[node name="Walk" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("15_mfrbk")
+max_distance = 1500.0
+attenuation = 2.5
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("16_b5mic")
+max_distance = 1500.0
+attenuation = 2.5
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("17_8mxr7")
+volume_db = 4.0
+max_distance = 1500.0
+attenuation = 2.5
+
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Wander/SoundTimer" to="StateMachine/Wander" method="_on_sound_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Pursue/SoundTimer" to="StateMachine/Pursue" method="_on_sound_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Look_Around/Timer" to="StateMachine/Look_Around" method="_on_timer_timeout"]

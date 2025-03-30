@@ -3,6 +3,7 @@ extends PlayerState
 func _enter():
 	super()
 	player.velocity.y = -player.jump_velocity
+	player.sound_manager.play("jump")
 		
 func _update(delta: float):
 	super(delta)

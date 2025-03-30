@@ -11,6 +11,7 @@ func _enter():
 	enemy.wall_check.force_raycast_update()
 	enemy.floor_check.force_raycast_update()
 	enemy.force_vision_update()
+	$SoundTimer.start()
 	
 func _update(delta: float):
 	super(delta)
@@ -25,3 +26,8 @@ func _physics_update(delta: float):
 func _exit():
 	super()
 	enemy.stop()
+	$SoundTimer.stop()
+
+func _on_sound_timer_timeout() -> void:
+	enemy.sound_manager.play("walk")
+	$SoundTimer.start()

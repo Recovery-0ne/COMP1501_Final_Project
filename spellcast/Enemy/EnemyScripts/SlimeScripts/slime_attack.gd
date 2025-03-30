@@ -19,6 +19,7 @@ func _physics_update(delta: float):
 		can_attack = false 
 		enemy.velocity = Vector2.ZERO
 		anim.play("jump_land")
+		enemy.sound_manager.play("land")
 	
 func _exit():
 	super()
@@ -30,6 +31,7 @@ func slime_jump():
 	
 func prepare_animation_finished():
 	anim.play("attack")
+	enemy.sound_manager.play("jump")
 	
 func land_animation_finished():
 	state_machine.change_state("pursue")

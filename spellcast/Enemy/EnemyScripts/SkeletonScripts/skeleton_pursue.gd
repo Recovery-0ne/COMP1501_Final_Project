@@ -6,6 +6,7 @@ func _enter():
 	enemy.default_speed *= enemy.pursuit_speed_multiplier
 	enemy.speed = enemy.default_speed
 	anim.speed_scale = 0.4 * enemy.pursuit_speed_multiplier
+	$SoundTimer.start()
 	
 func _update(delta: float):
 	super(delta)
@@ -24,10 +25,14 @@ func _physics_update(delta: float):
 	elif not enemy.can_see_target:
 		state_machine.change_state("look_around")
 	
-	
 func _exit():
 	super()
 	enemy.default_speed /= enemy.pursuit_speed_multiplier
 	enemy.speed = enemy.default_speed
 	anim.speed_scale = 1
 	enemy.stop()
+	$SoundTimer.stop()
+
+func _on_sound_timer_timeout() -> void:
+	enemy.sound_manager.play("walk")
+	$SoundTimer.start()
