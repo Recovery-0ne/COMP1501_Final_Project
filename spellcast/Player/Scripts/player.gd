@@ -7,20 +7,22 @@ var wall_check
 var jump_count = 0
 var max_jumps = 2
 
-var ability_names := ["Fireball", "Frost", "LightningStrike"] #Store all names of abilities
+var ability_names := ["Fireball", "Frost", "MeleeCombo", "LightningStrike"] #Store all names of abilities
 var available_abilities := [""] #Store all names of unlocked abilities. Empty string represents no ability
-var ability_methods := ["cast_fireball", "cast_frost", "cast_lightning_strike"] #Store method names of all abilites (indices should match the names array)
+var ability_methods := ["cast_fireball", "cast_frost", "use_melee_combo", "cast_lightning_strike"] #Store method names of all abilites (indices should match the names array)
 var current_ability_methods := ["", "", "", ""] #Store method names of the currently equipped abilities
 
 #Store the names of states that each ability can't be used in
-var dash_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb", "dash"]
+var dash_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
 var fireball_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
 var frost_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
 var lightning_strike_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
+var melee_combo_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb", "dash", "jump", "wall_jump", "fall"]
 
 #Make a dictionary for all the descriptions of the player's abilities
 var ability_descriptions = {"Fireball":"Cast a fireball in the direction of your cursor. Deals little damage on hit, but has a 100% chance to apply burning to the opponent.", 
-							"Frost":"Cast a ball of ice in the direction of your cursor. Deals little damage on hit, but has a 100% chance to apply freezing to the opponent.", 
+							"Frost":"Cast a ball of ice in the direction of your cursor. Deals little damage on hit, but has a 100% chance to apply freezing to the opponent.",
+							"MeleeCombo":"Strike the opponent with a series of 3 hits",
 							"LightningStrike":"Strike all opponents on the screen with a bolt of lightning. If the target is frozen, deal 50% more damage and remove the frozen effect. Otherwise, deal base damage with a 25% chance to apply burning."}
 
 func _init() -> void:
@@ -46,12 +48,12 @@ func move(multiplier:=1.0):
 	velocity.x = direction * speed * multiplier
 	move_and_slide()
 
-func damage_target():
+func damage_target(_damage = damage):
 	sound_manager.play("attack")
 	if attack_check.is_colliding():
 		#Damage all colliding objects
 		for i in attack_check.get_collision_count():
-			attack_check.get_collider(i).take_damage(damage)
+			attack_check.get_collider(i).take_damage(_damage)
 			
 func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
 	super(_damage, _flinch, _apply_frozen_multiplier)
@@ -98,6 +100,11 @@ func dash():
 	if can_dash():
 		$DashCooldownTimer.start()
 		$StateMachine.change_state("dash")
+		
+func use_melee_combo():
+	if $MeleeComboCooldownTimer.is_stopped() and not melee_combo_restricted_states.has($StateMachine.current_state.name.to_lower()):
+		$MeleeComboCooldownTimer.start()
+		$StateMachine.change_state("melee_combo")
 
 func use_ability(ability_num:int):
 	if current_ability_methods[ability_num - 1] != "":

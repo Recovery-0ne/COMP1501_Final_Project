@@ -11,3 +11,6 @@ func _physics_update(delta:float):
 	
 func _exit():
 	super()
+	
+func animation_finished():
+	state_machine.change_state("idle")
