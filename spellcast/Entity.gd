@@ -52,9 +52,11 @@ func decrease_health(_damage: int):
 
 func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
 	sound_manager.play("hurt")
-	if frozen and _apply_frozen_multiplier: _damage = _damage/2
+	if frozen and _apply_frozen_multiplier: 
+		_damage = _damage/2
+	if _flinch: 
+		flinch()
 	decrease_health(_damage)
-	if _flinch: flinch()
 	
 func flinch():pass #Define this for each entity in their own script
 		
@@ -108,12 +110,6 @@ func end_frozen_effect():
 func lightning_strike():
 	if dead: return
 	$LightningStrike.enable()
-	
-func is_lightning_strike_cooldown_done():
-	return $LightningStrikeCooldownTimer.is_stopped()
-	
-func start_lightning_strike_cooldown():
-	$LightningStrikeCooldownTimer.start()
 	
 func remove_all_status_conditions():
 	if not has_status_effect: return

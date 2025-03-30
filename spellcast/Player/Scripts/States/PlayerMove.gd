@@ -1,9 +1,13 @@
 extends PlayerState
 
+@onready var default_step_time = $StepTimer.wait_time
+@onready var time_left = default_step_time
+
 func _enter():
 	super()
 	player.gravity = 0
-	_on_step_timer_timeout()
+	$StepTimer.wait_time = time_left/2
+	$StepTimer.start()
 
 func _update(delta: float):
 	super(delta)
@@ -20,6 +24,7 @@ func _update(delta: float):
 func _physics_update(delta: float):
 	super(delta)
 	player.move()
+	time_left = $StepTimer.time_left
 
 func _exit():
 	super()
@@ -32,4 +37,5 @@ func _on_coyote_timer_timeout() -> void:
 
 func _on_step_timer_timeout() -> void:
 	player.sound_manager.play("walk")
+	$StepTimer.wait_time = default_step_time
 	$StepTimer.start()
