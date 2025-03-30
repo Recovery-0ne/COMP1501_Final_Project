@@ -4,6 +4,7 @@ func _enter():
 	super()
 	player.velocity.x = 1500 * player.facing_dir
 	player.sound_manager.play("dash")
+	player.start_dash_cooldown_timer()
 
 func _update(delta: float):
 	super(delta)

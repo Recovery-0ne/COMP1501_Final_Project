@@ -11,12 +11,11 @@ func _initialize():
 
 func change_state(new_state_name: String):
 	#print_debug(current_state.name + "-->" + new_state_name)
-	if current_state.player.frozen or current_state.player.dead:
-		return
-	var new_state = current_state.player.states[new_state_name]
-	current_state._exit()
-	current_state = new_state
-	current_state._enter()
+	if not current_state.player.frozen and not current_state.player.dead:
+		var new_state = current_state.player.states[new_state_name]
+		current_state._exit()
+		current_state = new_state
+		current_state._enter()
 
 func _process(delta: float):
 	current_state._update(delta)

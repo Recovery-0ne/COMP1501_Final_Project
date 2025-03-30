@@ -49,6 +49,7 @@ func _ready():
 		damage = default_damage
 		max_health *= boss_health_multiplier
 		health = max_health
+		scale *= 1.3
 		sprite.material = variant_material
 	update_health_display()
 

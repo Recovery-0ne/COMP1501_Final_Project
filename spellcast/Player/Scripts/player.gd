@@ -71,7 +71,7 @@ func respawn_player():
 	respawn_enemies()
 		
 func cast_fireball():
-	if not $Spells/Fireball.visible and $FireballCooldownTimer.is_stopped() and not fireball_restricted_states.has($StateMachine.current_state.name.to_lower()):
+	if $FireballCooldownTimer.is_stopped() and not fireball_restricted_states.has($StateMachine.current_state.name.to_lower()):
 		$FireballCooldownTimer.start()
 		$Spells/Fireball._activate(self, get_global_mouse_position())
 		sound_manager.play("fireball")
@@ -84,27 +84,31 @@ func cast_frost():
 		
 func cast_lightning_strike():
 	var hit_an_enemy = false
-	if is_lightning_strike_cooldown_done() and not lightning_strike_restricted_states.has($StateMachine.current_state.name.to_lower()):
+	if $LightningStrikeCooldownTimer.is_stopped() and not lightning_strike_restricted_states.has($StateMachine.current_state.name.to_lower()):
 		for enemy in get_tree().get_nodes_in_group("Enemies"):
-				if enemy.is_on_screen and not enemy.dead:
-					enemy.lightning_strike()
-					hit_an_enemy = true
-	if hit_an_enemy:
-		start_lightning_strike_cooldown()
-		sound_manager.play("lightning")
+			if enemy.is_on_screen and not enemy.dead:
+				enemy.lightning_strike()
+				hit_an_enemy = true
+		if hit_an_enemy:
+			$LightningStrikeCooldownTimer.start()
+			sound_manager.play("lightning")
 		
 func can_dash() -> bool:
 	return $DashCooldownTimer.is_stopped() and not dash_restricted_states.has($StateMachine.current_state.name.to_lower())
 	
 func dash():
 	if can_dash():
-		$DashCooldownTimer.start()
 		$StateMachine.change_state("dash")
+		
+func start_dash_cooldown_timer():
+	$DashCooldownTimer.start()
 		
 func use_melee_combo():
 	if $MeleeComboCooldownTimer.is_stopped() and not melee_combo_restricted_states.has($StateMachine.current_state.name.to_lower()):
-		$MeleeComboCooldownTimer.start()
 		$StateMachine.change_state("melee_combo")
+		
+func start_melee_combo_cooldown_timer():
+	$MeleeComboCooldownTimer.start()
 
 func use_ability(ability_num:int):
 	if current_ability_methods[ability_num - 1] != "":
