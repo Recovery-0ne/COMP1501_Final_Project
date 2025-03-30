@@ -19,7 +19,6 @@ func _process(delta: float) -> void:
 	update_ability_icon_progress()
 	
 func update_ability_icon_progress():
-	#Updates PlayerMoney richtextlabel to keep track of the amount of money the player has
 	#Update the dash progress value to show the player if it is still on cooldown
 	#Progress is as a percentage: time_left / total_time * 100%
 	$DashIcon/DashCooldown.progress_bar.value = (dash_timer.time_left)/(dash_timer.wait_time)*100
