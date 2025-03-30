@@ -33,6 +33,9 @@ var burning = false
 var frozen = false
 
 var dead:= false
+
+func respawn_enemies():
+	get_tree().call_group("Enemies", "respawn")
 	
 func apply_gravity():
 	if not is_on_floor():

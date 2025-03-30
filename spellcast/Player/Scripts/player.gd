@@ -66,6 +66,7 @@ func respawn_player():
 	health = max_health
 	update_health_display()
 	$HealthLabel.visible = true
+	respawn_enemies()
 		
 func cast_fireball():
 	if not $Spells/Fireball.visible and $FireballCooldownTimer.is_stopped() and not fireball_restricted_states.has($StateMachine.current_state.name.to_lower()):
