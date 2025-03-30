@@ -326,5 +326,7 @@ one_shot = true
 [node name="LightningStrike" parent="." instance=ExtResource("12_dif5t")]
 position = Vector2(0, -15.07)
 
+[node name="Sounds" type="Node" parent="."]
+
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Look_Around/Timer" to="StateMachine/Look_Around" method="_on_timer_timeout"]

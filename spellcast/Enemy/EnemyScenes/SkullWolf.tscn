@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ls572kqc41a2"]
+[gd_scene load_steps=27 format=3 uid="uid://ls572kqc41a2"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkullWolfScripts/skull_wolf.gd" id="1_hmn74"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="2_rvhue"]
@@ -13,6 +13,10 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_look_around.gd" id="10_u5b6j"]
 [ext_resource type="Material" uid="uid://byfawqk2e8tyv" path="res://Shaders/GreySkullWolf.tres" id="12_5q7dh"]
 [ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_et6r1"]
+[ext_resource type="Script" path="res://sound_manager.gd" id="14_8j1yo"]
+[ext_resource type="AudioStream" uid="uid://b0cd3bu1yjk7j" path="res://Assets/Audio/SFX/Skeleton/737238__sadiquecat__gritty-woosh.wav" id="15_k4s06"]
+[ext_resource type="AudioStream" uid="uid://cefwj6qtsuhsk" path="res://Assets/Audio/SFX/Skull_Wolf/579066__nomiqbomi__noise-swoosh-8-lr.mp3" id="15_r0p3r"]
+[ext_resource type="AudioStream" uid="uid://cmnjnwy57qk36" path="res://Assets/Audio/SFX/Skeleton/369958__mischy__raschel_kurz_2.wav" id="17_8oygn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omxgw"]
 size = Vector2(31.5, 17)
@@ -201,11 +205,19 @@ autostart = true
 [node name="Wander" type="Node" parent="StateMachine"]
 script = ExtResource("4_a7g3k")
 
+[node name="SoundTimer" type="Timer" parent="StateMachine/Wander"]
+wait_time = 0.8
+one_shot = true
+
 [node name="Pursue" type="Node" parent="StateMachine"]
 script = ExtResource("5_wkr8w")
 
 [node name="Timer" type="Timer" parent="StateMachine/Pursue"]
 wait_time = 0.5
+one_shot = true
+
+[node name="SoundTimer" type="Timer" parent="StateMachine/Pursue"]
+wait_time = 0.4
 one_shot = true
 
 [node name="Attack" type="Node" parent="StateMachine"]
@@ -277,6 +289,32 @@ one_shot = true
 [node name="LightningStrike" parent="." instance=ExtResource("12_et6r1")]
 position = Vector2(0, -16.96)
 
+[node name="Sounds" type="Node2D" parent="."]
+script = ExtResource("14_8j1yo")
+sounds = {
+"attack": NodePath("Attack"),
+"hurt": NodePath("Hurt"),
+"walk": NodePath("Walk")
+}
+
+[node name="Walk" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("15_k4s06")
+volume_db = 15.0
+max_distance = 1500.0
+attenuation = 2.5
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("15_r0p3r")
+max_distance = 1500.0
+attenuation = 2.5
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("17_8oygn")
+max_distance = 1500.0
+attenuation = 2.5
+
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Wander/SoundTimer" to="StateMachine/Wander" method="_on_sound_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Pursue/Timer" to="StateMachine/Pursue" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Pursue/SoundTimer" to="StateMachine/Pursue" method="_on_sound_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Look_Around/Timer" to="StateMachine/Look_Around" method="_on_timer_timeout"]

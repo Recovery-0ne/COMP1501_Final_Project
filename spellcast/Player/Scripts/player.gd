@@ -1,7 +1,6 @@
 extends Entity
 class_name Player
 
-@onready var sound_manager := $Sounds
 @export var checkpoint_position: Vector2
 var direction:= 1
 var wall_check

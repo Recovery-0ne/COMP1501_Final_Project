@@ -3,6 +3,8 @@ class_name Entity
 
 var states: Dictionary
 
+@onready var sound_manager := $Sounds
+
 @onready var anim:= $Sprite2D/AnimationPlayer
 @onready var sprite:= $Sprite2D
 @onready var attack_check:= $AttackCheck
@@ -46,6 +48,7 @@ func decrease_health(_damage: int):
 		dead = true
 
 func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
+	sound_manager.play("hurt")
 	if frozen and _apply_frozen_multiplier: _damage = _damage/2
 	decrease_health(_damage)
 	if _flinch: flinch()

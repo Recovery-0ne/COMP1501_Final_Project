@@ -1,7 +1,6 @@
 extends Node
 
 @export var sounds : Dictionary
-var tester:AudioStreamPlayer
 
 func play(sound:String):
 	var sound_player = find_child(sounds[sound])

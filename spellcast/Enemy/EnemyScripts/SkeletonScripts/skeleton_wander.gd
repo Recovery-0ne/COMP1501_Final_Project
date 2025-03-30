@@ -5,6 +5,7 @@ var saw_player_on_entering_wander:= false
 func _enter():
 	animation_name = "walk"
 	super()
+	anim.speed_scale = 0.9
 	if enemy._is_facing_wall() or enemy._is_on_ledge():
 		enemy.change_direction()
 	enemy.set_move()
@@ -13,6 +14,7 @@ func _enter():
 	enemy.wall_check.force_raycast_update()
 	enemy.floor_check.force_raycast_update()
 	enemy.force_vision_update()
+	$SoundTimer.start()
 	
 func _update(delta: float):
 	super(delta)
@@ -30,4 +32,11 @@ func _physics_update(delta: float):
 	
 func _exit():
 	super()
+	anim.speed_scale = 1
 	enemy.stop()
+	$SoundTimer.stop()
+
+
+func _on_sound_timer_timeout() -> void:
+	enemy.sound_manager.play("walk")
+	$SoundTimer.start()
