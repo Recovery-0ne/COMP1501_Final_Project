@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://pdne3m6kthea"]
+[gd_scene load_steps=33 format=3 uid="uid://pdne3m6kthea"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SpellCasterScripts/spell_caster.gd" id="1_nf63w"]
 [ext_resource type="Material" uid="uid://b0l4jry2bsxbl" path="res://Shaders/ShadowSpellCaster.tres" id="2_qfxht"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://dihqfvtcco3kk" path="res://Assets/Audio/SFX/Player/431174__highpixel__fireball-explosion.wav" id="18_my64i"]
 [ext_resource type="AudioStream" uid="uid://cjsi6drqkyx75" path="res://Assets/Audio/SFX/Player/524305__bertsz__wet-spell-shoot.wav" id="19_awri1"]
 [ext_resource type="AudioStream" uid="uid://lgbepjohpg0u" path="res://Assets/Audio/SFX/Player/683928__geoff-bremner-audio__whoosh-4.wav" id="20_egjua"]
+[ext_resource type="PackedScene" uid="uid://bkglkj88cjvjq" path="res://UI/In_Game_UI/hp_bar.tscn" id="21_t4yvw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1t2sk"]
 radius = 6.66667
@@ -318,16 +319,6 @@ libraries = {
 "": SubResource("AnimationLibrary_4ur2e")
 }
 
-[node name="HealthLabel" type="Label" parent="."]
-offset_left = -7.14286
-offset_top = -20.8571
-offset_right = 44.8571
-offset_bottom = 2.14291
-scale = Vector2(0.29, 0.29)
-text = "Health"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="StatusEffectTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -369,6 +360,9 @@ volume_db = 5.0
 max_distance = 1500.0
 attenuation = 2.5
 max_polyphony = 3
+
+[node name="HPbar" parent="." instance=ExtResource("21_t4yvw")]
+position = Vector2(-0.285714, -17.1429)
 
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Wander/SoundTimer" to="StateMachine/Wander" method="_on_sound_timer_timeout"]

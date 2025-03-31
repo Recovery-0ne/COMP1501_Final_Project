@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://3t047felsbuh" path="res://Assets/Audio/SFX/Slime/751341__qubodup__slime-jump-1.wav" id="19_c0dom"]
 [ext_resource type="AudioStream" uid="uid://bjg1uy4kvvnwu" path="res://Assets/Audio/SFX/Slime/353250__zuzek06__slimejump.wav" id="21_wkjnn"]
 [ext_resource type="AudioStream" uid="uid://dvpe7klm6aqbp" path="res://Assets/Audio/SFX/Slime/751339__qubodup__slime-attack-2.wav" id="22_ro88k"]
+[ext_resource type="PackedScene" uid="uid://bkglkj88cjvjq" path="res://UI/In_Game_UI/hp_bar.tscn" id="22_smodd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyfyn"]
 size = Vector2(25.7143, 14.8571)
@@ -390,9 +391,6 @@ _data = {
 "jump_start_up": SubResource("Animation_lfbqd")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_fpygx"]
-font_size = 28
-
 [node name="Slime" type="CharacterBody2D"]
 z_index = -8
 scale = Vector2(2, 2)
@@ -477,17 +475,6 @@ libraries = {
 "": SubResource("AnimationLibrary_micaa")
 }
 
-[node name="HealthLabel" type="Label" parent="."]
-offset_left = -14.0
-offset_top = -24.5
-offset_right = 86.0
-offset_bottom = 19.5
-scale = Vector2(0.29, 0.29)
-text = "Health"
-label_settings = SubResource("LabelSettings_fpygx")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="StatusEffectTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -525,6 +512,9 @@ attenuation = 2.5
 stream = ExtResource("22_ro88k")
 max_distance = 1200.0
 attenuation = 4.53653
+
+[node name="HPbar" parent="." instance=ExtResource("22_smodd")]
+position = Vector2(0, -14.5)
 
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Wander/SoundTimer" to="StateMachine/Wander" method="_on_sound_timer_timeout"]

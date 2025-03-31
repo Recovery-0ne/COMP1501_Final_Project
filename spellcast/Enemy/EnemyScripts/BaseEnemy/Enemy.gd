@@ -61,7 +61,7 @@ func respawn():
 	position = start_pos
 	$StateMachine._initialize()
 	update_health_display()
-	$HealthLabel.visible = true
+	$HPbar.visible = true
 
 func _is_facing_wall():
 	return wall_check.is_colliding()
