@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://drhydcmoetxlj"]
+[gd_scene load_steps=28 format=3 uid="uid://drhydcmoetxlj"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton.gd" id="1_0cshr"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_wander.gd" id="2_5do2f"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://bobnpqxiq08p1" path="res://Assets/Audio/SFX/Skeleton/579802__hudbud321__bones-breaking.mp3" id="15_mfrbk"]
 [ext_resource type="AudioStream" uid="uid://b0cd3bu1yjk7j" path="res://Assets/Audio/SFX/Skeleton/737238__sadiquecat__gritty-woosh.wav" id="16_b5mic"]
 [ext_resource type="AudioStream" uid="uid://cmnjnwy57qk36" path="res://Assets/Audio/SFX/Skeleton/369958__mischy__raschel_kurz_2.wav" id="17_8mxr7"]
+[ext_resource type="PackedScene" uid="uid://bkglkj88cjvjq" path="res://UI/In_Game_UI/hp_bar.tscn" id="18_6gc8j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1t2sk"]
 radius = 6.66667
@@ -270,16 +271,6 @@ libraries = {
 "": SubResource("AnimationLibrary_4ur2e")
 }
 
-[node name="HealthLabel" type="Label" parent="."]
-offset_left = -7.14286
-offset_top = -20.8571
-offset_right = 44.8571
-offset_bottom = 2.14291
-scale = Vector2(0.29, 0.29)
-text = "Health"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="StatusEffectTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -309,6 +300,9 @@ stream = ExtResource("17_8mxr7")
 volume_db = 4.0
 max_distance = 1500.0
 attenuation = 2.5
+
+[node name="HPbar" parent="." instance=ExtResource("18_6gc8j")]
+position = Vector2(0, -18.5714)
 
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Wander/SoundTimer" to="StateMachine/Wander" method="_on_sound_timer_timeout"]

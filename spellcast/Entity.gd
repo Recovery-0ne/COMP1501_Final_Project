@@ -47,7 +47,7 @@ func decrease_health(_damage: int):
 	if health == 0:
 		end_frozen_effect()
 		$StateMachine.change_state("dead")
-		$HealthLabel.visible = false
+		$HPbar.visible = false
 		dead = true
 
 func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
@@ -61,7 +61,7 @@ func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
 func flinch():pass #Define this for each entity in their own script
 		
 func update_health_display():
-	$HealthLabel.text = str(health)
+	$HPbar.update_healthbar((float(health) / float(max_health)) * 100)
 		
 func apply_effect(function_name:String):
 	call(function_name)

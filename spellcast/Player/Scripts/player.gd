@@ -74,7 +74,7 @@ func respawn_player():
 	$StateMachine._initialize()
 	health = max_health
 	update_health_display()
-	$HealthLabel.visible = true
+	$HPbar.visible = true
 	respawn_enemies()
 		
 func cast_fireball():
