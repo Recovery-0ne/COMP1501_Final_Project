@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://udvv0q57vsxm"]
+[gd_scene load_steps=52 format=3 uid="uid://udvv0q57vsxm"]
 
 [ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_uytxk"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerStateMachine.gd" id="2_jpeyr"]
@@ -30,6 +30,7 @@
 [ext_resource type="AudioStream" uid="uid://cjsi6drqkyx75" path="res://Assets/Audio/SFX/Player/524305__bertsz__wet-spell-shoot.wav" id="24_65d5b"]
 [ext_resource type="AudioStream" uid="uid://bwdrj8cvxdy1f" path="res://Assets/Audio/SFX/Player/458867__raclure__damage-sound-effect.mp3" id="25_4do21"]
 [ext_resource type="AudioStream" uid="uid://bd5xhx6mtofxm" path="res://Assets/Audio/SFX/Player/159769__timgormly__thunder_os_1.wav" id="29_g2p2a"]
+[ext_resource type="PackedScene" uid="uid://bkglkj88cjvjq" path="res://UI/In_Game_UI/hp_bar.tscn" id="32_t17xa"]
 [ext_resource type="Texture2D" uid="uid://mxabjsvr2h0h" path="res://Assets/Sprites/adventurer-v1.5-Sheet.png" id="56_sfjbp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tfxn8"]
@@ -1166,15 +1167,6 @@ position = Vector2(-0.5, -8.09)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_q64bo")
 
-[node name="HealthLabel" type="Label" parent="."]
-offset_left = -27.0
-offset_top = -79.0
-offset_right = 25.0
-offset_bottom = -56.0
-text = "Health"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -17)
 scale = Vector2(3, 3)
@@ -1274,6 +1266,9 @@ stream = ExtResource("24_65d5b")
 [node name="Lightning" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("29_g2p2a")
 volume_db = 5.0
+
+[node name="HPbar" parent="." instance=ExtResource("32_t17xa")]
+position = Vector2(-1, -63)
 
 [connection signal="timeout" from="StateMachine/Move/CoyoteTimer" to="StateMachine/Move" method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Move/StepTimer" to="StateMachine/Move" method="_on_step_timer_timeout"]
