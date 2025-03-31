@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dte2li7iee18p"]
+[gd_scene load_steps=9 format=3 uid="uid://dte2li7iee18p"]
 
 [ext_resource type="PackedScene" uid="uid://c41h162r5tvjh" path="res://UI/AbilityCooldowns/Fireball_Cooldown.tscn" id="1_ht01g"]
 [ext_resource type="Script" path="res://UI/In_Game_UI/In_Game_UI.gd" id="1_ru75n"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bilgp2fofscl4" path="res://UI/AbilityCooldowns/Dash_Cooldown.tscn" id="4_imfig"]
 [ext_resource type="PackedScene" uid="uid://cihayvgfownob" path="res://UI/AbilityCooldowns/Ability_Icon.tscn" id="5_tf2i2"]
 [ext_resource type="PackedScene" uid="uid://dvcwsvajpidw0" path="res://UI/AbilityCooldowns/Melee_Combo_Cooldown.tscn" id="7_78d7u"]
+[ext_resource type="PackedScene" uid="uid://dwl7r8mseig7s" path="res://UI/AbilityCooldowns/Medical_Malarkey_Cooldown.tscn" id="8_af0kq"]
 
 [node name="InGameUi" type="CanvasLayer" groups=["In_Game_UI"]]
 process_mode = 3
@@ -64,3 +65,5 @@ offset_bottom = 40.0
 [node name="LightningStrikeCooldown" parent="Ability_Icon_Templates" instance=ExtResource("3_rp55y")]
 
 [node name="MeleeComboCooldown" parent="Ability_Icon_Templates" instance=ExtResource("7_78d7u")]
+
+[node name="MedicalMalarkeyCooldown" parent="Ability_Icon_Templates" instance=ExtResource("8_af0kq")]
