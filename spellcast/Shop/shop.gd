@@ -10,7 +10,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	$ColorRect.visible = true
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	player_can_access_shop == false
+	player_can_access_shop = false
 	$ColorRect.visible = false
 	
 func _process(delta: float) -> void:

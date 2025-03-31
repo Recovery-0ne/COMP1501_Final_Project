@@ -49,8 +49,19 @@ func _ready():
 		damage = default_damage
 		max_health *= boss_health_multiplier
 		health = max_health
+		scale *= 1.3
 		sprite.material = variant_material
 	update_health_display()
+
+func respawn():
+	remove_all_status_conditions()
+	enable_functions_for_respawn()
+	dead = false
+	health = max_health
+	position = start_pos
+	$StateMachine._initialize()
+	update_health_display()
+	$HPbar.visible = true
 
 func _is_facing_wall():
 	return wall_check.is_colliding()
@@ -108,3 +119,9 @@ func disable_functions_for_dead():
 	wall_check.enabled = false
 	set_collision_layer_value(2, false)
 	
+func enable_functions_for_respawn():
+	vision.process_mode = Node.PROCESS_MODE_INHERIT
+	attack_check.enabled = true
+	floor_check.enabled = true
+	wall_check.enabled = true
+	set_collision_layer_value(2, true)

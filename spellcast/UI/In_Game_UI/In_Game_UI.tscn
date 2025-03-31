@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dte2li7iee18p"]
+[gd_scene load_steps=9 format=3 uid="uid://dte2li7iee18p"]
 
 [ext_resource type="PackedScene" uid="uid://c41h162r5tvjh" path="res://UI/AbilityCooldowns/Fireball_Cooldown.tscn" id="1_ht01g"]
 [ext_resource type="Script" path="res://UI/In_Game_UI/In_Game_UI.gd" id="1_ru75n"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dp8qrpiwj3f0s" path="res://UI/AbilityCooldowns/Lightning_Strike_Cooldown.tscn" id="3_rp55y"]
 [ext_resource type="PackedScene" uid="uid://bilgp2fofscl4" path="res://UI/AbilityCooldowns/Dash_Cooldown.tscn" id="4_imfig"]
 [ext_resource type="PackedScene" uid="uid://cihayvgfownob" path="res://UI/AbilityCooldowns/Ability_Icon.tscn" id="5_tf2i2"]
+[ext_resource type="PackedScene" uid="uid://dvcwsvajpidw0" path="res://UI/AbilityCooldowns/Melee_Combo_Cooldown.tscn" id="7_78d7u"]
+[ext_resource type="PackedScene" uid="uid://dwl7r8mseig7s" path="res://UI/AbilityCooldowns/Medical_Malarkey_Cooldown.tscn" id="8_af0kq"]
 
 [sub_resource type="FontFile" id="FontFile_06d8f"]
 cache/0/16/0/ascent = 0.0
@@ -223,6 +225,10 @@ offset_bottom = 40.0
 [node name="FireballCooldown" parent="Ability_Icon_Templates" instance=ExtResource("1_ht01g")]
 
 [node name="LightningStrikeCooldown" parent="Ability_Icon_Templates" instance=ExtResource("3_rp55y")]
+
+[node name="MeleeComboCooldown" parent="Ability_Icon_Templates" instance=ExtResource("7_78d7u")]
+
+[node name="MedicalMalarkeyCooldown" parent="Ability_Icon_Templates" instance=ExtResource("8_af0kq")]
 
 [node name="PlayerMoney" type="RichTextLabel" parent="."]
 offset_left = 24.0

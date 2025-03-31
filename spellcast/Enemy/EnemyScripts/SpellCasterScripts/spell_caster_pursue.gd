@@ -5,6 +5,7 @@ func _enter():
 	super()
 	enemy.default_speed *= enemy.pursuit_speed_multiplier
 	enemy.speed = enemy.default_speed
+	$SoundTimer.start()
 	
 func _update(delta: float):
 	super(delta)
@@ -27,3 +28,8 @@ func _exit():
 	enemy.default_speed /= enemy.pursuit_speed_multiplier
 	enemy.speed = enemy.default_speed
 	enemy.stop()
+	$SoundTimer.stop()
+
+func _on_sound_timer_timeout() -> void:
+	enemy.sound_manager.play("walk")
+	$SoundTimer.start()

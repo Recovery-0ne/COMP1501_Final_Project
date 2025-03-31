@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bhipjfcr34gqh"]
 
 [ext_resource type="Script" path="res://UI/AbilityCooldowns/ability_cooldown_template.gd" id="1_wdsm7"]
-[ext_resource type="Texture2D" uid="uid://dde81665m5gfe" path="res://Assets/Blue Effect Bullet Impact Explosion 32x32.png" id="2_jfy42"]
+[ext_resource type="Texture2D" uid="uid://dde81665m5gfe" path="res://Assets/Sprites/Blue Effect Bullet Impact Explosion 32x32.png" id="2_jfy42"]
 
 [node name="FrostCooldown" type="Node2D"]
 script = ExtResource("1_wdsm7")

@@ -20,3 +20,7 @@ func flip_facing_direction():
 	sprite.offset = sprite_offset[move_dir]
 	attack_check.position.x = abs(attack_check.position.x) * move_dir
 	flip_checks()
+	
+func damage_target():
+	super()
+	sound_manager.play("attack")

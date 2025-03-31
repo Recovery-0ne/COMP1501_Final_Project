@@ -1,7 +1,11 @@
-[gd_scene load_steps=17 format=4 uid="uid://c3ulabo7m34cy"]
+[gd_scene load_steps=18 format=4 uid="uid://c3ulabo7m34cy"]
 
-[ext_resource type="Texture2D" uid="uid://jflf4m5wg58j" path="res://Assets/TX Village Props.png" id="1_6roy3"]
+[ext_resource type="Texture2D" uid="uid://jflf4m5wg58j" path="res://Assets/Sprites/TX Village Props.png" id="1_6roy3"]
 [ext_resource type="Script" path="res://Shop/shop.gd" id="1_bt2m2"]
+[ext_resource type="PackedScene" uid="uid://cmbot0i2xfte3" path="res://Shop/NPC.tscn" id="2_peljg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_837o7"]
+size = Vector2(506.5, 300.5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r6mxh"]
 texture = ExtResource("1_6roy3")
@@ -7889,9 +7893,6 @@ texture = ExtResource("1_6roy3")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0kch6")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_837o7"]
-size = Vector2(506.5, 300.5)
-
 [sub_resource type="LabelSettings" id="LabelSettings_mb70i"]
 font_size = 32
 outline_size = 10
@@ -7902,6 +7903,17 @@ process_mode = 3
 z_index = -9
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_bt2m2")
+
+[node name="Area2D" type="Area2D" parent="."]
+process_mode = 3
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(43, -132)
+shape = SubResource("RectangleShape2D_837o7")
+
+[node name="Npc" parent="." instance=ExtResource("2_peljg")]
+position = Vector2(192.858, -154.038)
 
 [node name="BaseLayer" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)
@@ -7932,14 +7944,6 @@ tile_set = SubResource("TileSet_2x5py")
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAAEAP7/AAASAAIAAAAEAP//AAASAAMAAAAFAP7/AAATAAIAAAAFAP//AAATAAMAAAAAAP//AAAUABcAAAABAP//AAAVABcAAAA=")
 tile_set = SubResource("TileSet_b566s")
-
-[node name="Area2D" type="Area2D" parent="."]
-process_mode = 3
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(43, -132)
-shape = SubResource("RectangleShape2D_837o7")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

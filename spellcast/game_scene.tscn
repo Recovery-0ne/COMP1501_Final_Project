@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dte2li7iee18p" path="res://UI/In_Game_UI/In_Game_UI.tscn" id="1_8glpc"]
 [ext_resource type="PackedScene" uid="uid://cd4doq0o7358i" path="res://Areas/area_1.tscn" id="1_c3cfy"]
+[ext_resource type="PackedScene" uid="uid://bc1jmtrvhk2wb" path="res://Audio/BGM.tscn" id="1_ckhst"]
 [ext_resource type="PackedScene" uid="uid://bnaf8w5hco26x" path="res://UI/Shop_UI/Shop_UI.tscn" id="2_klu4k"]
 [ext_resource type="PackedScene" uid="uid://udvv0q57vsxm" path="res://Player/Player.tscn" id="2_rfu6c"]
 [ext_resource type="PackedScene" uid="uid://cquu65jwlfn3h" path="res://Enemy/EnemyScenes/Slime.tscn" id="3_5oc71"]
@@ -15,6 +16,8 @@
 font_size = 156
 
 [node name="GameScene" type="Node"]
+
+[node name="Bgm" parent="." instance=ExtResource("1_ckhst")]
 
 [node name="InGameUi" parent="." instance=ExtResource("1_8glpc")]
 layer = 10

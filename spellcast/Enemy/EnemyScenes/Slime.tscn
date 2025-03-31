@@ -1,7 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://cquu65jwlfn3h"]
+[gd_scene load_steps=33 format=3 uid="uid://cquu65jwlfn3h"]
 
-[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton.gd" id="1_a601n"]
-[ext_resource type="Material" uid="uid://b73flaqv2wyd6" path="res://Shaders/BossSlime.tres" id="2_hybc2"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SlimeScripts/slime.gd" id="1_jd7hp"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="3_k8l10"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_idle.gd" id="4_paicu"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SlimeScripts/slime_wander.gd" id="5_bpi8m"]
@@ -11,13 +10,18 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="9_d6qrr"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_look_around.gd" id="10_dlc2c"]
 [ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/Detection/detector.tscn" id="11_1mr2k"]
-[ext_resource type="Texture2D" uid="uid://c3r8pwm1b2hrm" path="res://Assets/Slime Enemy/Idle/Sprite Sheet - Green Idle.png" id="12_wkhyc"]
+[ext_resource type="Texture2D" uid="uid://c3r8pwm1b2hrm" path="res://Assets/Sprites/Slime Enemy/Idle/Sprite Sheet - Green Idle.png" id="12_wkhyc"]
 [ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="13_r1d47"]
-[ext_resource type="Texture2D" uid="uid://6nwapxu88evc" path="res://Assets/Slime Enemy/Jump/Sprite Sheet - Green Jump to Fall.png" id="13_toj2b"]
-[ext_resource type="Texture2D" uid="uid://shwgcvcw603d" path="res://Assets/Slime Enemy/Hurt/Sprite Sheet - Green Hurt.png" id="14_5nt1n"]
-[ext_resource type="Texture2D" uid="uid://cjgq5t70rm21n" path="res://Assets/Slime Enemy/Death/Sprite Sheet - Green Death.png" id="15_s6gqn"]
-[ext_resource type="Texture2D" uid="uid://cff6m24en6h2h" path="res://Assets/Slime Enemy/Jump/Sprite Sheet - Green Jump Start-up.png" id="16_gbbx4"]
-[ext_resource type="Texture2D" uid="uid://br8ww7lxxl8ia" path="res://Assets/Slime Enemy/Jump/Sprite Sheet - Green Jump Land.png" id="17_y0vir"]
+[ext_resource type="Texture2D" uid="uid://6nwapxu88evc" path="res://Assets/Sprites/Slime Enemy/Jump/Sprite Sheet - Green Jump to Fall.png" id="13_toj2b"]
+[ext_resource type="Texture2D" uid="uid://shwgcvcw603d" path="res://Assets/Sprites/Slime Enemy/Hurt/Sprite Sheet - Green Hurt.png" id="14_5nt1n"]
+[ext_resource type="Texture2D" uid="uid://cjgq5t70rm21n" path="res://Assets/Sprites/Slime Enemy/Death/Sprite Sheet - Green Death.png" id="15_s6gqn"]
+[ext_resource type="Texture2D" uid="uid://cff6m24en6h2h" path="res://Assets/Sprites/Slime Enemy/Jump/Sprite Sheet - Green Jump Start-up.png" id="16_gbbx4"]
+[ext_resource type="Texture2D" uid="uid://br8ww7lxxl8ia" path="res://Assets/Sprites/Slime Enemy/Jump/Sprite Sheet - Green Jump Land.png" id="17_y0vir"]
+[ext_resource type="Script" path="res://Audio/sound_manager.gd" id="19_30tq5"]
+[ext_resource type="AudioStream" uid="uid://3t047felsbuh" path="res://Assets/Audio/SFX/Slime/751341__qubodup__slime-jump-1.wav" id="19_c0dom"]
+[ext_resource type="AudioStream" uid="uid://bjg1uy4kvvnwu" path="res://Assets/Audio/SFX/Slime/353250__zuzek06__slimejump.wav" id="21_wkjnn"]
+[ext_resource type="AudioStream" uid="uid://dvpe7klm6aqbp" path="res://Assets/Audio/SFX/Slime/751339__qubodup__slime-attack-2.wav" id="22_ro88k"]
+[ext_resource type="PackedScene" uid="uid://bkglkj88cjvjq" path="res://UI/In_Game_UI/hp_bar.tscn" id="22_smodd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyfyn"]
 size = Vector2(25.7143, 14.8571)
@@ -387,22 +391,16 @@ _data = {
 "jump_start_up": SubResource("Animation_lfbqd")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_fpygx"]
-font_size = 28
-
 [node name="Slime" type="CharacterBody2D"]
 z_index = -8
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 128
-script = ExtResource("1_a601n")
-variant_material = ExtResource("2_hybc2")
-pursuit_speed_multiplier = 3
+script = ExtResource("1_jd7hp")
 max_health = 70
 default_damage = 10
-default_speed = 25
-default_jump_velocity = 500
-burn_effect_duration = [5, 10]
+default_speed = 55
+default_jump_velocity = 600
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
 script = ExtResource("3_k8l10")
@@ -418,6 +416,10 @@ autostart = true
 
 [node name="Wander" type="Node" parent="StateMachine"]
 script = ExtResource("5_bpi8m")
+
+[node name="SoundTimer" type="Timer" parent="StateMachine/Wander"]
+wait_time = 1.5
+one_shot = true
 
 [node name="Pursue" type="Node" parent="StateMachine"]
 script = ExtResource("6_0skxj")
@@ -473,22 +475,47 @@ libraries = {
 "": SubResource("AnimationLibrary_micaa")
 }
 
-[node name="HealthLabel" type="Label" parent="."]
-offset_left = -14.0
-offset_top = -24.5
-offset_right = 86.0
-offset_bottom = 19.5
-scale = Vector2(0.29, 0.29)
-text = "Health"
-label_settings = SubResource("LabelSettings_fpygx")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="StatusEffectTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="LightningStrike" parent="." instance=ExtResource("13_r1d47")]
 position = Vector2(0, -20.81)
 
+[node name="Sounds" type="Node2D" parent="."]
+script = ExtResource("19_30tq5")
+sounds = {
+"hurt": NodePath("Hurt"),
+"jump": NodePath("Jump"),
+"land": NodePath("Land"),
+"walk": NodePath("Walk")
+}
+
+[node name="Walk" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("19_c0dom")
+volume_db = -5.0
+max_distance = 1500.0
+attenuation = 2.5
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("21_wkjnn")
+volume_db = 2.0
+max_distance = 1500.0
+attenuation = 2.5
+
+[node name="Land" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("21_wkjnn")
+volume_db = 4.0
+max_distance = 1500.0
+attenuation = 2.5
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("22_ro88k")
+max_distance = 1200.0
+attenuation = 4.53653
+
+[node name="HPbar" parent="." instance=ExtResource("22_smodd")]
+position = Vector2(0, -14.5)
+
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Wander/SoundTimer" to="StateMachine/Wander" method="_on_sound_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Look_Around/Timer" to="StateMachine/Look_Around" method="_on_timer_timeout"]
