@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dte2li7iee18p"]
+[gd_scene load_steps=10 format=3 uid="uid://dte2li7iee18p"]
 
 [ext_resource type="PackedScene" uid="uid://c41h162r5tvjh" path="res://UI/AbilityCooldowns/Fireball_Cooldown.tscn" id="1_ht01g"]
 [ext_resource type="Script" path="res://UI/In_Game_UI/In_Game_UI.gd" id="1_ru75n"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://dwl7r8mseig7s" path="res://UI/AbilityCooldowns/Medical_Malarkey_Cooldown.tscn" id="8_af0kq"]
 
 [sub_resource type="FontFile" id="FontFile_06d8f"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0

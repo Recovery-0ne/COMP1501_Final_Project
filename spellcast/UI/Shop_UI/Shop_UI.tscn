@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://dnuc3uqmd1srt" path="res://UI/Shop_UI/ability_description_popup.tscn" id="2_5k4q7"]
 
 [sub_resource type="FontFile" id="FontFile_8ypnd"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
