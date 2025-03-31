@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=3 uid="uid://ct676tvc36je0"]
+
+[ext_resource type="PackedScene" uid="uid://dte2li7iee18p" path="res://UI/In_Game_UI/In_Game_UI.tscn" id="1_8glpc"]
+[ext_resource type="PackedScene" uid="uid://cd4doq0o7358i" path="res://Areas/area_1.tscn" id="1_c3cfy"]
+[ext_resource type="PackedScene" uid="uid://bc1jmtrvhk2wb" path="res://Audio/BGM.tscn" id="1_ckhst"]
+[ext_resource type="PackedScene" uid="uid://bnaf8w5hco26x" path="res://UI/Shop_UI/Shop_UI.tscn" id="2_klu4k"]
+[ext_resource type="PackedScene" uid="uid://udvv0q57vsxm" path="res://Player/Player.tscn" id="2_rfu6c"]
+[ext_resource type="PackedScene" uid="uid://cquu65jwlfn3h" path="res://Enemy/EnemyScenes/Slime.tscn" id="3_5oc71"]
+[ext_resource type="PackedScene" uid="uid://c3ulabo7m34cy" path="res://Shop/shop.tscn" id="4_k6ms1"]
+[ext_resource type="PackedScene" uid="uid://pdne3m6kthea" path="res://Enemy/EnemyScenes/SpellCaster.tscn" id="5_gcrg4"]
+[ext_resource type="PackedScene" uid="uid://ls572kqc41a2" path="res://Enemy/EnemyScenes/SkullWolf.tscn" id="6_rb1oy"]
+[ext_resource type="PackedScene" uid="uid://drhydcmoetxlj" path="res://Enemy/EnemyScenes/Skeleton.tscn" id="7_b8jpe"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bpxtw"]
+font_size = 156
+
+[node name="GameScene" type="Node"]
+
+[node name="Bgm" parent="." instance=ExtResource("1_ckhst")]
+
+[node name="InGameUi" parent="." instance=ExtResource("1_8glpc")]
+layer = 10
+
+[node name="ShopUi" parent="." instance=ExtResource("2_klu4k")]
+
+[node name="AreaTemplate" parent="." instance=ExtResource("1_c3cfy")]
+
+[node name="Shop" parent="." instance=ExtResource("4_k6ms1")]
+position = Vector2(-982, -528.075)
+
+[node name="Shop2" parent="." instance=ExtResource("4_k6ms1")]
+position = Vector2(6149.17, 432.26)
+
+[node name="Shop3" parent="." instance=ExtResource("4_k6ms1")]
+position = Vector2(2818, 146)
+
+[node name="Player" parent="." instance=ExtResource("2_rfu6c")]
+position = Vector2(-5701, -144)
+
+[node name="Slime" parent="." instance=ExtResource("3_5oc71")]
+position = Vector2(922, -44)
+
+[node name="SpellCaster" parent="." instance=ExtResource("5_gcrg4")]
+position = Vector2(4099, 575)
+is_boss = true
+flip_on_start = true
+
+[node name="SkullWolf" parent="." instance=ExtResource("6_rb1oy")]
+position = Vector2(3307, 592)
+
+[node name="Slime3" parent="." instance=ExtResource("3_5oc71")]
+position = Vector2(4973, 541)
+
+[node name="Skeleton2" parent="." instance=ExtResource("7_b8jpe")]
+position = Vector2(7674, 83)
+is_boss = true
+
+[node name="Slime4" parent="." instance=ExtResource("3_5oc71")]
+position = Vector2(-4100, -39)
+
+[node name="Slime5" parent="." instance=ExtResource("3_5oc71")]
+position = Vector2(-3544, -42)
+flip_on_start = true
+
+[node name="SkullWolf2" parent="." instance=ExtResource("6_rb1oy")]
+position = Vector2(-2735, -620)
+
+[node name="Skeleton3" parent="." instance=ExtResource("7_b8jpe")]
+position = Vector2(-1904, -635)
+
+[node name="SkullWolf3" parent="." instance=ExtResource("6_rb1oy")]
+position = Vector2(-5, -39)
+is_boss = true
+
+[node name="SpellCaster2" parent="." instance=ExtResource("5_gcrg4")]
+position = Vector2(1845, -53)
+
+[node name="Slime2" parent="." instance=ExtResource("3_5oc71")]
+position = Vector2(-4687, -515)
+
+[node name="WinLabel" type="Label" parent="."]
+offset_left = 13852.0
+offset_top = -658.0
+offset_right = 14512.0
+offset_bottom = -445.0
+text = "You Win!"
+label_settings = SubResource("LabelSettings_bpxtw")
+horizontal_alignment = 1
+vertical_alignment = 1

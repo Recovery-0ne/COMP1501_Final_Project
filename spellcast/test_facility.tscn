@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://pwhcfr60yjc2"]
+[gd_scene load_steps=5 format=3 uid="uid://pwhcfr60yjc2"]
 
 [ext_resource type="PackedScene" uid="uid://udvv0q57vsxm" path="res://Player/Player.tscn" id="1_v26ed"]
+[ext_resource type="PackedScene" uid="uid://pdne3m6kthea" path="res://Enemy/EnemyScenes/SpellCaster.tscn" id="2_uk3dx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sw80l"]
 
@@ -23,7 +24,7 @@ scale = Vector2(20, 20)
 mesh = SubResource("QuadMesh_afiq8")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(444, 200)
+position = Vector2(-828, 207)
 scale = Vector2(5.3, 5.375)
 collision_layer = 128
 collision_mask = 0
@@ -37,7 +38,7 @@ scale = Vector2(20, 20)
 mesh = SubResource("QuadMesh_afiq8")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(87.9999, 205)
+position = Vector2(314, 198)
 scale = Vector2(5.3, 5.375)
 collision_layer = 128
 collision_mask = 0
@@ -51,4 +52,6 @@ scale = Vector2(20, 20)
 mesh = SubResource("QuadMesh_afiq8")
 
 [node name="Player" parent="." instance=ExtResource("1_v26ed")]
-position = Vector2(-502, 189)
+position = Vector2(-433, 198)
+
+[node name="SpellCaster" parent="." instance=ExtResource("2_uk3dx")]

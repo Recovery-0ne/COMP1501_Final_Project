@@ -3,6 +3,8 @@ class_name Entity
 
 var states: Dictionary
 
+@onready var sound_manager := $Sounds
+
 @onready var anim:= $Sprite2D/AnimationPlayer
 @onready var sprite:= $Sprite2D
 @onready var attack_check:= $AttackCheck
@@ -18,6 +20,8 @@ var states: Dictionary
 @export var default_jump_velocity:= 1000
 @onready var jump_velocity:= default_jump_velocity
 
+var facing_dir:int
+
 var has_status_effect:= false
 var status_effect_duration:float #Depending on the effect, this could be a max number of occurances or a time
 
@@ -29,6 +33,9 @@ var burning = false
 var frozen = false
 
 var dead:= false
+
+func respawn_enemies():
+	get_tree().call_group("Enemies", "respawn")
 	
 func apply_gravity():
 	if not is_on_floor():
@@ -40,18 +47,21 @@ func decrease_health(_damage: int):
 	if health == 0:
 		end_frozen_effect()
 		$StateMachine.change_state("dead")
-		$HealthLabel.visible = false
+		$HPbar.visible = false
 		dead = true
 
 func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
-	if frozen and _apply_frozen_multiplier: _damage = _damage/2
+	sound_manager.play("hurt")
+	if frozen and _apply_frozen_multiplier: 
+		_damage = _damage/2
+	if _flinch: 
+		flinch()
 	decrease_health(_damage)
-	if _flinch: flinch()
 	
 func flinch():pass #Define this for each entity in their own script
 		
 func update_health_display():
-	$HealthLabel.text = str(health)
+	$HPbar.update_healthbar((float(health) / float(max_health)) * 100)
 		
 func apply_effect(function_name:String):
 	call(function_name)
@@ -71,9 +81,12 @@ func take_burn_damage():
 		decrease_health(1)
 		$StatusEffectTimer.start()
 	else:
-		has_status_effect = false
-		burning = false
-		$StatusEffectTimer.disconnect("timeout", take_burn_damage)
+		end_burning_effect()
+		
+func end_burning_effect():
+	has_status_effect = false
+	burning = false
+	$StatusEffectTimer.disconnect("timeout", take_burn_damage)
 			
 func apply_freezing():
 	if has_status_effect or dead: return
@@ -98,8 +111,7 @@ func lightning_strike():
 	if dead: return
 	$LightningStrike.enable()
 	
-func is_lightning_strike_cooldown_done():
-	return $LightningStrikeCooldownTimer.is_stopped()
-	
-func start_lightning_strike_cooldown():
-	$LightningStrikeCooldownTimer.start()
+func remove_all_status_conditions():
+	if not has_status_effect: return
+	if burning: end_burning_effect()
+	elif frozen: end_frozen_effect()

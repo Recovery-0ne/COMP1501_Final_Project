@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnaf8w5hco26x"]
+
+[ext_resource type="Script" path="res://UI/Shop_UI/shop_ui.gd" id="1_qqm55"]
+
+[node name="ShopUi" type="CanvasLayer" groups=["Shop_UI"]]
+process_mode = 3
+script = ExtResource("1_qqm55")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.239216, 0.239216, 0.239216, 0.631373)
+
+[node name="Ability_Selectors" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 362.0
+offset_top = 24.0
+offset_right = 362.0
+offset_bottom = 24.0
+
+[node name="OptionButton1" type="OptionButton" parent="Ability_Selectors"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 159.0
+offset_bottom = 42.0
+
+[node name="OptionButton2" type="OptionButton" parent="Ability_Selectors"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 48.0
+offset_right = 159.0
+offset_bottom = 81.0
+
+[node name="OptionButton3" type="OptionButton" parent="Ability_Selectors"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 87.0
+offset_right = 159.0
+offset_bottom = 120.0
+
+[node name="OptionButton4" type="OptionButton" parent="Ability_Selectors"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 126.0
+offset_right = 159.0
+offset_bottom = 159.0
+
+[node name="Ability_Unlocks" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 34.0
+offset_right = 30.0
+offset_bottom = 34.0
+
+[connection signal="item_selected" from="Ability_Selectors/OptionButton1" to="." method="_ability_changed" binds= [0]]
+[connection signal="item_selected" from="Ability_Selectors/OptionButton2" to="." method="_ability_changed" binds= [1]]
+[connection signal="item_selected" from="Ability_Selectors/OptionButton3" to="." method="_ability_changed" binds= [2]]
+[connection signal="item_selected" from="Ability_Selectors/OptionButton4" to="." method="_ability_changed" binds= [3]]

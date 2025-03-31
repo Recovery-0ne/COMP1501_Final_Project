@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://j4tmoiklso7j"]
 
-[ext_resource type="Texture2D" uid="uid://cjqjq755yc2y2" path="res://Assets/FireBall/Sheets/ShotLoop-Sheet.png" id="1_1xfwh"]
+[ext_resource type="Texture2D" uid="uid://cjqjq755yc2y2" path="res://Assets/Sprites/FireBall/Sheets/ShotLoop-Sheet.png" id="1_1xfwh"]
 [ext_resource type="Script" path="res://Spells/projectile_spell.gd" id="1_d78sk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l563i"]

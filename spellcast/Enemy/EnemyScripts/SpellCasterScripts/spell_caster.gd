@@ -8,13 +8,16 @@ func set_move():
 	
 func stop():
 	velocity.x = 0
+	
+func change_facing_direction_to(dir:int):
+	facing_dir = dir
+	sprite.flip_h = dir < 0
+	sprite.offset = sprite_offset[dir]
+	attack_check.position.x = abs(attack_check.position.x) * dir
 
-func change_facing_direction():
-	if velocity.x != 0:
-		facing_dir = move_dir
-		sprite.flip_h = move_dir < 0
-		sprite.offset = sprite_offset[move_dir]
-		attack_check.position.x = abs(attack_check.position.x) * move_dir
+func change_facing_direction_to_player():
+	if player.position.x - position.x == 0: return
+	change_facing_direction_to((player.position.x - position.x)/abs(player.position.x - position.x))
 
 func flip_facing_direction():
 	move_dir *= -1

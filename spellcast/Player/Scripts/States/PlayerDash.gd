@@ -1,13 +1,14 @@
 extends PlayerState
 
 func _enter():
-	animation_name = "dash"
 	super()
-	player.velocity.x = 1500*player.direction
+	player.velocity.x = 1500 * player.facing_dir
+	player.sound_manager.play("dash")
+	player.start_dash_cooldown_timer()
 
 func _update(delta: float):
 	super(delta)
-	if player.is_on_wall() and player.wall_check.is_colliding():
+	if player.wall_check.is_colliding():
 		state_machine.change_state("wall_climb")
 
 func _physics_update(delta: float):

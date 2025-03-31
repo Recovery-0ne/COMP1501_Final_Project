@@ -13,4 +13,4 @@ func _exit():
 	super()
 	
 func _animation_finished():
-	state_machine.change_state("pursue")
+	state_machine.change_state("look_around")

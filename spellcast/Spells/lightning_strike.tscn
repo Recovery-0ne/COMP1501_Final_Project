@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlybf05b0r4ov"]
 
 [ext_resource type="Script" path="res://Spells/lightning_strike.gd" id="1_dst3d"]
-[ext_resource type="Texture2D" uid="uid://dm1rj2fawohkm" path="res://Assets/Thunderstrike wo blur.png" id="2_max77"]
+[ext_resource type="Texture2D" uid="uid://dm1rj2fawohkm" path="res://Assets/Sprites/Thunderstrike wo blur.png" id="2_max77"]
 
 [sub_resource type="Animation" id="Animation_ose1h"]
 length = 0.001
