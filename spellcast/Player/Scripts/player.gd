@@ -7,6 +7,8 @@ var wall_check
 var jump_count = 0
 var max_jumps = 2
 
+var player_money = 0
+
 #Store all names of abilities
 var ability_names := ["Fireball", "Frost", "MeleeCombo", "LightningStrike", "MedicalMalarkey"] 
 #Store all names of unlocked abilities. Empty string represents no ability
@@ -23,6 +25,9 @@ var ability_descriptions = {"Fireball":"Cast a fireball in the direction of your
 							"LightningStrike":"Strike all opponents on the screen with a bolt of lightning. If the target is frozen, deal 50% more damage and remove the frozen effect. Otherwise, deal base damage with a 25% chance to apply burning.",
 							"MedicalMalarkey":"Heal yourself a small amount"
 							}
+
+#Store prices of all the abilities
+var ability_prices = {"Fireball":50,"Frost":50,"MeleeCombo":80,"LightningStrike":150,"MedicalMalarkey":100}
 
 #Store the names of states that each ability can't be used in
 var dash_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
@@ -44,7 +49,14 @@ func _ready():
 		states[state.name.to_lower()] = state
 	$StateMachine._initialize()
 	update_health_display()
-	
+
+func set_money(amount):
+	player_money = amount
+	var ui = get_tree().get_first_node_in_group("In_Game_UI")
+	ui.find_child("PlayerMoney").text = "Money: "+str(player_money)
+	ui = get_tree().get_first_node_in_group("Shop_UI")
+	ui.find_child("PlayerMoney").text = "Money: "+str(player_money)
+
 func flip_to(dir:int):
 	facing_dir = dir
 	sprite.flip_h = dir < 0
@@ -54,13 +66,17 @@ func flip_to(dir:int):
 func move(multiplier:=1.0):
 	velocity.x = direction * speed * multiplier
 	move_and_slide()
-
-func damage_target(_damage = damage):
+  
+func damage_target():
 	sound_manager.play("attack")
 	if attack_check.is_colliding():
 		#Damage all colliding objects
 		for i in attack_check.get_collision_count():
-			attack_check.get_collider(i).take_damage(_damage)
+			if (attack_check.get_collider(i) is Enemy):
+				attack_check.get_collider(i).take_damage(damage)
+			else:
+				var collider = attack_check.get_collider(i)
+				collider.get_parent().open_chest()
 			
 func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
 	super(_damage, _flinch, _apply_frozen_multiplier)

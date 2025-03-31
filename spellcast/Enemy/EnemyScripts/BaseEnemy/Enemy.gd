@@ -98,6 +98,8 @@ func damage_target():
 		
 func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
 	super(_damage, _flinch, _apply_frozen_multiplier)
+	if health <= 0:
+		player.set_money(player.player_money + 10)
 	if _flinch == true and $StateMachine.current_state != states["attack"] and $StateMachine.current_state != states["damaged"]:
 		$StateMachine.change_state("damaged")
 		
