@@ -1,0 +1,281 @@
+[gd_scene load_steps=23 format=3 uid="uid://ls572kqc41a2"]
+
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkullWolf/skull_wolf.gd" id="1_hmn74"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="2_rvhue"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_idle.gd" id="3_m212f"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_wander.gd" id="4_a7g3k"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_pursue.gd" id="5_wkr8w"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_attack.gd" id="6_fxofp"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="8_ml8if"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_damaged_state.gd" id="9_7575k"]
+[ext_resource type="Texture2D" uid="uid://dmm843cnrnrfl" path="res://Assets/Massacre Sprite Sheet.png" id="10_dpnav"]
+[ext_resource type="PackedScene" uid="uid://jfmsiyag1rg7" path="res://Enemy/detector.tscn" id="10_fk00d"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_look_around.gd" id="10_u5b6j"]
+[ext_resource type="Material" uid="uid://byfawqk2e8tyv" path="res://Shaders/GreySkullWolf.tres" id="12_5q7dh"]
+[ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="12_et6r1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omxgw"]
+size = Vector2(31.5, 17)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5lmgg"]
+
+[sub_resource type="Animation" id="Animation_ermsj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_s5w6g"]
+resource_name = "attack"
+length = 0.75
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.38),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"damage_target"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/Attack")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_animation_finished"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_m1ud5"]
+resource_name = "damaged"
+length = 0.6
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [14, 15, 16, 17]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/Damaged")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_animation_finished"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_jgmcr"]
+resource_name = "dead"
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [21, 22, 23, 24, 25, 26, 27]
+}
+
+[sub_resource type="Animation" id="Animation_cke7r"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_tte2k"]
+resource_name = "walk"
+length = 0.75
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uju4s"]
+_data = {
+"RESET": SubResource("Animation_ermsj"),
+"attack": SubResource("Animation_s5w6g"),
+"damaged": SubResource("Animation_m1ud5"),
+"dead": SubResource("Animation_jgmcr"),
+"idle": SubResource("Animation_cke7r"),
+"walk": SubResource("Animation_tte2k")
+}
+
+[node name="SkullWolf" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 128
+platform_floor_layers = 4294967168
+script = ExtResource("1_hmn74")
+variant_material = ExtResource("12_5q7dh")
+pursuit_speed_multiplier = 4
+move_dir = -1
+max_health = 50
+default_damage = 10
+default_speed = 100
+burn_effect_duration = [5, 10]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("inital_state")]
+script = ExtResource("2_rvhue")
+inital_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_m212f")
+
+[node name="Timer" type="Timer" parent="StateMachine/Idle"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Wander" type="Node" parent="StateMachine"]
+script = ExtResource("4_a7g3k")
+
+[node name="Pursue" type="Node" parent="StateMachine"]
+script = ExtResource("5_wkr8w")
+
+[node name="Timer" type="Timer" parent="StateMachine/Pursue"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("6_fxofp")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("8_ml8if")
+
+[node name="Damaged" type="Node" parent="StateMachine"]
+script = ExtResource("9_7575k")
+
+[node name="Look_Around" type="Node" parent="StateMachine"]
+script = ExtResource("10_u5b6j")
+
+[node name="Timer" type="Timer" parent="StateMachine/Look_Around"]
+wait_time = 1.5
+one_shot = true
+
+[node name="Detector" parent="." instance=ExtResource("10_fk00d")]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.5, 2.5)
+scale = Vector2(0.25, 0.85)
+
+[node name="BodyCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0.75, 2.5)
+shape = SubResource("RectangleShape2D_omxgw")
+
+[node name="AttackCheck" type="ShapeCast2D" parent="."]
+position = Vector2(-21.965, -3)
+scale = Vector2(1.54, 1.54)
+shape = SubResource("CircleShape2D_5lmgg")
+target_position = Vector2(0, 0)
+
+[node name="FloorCheck" type="RayCast2D" parent="."]
+position = Vector2(-30, 3.5)
+target_position = Vector2(0, 10)
+collision_mask = 128
+
+[node name="WallCheck" type="RayCast2D" parent="."]
+target_position = Vector2(-40, 0)
+collision_mask = 128
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = -11.5
+offset_top = -29.5
+offset_right = 40.5
+offset_bottom = -6.5
+scale = Vector2(0.5, 0.5)
+text = "Health"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -14.5)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("10_dpnav")
+hframes = 7
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_uju4s")
+}
+
+[node name="StatusEffectTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="LightningStrike" parent="." instance=ExtResource("12_et6r1")]
+position = Vector2(0, -16.96)
+
+[connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Pursue/Timer" to="StateMachine/Pursue" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Look_Around/Timer" to="StateMachine/Look_Around" method="_on_timer_timeout"]

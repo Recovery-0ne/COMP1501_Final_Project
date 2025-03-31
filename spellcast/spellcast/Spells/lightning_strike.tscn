@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlybf05b0r4ov"]
+
+[ext_resource type="Script" path="res://Spells/lightning_strike.gd" id="1_dst3d"]
+[ext_resource type="Texture2D" uid="uid://dm1rj2fawohkm" path="res://Assets/Thunderstrike wo blur.png" id="2_max77"]
+
+[sub_resource type="Animation" id="Animation_ose1h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_kj4r1"]
+resource_name = "default"
+length = 0.96
+loop_mode = 2
+step = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32, 0.4, 0.48, 0.56, 0.64, 0.72, 0.8, 0.88),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.48, 0.96),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"do_damage"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j4qgh"]
+_data = {
+"RESET": SubResource("Animation_ose1h"),
+"default": SubResource("Animation_kj4r1")
+}
+
+[node name="LightningStrike" type="Node2D"]
+visible = false
+script = ExtResource("1_dst3d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_max77")
+hframes = 13
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_j4qgh")
+}
