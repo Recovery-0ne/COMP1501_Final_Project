@@ -108,6 +108,7 @@ func end_frozen_effect():
 	anim.speed_scale = 1
 	has_status_effect = false
 	frozen = false
+	$HPbar.update_status_effect_frozen(frozen)
 	$StatusEffectTimer.disconnect("timeout", end_frozen_effect)
 	
 func lightning_strike():
