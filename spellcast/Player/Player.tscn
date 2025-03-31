@@ -537,7 +537,8 @@ position = Vector2(40.305, -7.455)
 scale = Vector2(3.79, 3.79)
 shape = SubResource("CircleShape2D_tfxn8")
 target_position = Vector2(0, 0)
-collision_mask = 2
+collision_mask = 34
+collide_with_areas = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -8.5)

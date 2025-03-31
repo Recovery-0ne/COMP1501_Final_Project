@@ -55,12 +55,16 @@ func flip_to(dir:int):
 func move(multiplier:=1.0):
 	velocity.x = direction * speed * multiplier
 	move_and_slide()
-
+	
 func damage_target():
 	if attack_check.is_colliding():
 		#Damage all colliding objects
 		for i in attack_check.get_collision_count():
-			attack_check.get_collider(i).take_damage(damage)
+			if (attack_check.get_collider(i) is Enemy):
+				attack_check.get_collider(i).take_damage(damage)
+			else:
+				var collider = attack_check.get_collider(i)
+				collider.get_parent().open_chest()
 			
 func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
 	super(_damage, _flinch, _apply_frozen_multiplier)

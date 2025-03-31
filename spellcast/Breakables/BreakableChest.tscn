@@ -3,17 +3,21 @@
 [ext_resource type="Script" path="res://Breakables/breakable_chest.gd" id="1_gaqyw"]
 [ext_resource type="Texture2D" uid="uid://p7uhedjwi1pr" path="res://Assets/chest1.png" id="2_lmm1r"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wk710"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pdh4h"]
+size = Vector2(34, 28.8)
 
 [node name="BreakableChest" type="Node2D"]
 scale = Vector2(2.5, 2.5)
 script = ExtResource("1_gaqyw")
 
-[node name="ChestCast" type="ShapeCast2D" parent="."]
-scale = Vector2(1.7, 1.5)
-shape = SubResource("RectangleShape2D_wk710")
-target_position = Vector2(0, 0)
-max_results = 1
-
 [node name="ChestImage" type="Sprite2D" parent="."]
 texture = ExtResource("2_lmm1r")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.199999, 0)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_pdh4h")
