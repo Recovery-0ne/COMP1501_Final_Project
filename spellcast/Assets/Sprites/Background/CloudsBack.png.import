@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p7uhedjwi1pr"
-path="res://.godot/imported/chest1.png-8f55e124950705f4f0f4f16df9eadfb2.ctex"
+uid="uid://0jq3fdmhmgwb"
+path="res://.godot/imported/CloudsBack.png-2a759592fd6f73ead55c95546db391ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/chest1.png"
-dest_files=["res://.godot/imported/chest1.png-8f55e124950705f4f0f4f16df9eadfb2.ctex"]
+source_file="res://Assets/Sprites/Background/CloudsBack.png"
+dest_files=["res://.godot/imported/CloudsBack.png-2a759592fd6f73ead55c95546db391ea.ctex"]
 
 [params]
 

@@ -34,4 +34,10 @@ func flip_facing_direction():
 	
 func damage_target():
 	super()
-	sound_manager.play("attack")
+	
+func disable_functions_for_dead():
+	vision.process_mode = Node.PROCESS_MODE_DISABLED
+	attack_check.enabled = false
+	floor_check.enabled = false
+	wall_check.enabled = false
+	set_collision_layer_value(2, false)
