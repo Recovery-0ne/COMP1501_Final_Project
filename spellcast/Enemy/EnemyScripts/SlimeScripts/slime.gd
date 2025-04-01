@@ -1,4 +1,7 @@
-extends Enemy
+extends BasicEnemy
+
+func _ready() -> void:
+	super()
 	
 func set_move():
 	velocity.x = move_dir * speed

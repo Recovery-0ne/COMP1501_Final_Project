@@ -1,7 +1,10 @@
-extends Enemy
+extends BasicEnemy
 
 @export var attack_range:=400
 @onready var attack_cooldown_timer = $AttackCooldown
+
+func _ready() -> void:
+	super()
 	
 func set_move():
 	velocity.x = move_dir * speed
