@@ -20,12 +20,12 @@
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerWallJump.gd" id="17_ve5nd"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerDash.gd" id="18_iy4go"]
 [ext_resource type="Script" path="res://Audio/sound_manager.gd" id="19_cmlnt"]
-[ext_resource type="AudioStream" uid="uid://bdnast1wlvk8u" path="res://Assets/Audio/SFX/Player/390757__d00121058__fx_004_footstep_gravel_r.wav" id="20_a2f2x"]
 [ext_resource type="AudioStream" uid="uid://di7ouebtvgm8n" path="res://Assets/Audio/SFX/Player/670077__memerunknown__afterjump.wav" id="21_6t4p2"]
 [ext_resource type="AudioStream" uid="uid://lgbepjohpg0u" path="res://Assets/Audio/SFX/Player/683928__geoff-bremner-audio__whoosh-4.wav" id="21_6056n"]
 [ext_resource type="AudioStream" uid="uid://bpodpbmthmhp1" path="res://Assets/Audio/SFX/Player/420668__sypherzent__basic-melee-swing-miss-whoosh.wav" id="21_ak4pt"]
 [ext_resource type="AudioStream" uid="uid://dihqfvtcco3kk" path="res://Assets/Audio/SFX/Player/431174__highpixel__fireball-explosion.wav" id="22_3yg7g"]
 [ext_resource type="AudioStream" uid="uid://bb0xi8xknnwmw" path="res://Assets/Audio/SFX/Player/477716__joao_janz__light-wood-surface-scratching-1_2.wav" id="22_5c050"]
+[ext_resource type="AudioStream" uid="uid://q5q83v4gjw5t" path="res://Assets/Audio/SFX/Player/517122__wdomino__footsteps-stone-2.wav" id="22_bbspe"]
 [ext_resource type="AudioStream" uid="uid://d0g3h2gdbcb4e" path="res://Assets/Audio/SFX/Player/738050__sadiquecat__wd40-quarter-full-finger-tapping-8.wav" id="23_ifblp"]
 [ext_resource type="AudioStream" uid="uid://cjsi6drqkyx75" path="res://Assets/Audio/SFX/Player/524305__bertsz__wet-spell-shoot.wav" id="24_65d5b"]
 [ext_resource type="AudioStream" uid="uid://bwdrj8cvxdy1f" path="res://Assets/Audio/SFX/Player/458867__raclure__damage-sound-effect.mp3" id="25_4do21"]
@@ -1235,8 +1235,7 @@ sounds = {
 }
 
 [node name="Step" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("20_a2f2x")
-volume_db = -5.0
+stream = ExtResource("22_bbspe")
 autoplay = true
 
 [node name="Jump" type="AudioStreamPlayer" parent="Sounds"]
@@ -1244,7 +1243,7 @@ stream = ExtResource("21_6t4p2")
 volume_db = 10.0
 
 [node name="Land" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("20_a2f2x")
+stream = ExtResource("22_bbspe")
 volume_db = 8.0
 
 [node name="Dash" type="AudioStreamPlayer" parent="Sounds"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxuw2qj8efwfg"
-path="res://.godot/imported/CloudsFront.png-e73dbc72a6dbc33fab882ad60b28f774.ctex"
+uid="uid://b0r6l2fyqx0q8"
+path="res://.godot/imported/gollux_idle.png-7e24e5e71a9289b865b096efc234e997.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background/CloudsFront.png"
-dest_files=["res://.godot/imported/CloudsFront.png-e73dbc72a6dbc33fab882ad60b28f774.ctex"]
+source_file="res://Assets/Sprites/Gollux/gollux_idle.png"
+dest_files=["res://.godot/imported/gollux_idle.png-7e24e5e71a9289b865b096efc234e997.ctex"]
 
 [params]
 

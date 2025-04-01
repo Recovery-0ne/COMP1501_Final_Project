@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjbpvatcjo8jr"]
 
 [ext_resource type="Script" path="res://Breakables/breakable_chest.gd" id="1_gaqyw"]
-[ext_resource type="Texture2D" uid="uid://p7uhedjwi1pr" path="res://Assets/chest1.png" id="2_lmm1r"]
+[ext_resource type="Texture2D" uid="uid://p7uhedjwi1pr" path="res://Assets/Sprites/chest1.png" id="2_lmm1r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pdh4h"]
 size = Vector2(34, 28.8)

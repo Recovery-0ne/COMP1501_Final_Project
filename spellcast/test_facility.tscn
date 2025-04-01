@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://pwhcfr60yjc2"]
 
 [ext_resource type="PackedScene" uid="uid://udvv0q57vsxm" path="res://Player/Player.tscn" id="1_v26ed"]
-[ext_resource type="PackedScene" uid="uid://pdne3m6kthea" path="res://Enemy/EnemyScenes/SpellCaster.tscn" id="2_uk3dx"]
+[ext_resource type="PackedScene" uid="uid://nq31xl6vbf3x" path="res://Enemy/EnemyScenes/Gollux.tscn" id="2_4ab8v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sw80l"]
 
@@ -52,6 +52,7 @@ scale = Vector2(20, 20)
 mesh = SubResource("QuadMesh_afiq8")
 
 [node name="Player" parent="." instance=ExtResource("1_v26ed")]
-position = Vector2(-433, 198)
+position = Vector2(-1008, 185)
 
-[node name="SpellCaster" parent="." instance=ExtResource("2_uk3dx")]
+[node name="Gollux" parent="." instance=ExtResource("2_4ab8v")]
+position = Vector2(-196, 135)

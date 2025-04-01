@@ -53,6 +53,7 @@ func _ready():
 func set_money(amount):
 	player_money = amount
 	var ui = get_tree().get_first_node_in_group("In_Game_UI")
+	if ui == null: return
 	ui.find_child("PlayerMoney").text = "Money: "+str(player_money)
 	ui = get_tree().get_first_node_in_group("Shop_UI")
 	ui.find_child("PlayerMoney").text = "Money: "+str(player_money)
