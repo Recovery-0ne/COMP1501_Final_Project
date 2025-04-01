@@ -6,3 +6,10 @@ func _ready():
 
 func update_healthbar(health:float):
 	$textureprogressbar.value = health
+	
+func update_status_effect_burn(statuseffect:bool):
+	$statuseffectburn.visible = statuseffect
+
+func update_status_effect_frozen(statuseffect:bool):
+	$statuseffectfrozen.visible = statuseffect
+	

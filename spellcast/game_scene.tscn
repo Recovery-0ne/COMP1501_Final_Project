@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://do87qc3mlcav3" path="res://Assets/Background/BGBack.png" id="7_3wr1w"]
 [ext_resource type="PackedScene" uid="uid://drhydcmoetxlj" path="res://Enemy/EnemyScenes/Skeleton.tscn" id="7_b8jpe"]
 [ext_resource type="Texture2D" uid="uid://co56oqhns5awj" path="res://Assets/Background/BGFront.png" id="8_d3iji"]
+[ext_resource type="PackedScene" uid="uid://cjbpvatcjo8jr" path="res://Breakables/BreakableChest.tscn" id="10_yv3nh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bpxtw"]
 font_size = 156
@@ -131,3 +132,12 @@ text = "You Win!"
 label_settings = SubResource("LabelSettings_bpxtw")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BreakableChest" parent="." instance=ExtResource("10_yv3nh")]
+position = Vector2(-5376, -756)
+
+[node name="BreakableChest2" parent="." instance=ExtResource("10_yv3nh")]
+position = Vector2(314, -516)
+
+[node name="BreakableChest3" parent="." instance=ExtResource("10_yv3nh")]
+position = Vector2(-2928, 156)

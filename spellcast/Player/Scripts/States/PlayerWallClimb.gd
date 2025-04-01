@@ -16,7 +16,7 @@ func _update(delta: float):
 	if Input.is_action_just_pressed("jump"):
 		state_machine.change_state("wall_jump")
 		return
-	elif player.direction == wall_normal:
+	elif player.facing_dir == wall_normal:
 		state_machine.change_state("fall")
 		return
 		
