@@ -54,7 +54,7 @@ func buy_ability(ability_name:String):
 	update_options()
 	
 func popup(ability_name:String):
-	$Popup.set_popup(ability_name, player.ability_descriptions[ability_name])
+	$Popup.set_popup(ability_name, player.ability_descriptions[ability_name], player.ability_prices[ability_name])
 	$Popup.position = $ColorRect.get_global_mouse_position()
 	$Popup.visible = true
 	

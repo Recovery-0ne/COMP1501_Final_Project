@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnuc3uqmd1srt"]
+[gd_scene load_steps=5 format=3 uid="uid://dnuc3uqmd1srt"]
 
 [ext_resource type="Script" path="res://UI/Shop_UI/ability_description_popup.gd" id="1_unbn5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_omqvk"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_xbrds"]
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_e3ylp"]
@@ -31,6 +34,11 @@ theme_override_constants/separation = 10
 layout_mode = 2
 text = "Name"
 label_settings = SubResource("LabelSettings_omqvk")
+
+[node name="Price" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Cost: "
+label_settings = SubResource("LabelSettings_xbrds")
 
 [node name="Description" type="Label" parent="VBoxContainer"]
 custom_minimum_size = Vector2(200, 100)

@@ -7,10 +7,27 @@ var wall_check
 var jump_count = 0
 var max_jumps = 2
 
-var ability_names := ["Fireball", "Frost", "MeleeCombo", "LightningStrike"] #Store all names of abilities
-var available_abilities := [""] #Store all names of unlocked abilities. Empty string represents no ability
-var ability_methods := ["cast_fireball", "cast_frost", "use_melee_combo", "cast_lightning_strike"] #Store method names of all abilites (indices should match the names array)
-var current_ability_methods := ["", "", "", ""] #Store method names of the currently equipped abilities
+var player_money = 0
+
+#Store all names of abilities
+var ability_names := ["Fireball", "Frost", "MeleeCombo", "LightningStrike", "MedicalMalarkey"] 
+#Store all names of unlocked abilities. Empty string represents no ability
+var available_abilities := [""] 
+#Store method names of all abilites (indices should match the names array)
+var ability_methods := ["cast_fireball", "cast_frost", "use_melee_combo", "cast_lightning_strike", "use_medical_malarkey"] 
+#Store method names of the currently equipped abilities
+var current_ability_methods := ["", "", "", ""] 
+
+#Make a dictionary for all the descriptions of the player's abilities
+var ability_descriptions = {"Fireball":"Cast a fireball in the direction of your cursor. Deals little damage on hit, but has a 100% chance to apply burning to the opponent.", 
+							"Frost":"Cast a ball of ice in the direction of your cursor. Deals little damage on hit, but has a 100% chance to apply freezing to the opponent.",
+							"MeleeCombo":"Strike the opponent with a series of 3 hits",
+							"LightningStrike":"Strike all opponents on the screen with a bolt of lightning. If the target is frozen, deal 50% more damage and remove the frozen effect. Otherwise, deal base damage with a 25% chance to apply burning.",
+							"MedicalMalarkey":"Heal yourself a small amount"
+							}
+
+#Store prices of all the abilities
+var ability_prices = {"Fireball":50,"Frost":50,"MeleeCombo":80,"LightningStrike":150,"MedicalMalarkey":100}
 
 #Store the names of states that each ability can't be used in
 var dash_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
@@ -18,12 +35,7 @@ var fireball_restricted_states := ["attack", "air_attack", "move_attack", "dead"
 var frost_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
 var lightning_strike_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]
 var melee_combo_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb", "dash", "jump", "wall_jump", "fall"]
-
-#Make a dictionary for all the descriptions of the player's abilities
-var ability_descriptions = {"Fireball":"Cast a fireball in the direction of your cursor. Deals little damage on hit, but has a 100% chance to apply burning to the opponent.", 
-							"Frost":"Cast a ball of ice in the direction of your cursor. Deals little damage on hit, but has a 100% chance to apply freezing to the opponent.",
-							"MeleeCombo":"Strike the opponent with a series of 3 hits",
-							"LightningStrike":"Strike all opponents on the screen with a bolt of lightning. If the target is frozen, deal 50% more damage and remove the frozen effect. Otherwise, deal base damage with a 25% chance to apply burning."}
+var medical_malarkey_restricted_states := ["dead"]
 
 func _init() -> void:
 	self.add_to_group("Player")
@@ -37,7 +49,14 @@ func _ready():
 		states[state.name.to_lower()] = state
 	$StateMachine._initialize()
 	update_health_display()
-	
+
+func set_money(amount):
+	player_money = amount
+	var ui = get_tree().get_first_node_in_group("In_Game_UI")
+	ui.find_child("PlayerMoney").text = "Money: "+str(player_money)
+	ui = get_tree().get_first_node_in_group("Shop_UI")
+	ui.find_child("PlayerMoney").text = "Money: "+str(player_money)
+
 func flip_to(dir:int):
 	facing_dir = dir
 	sprite.flip_h = dir < 0
@@ -47,13 +66,17 @@ func flip_to(dir:int):
 func move(multiplier:=1.0):
 	velocity.x = direction * speed * multiplier
 	move_and_slide()
-
-func damage_target(_damage = damage):
+  
+func damage_target():
 	sound_manager.play("attack")
 	if attack_check.is_colliding():
 		#Damage all colliding objects
 		for i in attack_check.get_collision_count():
-			attack_check.get_collider(i).take_damage(_damage)
+			if (attack_check.get_collider(i) is Enemy):
+				attack_check.get_collider(i).take_damage(damage)
+			else:
+				var collider = attack_check.get_collider(i)
+				collider.get_parent().open_chest()
 			
 func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
 	super(_damage, _flinch, _apply_frozen_multiplier)
@@ -109,6 +132,13 @@ func use_melee_combo():
 		
 func start_melee_combo_cooldown_timer():
 	$MeleeComboCooldownTimer.start()
+	
+func use_medical_malarkey():
+	if $MedicalMalarkeyCooldownTimer.is_stopped() and not medical_malarkey_restricted_states.has($StateMachine.current_state.name.to_lower()):
+		health = clamp(health + 10, 0, max_health)
+		$MedicalMalarkeyCooldownTimer.start()
+		update_health_display()
+		sound_manager.play("heal")
 
 func use_ability(ability_num:int):
 	if current_ability_methods[ability_num - 1] != "":

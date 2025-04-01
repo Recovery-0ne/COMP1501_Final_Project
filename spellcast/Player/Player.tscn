@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://udvv0q57vsxm"]
+[gd_scene load_steps=53 format=3 uid="uid://udvv0q57vsxm"]
 
 [ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_uytxk"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerStateMachine.gd" id="2_jpeyr"]
@@ -31,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://bwdrj8cvxdy1f" path="res://Assets/Audio/SFX/Player/458867__raclure__damage-sound-effect.mp3" id="25_4do21"]
 [ext_resource type="AudioStream" uid="uid://bd5xhx6mtofxm" path="res://Assets/Audio/SFX/Player/159769__timgormly__thunder_os_1.wav" id="29_g2p2a"]
 [ext_resource type="PackedScene" uid="uid://bkglkj88cjvjq" path="res://UI/In_Game_UI/hp_bar.tscn" id="32_t17xa"]
+[ext_resource type="AudioStream" uid="uid://dutj48j3hhmfx" path="res://Assets/Audio/SFX/Player/523649__lilmati__powerup-07.wav" id="32_ymn3x"]
 [ext_resource type="Texture2D" uid="uid://mxabjsvr2h0h" path="res://Assets/Sprites/adventurer-v1.5-Sheet.png" id="56_sfjbp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tfxn8"]
@@ -1160,7 +1161,8 @@ position = Vector2(40.305, -7.455)
 scale = Vector2(3.79, 3.79)
 shape = SubResource("CircleShape2D_tfxn8")
 target_position = Vector2(0, 0)
-collision_mask = 2
+collision_mask = 34
+collide_with_areas = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -8.09)
@@ -1204,6 +1206,10 @@ one_shot = true
 wait_time = 8.0
 one_shot = true
 
+[node name="MedicalMalarkeyCooldownTimer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
 [node name="Spells" type="Node" parent="."]
 
 [node name="Frost" parent="Spells" instance=ExtResource("9_2xb0b")]
@@ -1219,6 +1225,7 @@ sounds = {
 "dash": NodePath("Dash"),
 "fireball": NodePath("Fireball"),
 "frost": NodePath("Frost"),
+"heal": NodePath("Heal"),
 "hurt": NodePath("Hurt"),
 "jump": NodePath("Jump"),
 "land": NodePath("Land"),
@@ -1266,6 +1273,9 @@ stream = ExtResource("24_65d5b")
 [node name="Lightning" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("29_g2p2a")
 volume_db = 5.0
+
+[node name="Heal" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("32_ymn3x")
 
 [node name="HPbar" parent="." instance=ExtResource("32_t17xa")]
 position = Vector2(-1, -63)

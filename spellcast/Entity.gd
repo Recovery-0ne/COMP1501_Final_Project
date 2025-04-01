@@ -74,6 +74,7 @@ func apply_burning():
 	$StatusEffectTimer.wait_time = 1
 	$StatusEffectTimer.connect("timeout", take_burn_damage)
 	$StatusEffectTimer.start()
+	$HPbar.update_status_effect_burn(burning)
 	
 func take_burn_damage():
 	status_effect_duration -= 1
@@ -86,6 +87,7 @@ func take_burn_damage():
 func end_burning_effect():
 	has_status_effect = false
 	burning = false
+	$HPbar.update_status_effect_burn(burning)
 	$StatusEffectTimer.disconnect("timeout", take_burn_damage)
 			
 func apply_freezing():
@@ -98,6 +100,7 @@ func apply_freezing():
 	$StatusEffectTimer.wait_time = status_effect_duration
 	$StatusEffectTimer.connect("timeout", end_frozen_effect)
 	$StatusEffectTimer.start()
+	$HPbar.update_status_effect_frozen(frozen)
 		
 func end_frozen_effect():
 	if not frozen: return
@@ -105,6 +108,7 @@ func end_frozen_effect():
 	anim.speed_scale = 1
 	has_status_effect = false
 	frozen = false
+	$HPbar.update_status_effect_frozen(frozen)
 	$StatusEffectTimer.disconnect("timeout", end_frozen_effect)
 	
 func lightning_strike():
