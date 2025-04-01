@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ct676tvc36je0"]
+[gd_scene load_steps=13 format=3 uid="uid://ct676tvc36je0"]
 
 [ext_resource type="PackedScene" uid="uid://dte2li7iee18p" path="res://UI/In_Game_UI/In_Game_UI.tscn" id="1_8glpc"]
 [ext_resource type="PackedScene" uid="uid://cd4doq0o7358i" path="res://Areas/area_1.tscn" id="1_c3cfy"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://pdne3m6kthea" path="res://Enemy/EnemyScenes/SpellCaster.tscn" id="5_gcrg4"]
 [ext_resource type="PackedScene" uid="uid://ls572kqc41a2" path="res://Enemy/EnemyScenes/SkullWolf.tscn" id="6_rb1oy"]
 [ext_resource type="PackedScene" uid="uid://drhydcmoetxlj" path="res://Enemy/EnemyScenes/Skeleton.tscn" id="7_b8jpe"]
-[ext_resource type="Texture2D" uid="uid://co56oqhns5awj" path="res://Assets/Background/BGFront.png" id="8_d3iji"]
 [ext_resource type="PackedScene" uid="uid://cjbpvatcjo8jr" path="res://Breakables/BreakableChest.tscn" id="10_yv3nh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bpxtw"]
@@ -41,7 +40,7 @@ position = Vector2(6149.17, 432.26)
 position = Vector2(2818, 146)
 
 [node name="Player" parent="." instance=ExtResource("2_rfu6c")]
-position = Vector2(3673, 269)
+position = Vector2(-5701, -144)
 
 [node name="Slime" parent="." instance=ExtResource("3_5oc71")]
 position = Vector2(922, -44)
