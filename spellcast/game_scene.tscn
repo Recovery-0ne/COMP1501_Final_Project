@@ -26,10 +26,6 @@ layer = 10
 
 [node name="AreaTemplate" parent="." instance=ExtResource("1_c3cfy")]
 
-[node name="ParallaxBackground2" type="ParallaxBackground" parent="AreaTemplate"]
-offset = Vector2(600, 0)
-transform = Transform2D(1, 0, 0, 1, 600, 0)
-
 [node name="Shop" parent="." instance=ExtResource("4_k6ms1")]
 position = Vector2(-982, -528.075)
 
