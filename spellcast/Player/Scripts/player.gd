@@ -28,6 +28,7 @@ var ability_descriptions = {"Fireball":"Cast a fireball in the direction of your
 
 #Store prices of all the abilities
 var ability_prices = {"Fireball":50,"Frost":50,"MeleeCombo":80,"LightningStrike":150,"MedicalMalarkey":100}
+var ability_unlock_levels = {"Fireball":1,"Frost":1,"MeleeCombo":2,"LightningStrike":3,"MedicalMalarkey":3}
 
 #Store the names of states that each ability can't be used in
 var dash_restricted_states := ["attack", "air_attack", "move_attack", "dead", "wall_slide", "wall_climb"]

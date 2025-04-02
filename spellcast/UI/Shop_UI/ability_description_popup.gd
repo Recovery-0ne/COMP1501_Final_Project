@@ -5,7 +5,7 @@ func set_popup(ability_name:String, ability_description:String, ability_price:in
 	$VBoxContainer/Name.text = ability_name
 	$VBoxContainer/Price.text = str(ability_price)
 	$VBoxContainer/Description.text = ability_description
-	$Button.disabled = UI.player.available_abilities.has(ability_name)
+	$Button.disabled = UI.player.available_abilities.has(ability_name) or UI.player.ability_unlock_levels[ability_name] > UI.checkpoint_level
 	
 func deactivate():
 	visible = false

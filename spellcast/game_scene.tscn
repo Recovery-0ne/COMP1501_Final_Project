@@ -34,10 +34,12 @@ transform = Transform2D(1, 0, 0, 1, 600, 0)
 position = Vector2(-982, -528.075)
 
 [node name="Shop2" parent="." instance=ExtResource("4_k6ms1")]
-position = Vector2(6149.17, 432.26)
+position = Vector2(2818, 146)
+checkpoint_level = 2
 
 [node name="Shop3" parent="." instance=ExtResource("4_k6ms1")]
-position = Vector2(2818, 146)
+position = Vector2(6149.17, 432.26)
+checkpoint_level = 3
 
 [node name="Player" parent="." instance=ExtResource("2_rfu6c")]
 position = Vector2(-5713, -152)

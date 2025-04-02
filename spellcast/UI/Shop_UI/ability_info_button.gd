@@ -9,6 +9,9 @@ func set_icon(_color, _transform, _texture, _hframes, _vframes, _frame):
 	$Sprite2D.hframes = _hframes
 	$Sprite2D.vframes = _vframes
 	$Sprite2D.frame = _frame
+	
+func set_locked(_locked:bool):
+	$LockedColour.visible = _locked
 
 func _on_button_up() -> void:
 	get_tree().get_first_node_in_group("Shop_UI").popup(name)
