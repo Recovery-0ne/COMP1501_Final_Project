@@ -3,6 +3,7 @@ extends CanvasLayer
 var player: Player
 var unchosen_abilities:Array
 var ability_rows:=4
+var checkpoint_level:int
 
 func _ready() -> void:
 	player = get_tree().get_nodes_in_group("Player")[0]
@@ -21,6 +22,9 @@ func set_active_state(active_state:bool):
 		option.disabled = !active_state
 	#Make sure the dropdowns are updated
 	update_options()
+	#Set whether abilites are locked at this checkpoint
+	for i in range(0,player.ability_names.size()):
+		$Ability_Unlocks.get_child(i).set_locked(player.ability_unlock_levels[player.ability_names[i]] > checkpoint_level)
 	
 func set_shop_abilities():
 	var column = 0
