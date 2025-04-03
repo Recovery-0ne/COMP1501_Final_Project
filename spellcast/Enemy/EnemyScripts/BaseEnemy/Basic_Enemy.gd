@@ -24,6 +24,11 @@ func _ready() -> void:
 func force_vision_update():
 	can_see_target = vision._can_see_target()
 	
+func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
+	super(_damage, _flinch, _apply_frozen_multiplier)
+	if _flinch == true and $StateMachine.current_state != states["attack"] and $StateMachine.current_state != states["damaged"]:
+		$StateMachine.change_state("damaged")
+	
 func respawn():
 	remove_all_status_conditions()
 	enable_functions_for_respawn()

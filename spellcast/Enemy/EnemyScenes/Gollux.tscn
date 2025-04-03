@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://nq31xl6vbf3x"]
+[gd_scene load_steps=36 format=3 uid="uid://nq31xl6vbf3x"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/GolluxScripts/gollux.gd" id="1_lke21"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="3_ma5bd"]
@@ -8,7 +8,9 @@
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/GolluxScripts/gollux_attack.gd" id="7_oponu"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/GolluxScripts/gollux_damaged.gd" id="7_uj0i2"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/SkeletonScripts/skeleton_dead_state.gd" id="8_50dhq"]
+[ext_resource type="Script" path="res://Enemy/EnemyScripts/GolluxScripts/gollux_rock_throw.gd" id="9_443xy"]
 [ext_resource type="PackedScene" uid="uid://bmun4qnc6sa6v" path="res://Enemy/Detection/boss_detector.tscn" id="10_1dps6"]
+[ext_resource type="PackedScene" uid="uid://dewts5qog2qp5" path="res://Spells/rock_throw.tscn" id="10_m3g1e"]
 [ext_resource type="Texture2D" uid="uid://b0r6l2fyqx0q8" path="res://Assets/Sprites/Gollux/gollux_idle.png" id="12_y1pqo"]
 [ext_resource type="PackedScene" uid="uid://dlybf05b0r4ov" path="res://Spells/lightning_strike.tscn" id="13_luq7n"]
 [ext_resource type="Texture2D" uid="uid://cholya6gqaygg" path="res://Assets/Sprites/Gollux/gollux_move.png" id="13_lxtk7"]
@@ -21,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://6yd8nwcwifqq" path="res://Assets/Audio/SFX/Gollux/757190__henkonen__container-thud.wav" id="18_0njjl"]
 [ext_resource type="PackedScene" uid="uid://bkglkj88cjvjq" path="res://UI/In_Game_UI/hp_bar.tscn" id="18_k40wt"]
 [ext_resource type="AudioStream" uid="uid://rqht2w6pewn0" path="res://Assets/Audio/SFX/Gollux/733157__locky_y__bang-on-table-4.wav" id="20_ds4pl"]
+[ext_resource type="AudioStream" uid="uid://bwdrj8cvxdy1f" path="res://Assets/Audio/SFX/Player/458867__raclure__damage-sound-effect.mp3" id="22_mvyg2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awxm6"]
 
@@ -227,6 +230,34 @@ tracks/4/keys = {
 "values": [{
 "args": [],
 "method": &"damage_target"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"use_rock_throw"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Sounds/Attack2")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.77),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
 }]
 }
 
@@ -540,6 +571,15 @@ script = ExtResource("8_50dhq")
 [node name="Damaged" type="Node" parent="StateMachine"]
 script = ExtResource("7_uj0i2")
 
+[node name="Rock_Throw" type="Node" parent="StateMachine"]
+script = ExtResource("9_443xy")
+
+[node name="RockThrow" parent="StateMachine/Rock_Throw" instance=ExtResource("10_m3g1e")]
+position = Vector2(72.445, 11.66)
+speed = 700
+rotation_speed = 15
+damage = 10
+
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0.285714, 1.14286)
 scale = Vector2(0.628571, 0.742857)
@@ -602,6 +642,12 @@ volume_db = 10.0
 max_distance = 1500.0
 attenuation = 0.412346
 
+[node name="Attack2" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("22_mvyg2")
+volume_db = 10.0
+max_distance = 1500.0
+attenuation = 0.412346
+
 [node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("20_ds4pl")
 volume_db = 15.0
@@ -610,5 +656,9 @@ attenuation = 2.5
 
 [node name="HPbar" parent="." instance=ExtResource("18_k40wt")]
 position = Vector2(1.14286, -37.4286)
+
+[node name="RockThrowCooldownTimer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
 
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]

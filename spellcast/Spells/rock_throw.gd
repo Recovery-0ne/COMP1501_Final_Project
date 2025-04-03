@@ -5,9 +5,9 @@ var creator : Entity
 var creator_position : Vector2
 var direction : Vector2
 @export var speed = 800
+@export var rotation_speed = 10
 @export var projectile_range = 400
 @export var damage = 10
-@export var effect_function_name : String
 
 func _ready() -> void:
 	initial_position = position
@@ -19,16 +19,17 @@ func _activate(_creator : Node2D, _target_pos : Vector2):
 	creator_position = creator.position
 	#Reset the position (which is global since it needs to move independently from the node that created it)
 	position = creator.position + initial_position * _creator.facing_dir
+	#Set the rotation to match the direction it's being thrown in
+	rotation_speed = abs(rotation_speed) * _creator.facing_dir
 	#Direction is the difference in the current position and the target position. Normalize the vector to make it more useful during calculations
 	direction = (_target_pos - position).normalized()
-	#Turn the sprite to face the direction it will move in. Use look_at() and pass a point in the path the object will take
-	$Marker2D.look_at(position + direction)
 	$SpellCollider.disabled = false
 	visible = true
 	
 func _process(delta: float) -> void:
 	if visible: #If it's visible, then it has been activated
 		translate(direction * speed * delta)
+		rotate(rotation_speed * delta)
 		#Past a certain range, the fireball will burn up/deactivate
 		if (position - creator_position).length() > projectile_range:
 			_deactivate()
@@ -43,5 +44,4 @@ func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int
 		call_deferred("_deactivate") #Only call deactivate once the collider is finished with the collision
 		if body is Entity:
 			body.take_damage(damage, true, false)
-			body.apply_effect(effect_function_name)
 			
