@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://f5e00ig7ikmu"]
 
-[ext_resource type="Script" path="res://UI/start.gd" id="1_5wiy3"]
+[ext_resource type="Script" path="res://UI/Start_UI/start.gd" id="1_5wiy3"]
 [ext_resource type="Texture2D" uid="uid://0jq3fdmhmgwb" path="res://Assets/Sprites/Background/CloudsBack.png" id="1_pdtdf"]
 [ext_resource type="PackedScene" uid="uid://ct676tvc36je0" path="res://game_scene.tscn" id="2_xg1or"]
 [ext_resource type="Texture2D" uid="uid://dxuw2qj8efwfg" path="res://Assets/Sprites/Background/CloudsFront.png" id="2_yeg8w"]
