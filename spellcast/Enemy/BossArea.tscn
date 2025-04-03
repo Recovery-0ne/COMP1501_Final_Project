@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxc1grncyv7qb"]
+
+[ext_resource type="Script" path="res://Enemy/boss_area.gd" id="1_5dls8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xqg2o"]
+
+[node name="BossArea" type="Area2D"]
+visible = false
+collision_layer = 0
+script = ExtResource("1_5dls8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xqg2o")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
