@@ -115,6 +115,7 @@ tile_map_data = PackedByteArray("AAAyAAAAAAAJAAQAAAAzAAAAAAAJAAQAAAA=")
 
 [node name="ParallaxBackground" parent="." index="4"]
 offset = Vector2(600, -300)
+scale = Vector2(1, 1)
 transform = Transform2D(1, 0, 0, 1, 600, -300)
 
 [node name="BoundaryLayer" type="TileMapLayer" parent="." index="5"]
