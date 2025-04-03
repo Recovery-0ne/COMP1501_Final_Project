@@ -59,3 +59,24 @@ func can_use_rock_throw() -> bool:
 func use_rock_throw():
 	$RockThrowCooldownTimer.start()
 	$StateMachine/Rock_Throw/RockThrow._activate(self, player.position)
+	
+func apply_freezing():
+	if has_status_effect or dead: return
+	speed *= 0.7
+	anim.speed_scale = 0.7
+	has_status_effect = true
+	frozen = true
+	status_effect_duration = freeze_slow_duration
+	$StatusEffectTimer.wait_time = status_effect_duration
+	$StatusEffectTimer.connect("timeout", end_frozen_effect)
+	$StatusEffectTimer.start()
+	$HPbar.update_status_effect_frozen(frozen)
+		
+func end_frozen_effect():
+	if not frozen: return
+	speed = default_speed
+	anim.speed_scale = 1
+	has_status_effect = false
+	frozen = false
+	$HPbar.update_status_effect_frozen(frozen)
+	$StatusEffectTimer.disconnect("timeout", end_frozen_effect)
