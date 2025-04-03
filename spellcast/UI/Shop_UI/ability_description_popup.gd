@@ -13,6 +13,9 @@ func deactivate():
 
 func _on_button_button_up() -> void:
 	if UI.player.player_money >= UI.player.ability_prices[$VBoxContainer/Name.text]:
+		$BuySound.play()
 		UI.player.set_money(UI.player.player_money - UI.player.ability_prices[$VBoxContainer/Name.text])
 		UI.buy_ability($VBoxContainer/Name.text)
 		$Button.disabled = true
+	else:
+		$BuyError.play()

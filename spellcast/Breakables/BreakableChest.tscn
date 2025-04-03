@@ -8,6 +8,7 @@
 size = Vector2(34, 28.8)
 
 [node name="BreakableChest" type="Node2D"]
+z_index = -20
 scale = Vector2(2.5, 2.5)
 script = ExtResource("1_gaqyw")
 

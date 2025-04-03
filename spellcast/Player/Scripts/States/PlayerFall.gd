@@ -12,6 +12,8 @@ func _update(delta: float):
 	elif Input.is_action_just_pressed("attack"):
 		state_machine.change_state("air_attack")
 	elif player.wall_check.is_colliding():
+		player.jump_count = 0
+		player.sound_manager.play("land")
 		state_machine.change_state("wall_climb")
 	elif Input.is_action_just_pressed("jump") and (player.jump_count < player.max_jumps):
 		state_machine.change_state("jump")

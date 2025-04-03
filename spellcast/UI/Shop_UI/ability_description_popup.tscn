@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnuc3uqmd1srt"]
+[gd_scene load_steps=7 format=3 uid="uid://dnuc3uqmd1srt"]
 
 [ext_resource type="Script" path="res://UI/Shop_UI/ability_description_popup.gd" id="1_unbn5"]
+[ext_resource type="AudioStream" uid="uid://bkrc8ykl5xc6f" path="res://Assets/Audio/SFX/cash-register-purchase-87313.mp3" id="2_i37le"]
+[ext_resource type="AudioStream" uid="uid://dqxh5sj1vsi84" path="res://Assets/Audio/SFX/wrong-47985.mp3" id="3_opwsf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_omqvk"]
 font_size = 32
@@ -60,5 +62,11 @@ offset_right = 137.5
 grow_horizontal = 2
 grow_vertical = 0
 text = "Buy"
+
+[node name="BuySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_i37le")
+
+[node name="BuyError" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_opwsf")
 
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

@@ -1,10 +1,9 @@
 extends PlayerState
-var wall_normal = 0
 var defaultAnimSpeed
 func _enter():
 	super()
+	player.jump_count = 1
 	defaultAnimSpeed = anim.speed_scale
-	wall_normal = player.get_wall_normal().x
 	player.gravity = 0
 	player.velocity.y = 0
 	player.direction = 0
@@ -16,10 +15,9 @@ func _update(delta: float):
 	if Input.is_action_just_pressed("jump"):
 		state_machine.change_state("wall_jump")
 		return
-	elif player.facing_dir == wall_normal:
+	if player.facing_dir == player.get_wall_normal().x:
 		state_machine.change_state("fall")
 		return
-		
 	if not player.wall_check.is_colliding():
 		player.velocity.y = 0
 		anim.speed_scale = 0
