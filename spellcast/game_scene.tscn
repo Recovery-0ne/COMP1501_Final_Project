@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ct676tvc36je0"]
+[gd_scene load_steps=16 format=3 uid="uid://ct676tvc36je0"]
 
 [ext_resource type="PackedScene" uid="uid://dte2li7iee18p" path="res://UI/In_Game_UI/In_Game_UI.tscn" id="1_8glpc"]
 [ext_resource type="PackedScene" uid="uid://cd4doq0o7358i" path="res://Areas/area_1.tscn" id="1_c3cfy"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cjbpvatcjo8jr" path="res://Breakables/BreakableChest.tscn" id="10_yv3nh"]
 [ext_resource type="PackedScene" uid="uid://nq31xl6vbf3x" path="res://Enemy/EnemyScenes/Gollux.tscn" id="12_1t6es"]
 [ext_resource type="PackedScene" uid="uid://dbmtous8gk42o" path="res://SpikeDamage/SpikeDamage.tscn" id="13_lvuow"]
+[ext_resource type="PackedScene" uid="uid://bxc1grncyv7qb" path="res://Enemy/BossArea.tscn" id="13_rs0sx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bpxtw"]
 font_size = 156
@@ -44,7 +45,7 @@ position = Vector2(6149.17, 432.26)
 checkpoint_level = 3
 
 [node name="Player" parent="." instance=ExtResource("2_rfu6c")]
-position = Vector2(-5713, -152)
+position = Vector2(11255, -779)
 
 [node name="Slime" parent="." instance=ExtResource("3_5oc71")]
 position = Vector2(922, -44)
@@ -108,6 +109,12 @@ position = Vector2(-2928, 158)
 
 [node name="Gollux" parent="." instance=ExtResource("12_1t6es")]
 position = Vector2(13167, -344)
+
+[node name="BossArea" parent="." node_paths=PackedStringArray("boss", "music_player") instance=ExtResource("13_rs0sx")]
+position = Vector2(13031.4, -659.29)
+scale = Vector2(149.66, 43.7)
+boss = NodePath("../Gollux")
+music_player = NodePath("../Bgm")
 
 [node name="BreakableChest4" parent="." instance=ExtResource("10_yv3nh")]
 position = Vector2(6346, -82)

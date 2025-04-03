@@ -7,6 +7,11 @@ func _ready() -> void:
 	vision = $Detector
 	vision.body = self
 	vision.target = player
+
+func reset():
+	health = max_health
+	remove_all_status_conditions()
+	update_health_display()
 	
 func force_vision_update():
 	can_see_target = vision._can_see_target()
