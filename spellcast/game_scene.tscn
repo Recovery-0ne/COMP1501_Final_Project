@@ -110,10 +110,11 @@ position = Vector2(-2928, 158)
 [node name="Gollux" parent="." instance=ExtResource("12_1t6es")]
 position = Vector2(13167, -344)
 
-[node name="BossArea" parent="." node_paths=PackedStringArray("boss") instance=ExtResource("13_rs0sx")]
+[node name="BossArea" parent="." node_paths=PackedStringArray("boss", "music_player") instance=ExtResource("13_rs0sx")]
 position = Vector2(13031.4, -659.29)
 scale = Vector2(149.66, 43.7)
 boss = NodePath("../Gollux")
+music_player = NodePath("../Bgm")
 
 [node name="BreakableChest4" parent="." instance=ExtResource("10_yv3nh")]
 position = Vector2(6346, -82)

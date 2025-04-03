@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bc1jmtrvhk2wb"]
+[gd_scene load_steps=3 format=3 uid="uid://bc1jmtrvhk2wb"]
 
 [ext_resource type="AudioStream" uid="uid://i0l5e847vdbj" path="res://Assets/Audio/BGM/464535__pcmac__backtrack1.wav" id="1_3t7e6"]
+[ext_resource type="Script" path="res://Audio/bgm.gd" id="1_t4fum"]
 
 [node name="Bgm" type="Node"]
 process_mode = 3
+script = ExtResource("1_t4fum")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="DefaultMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_3t7e6")
 volume_db = -5.0
 autoplay = true
+
+[node name="BossMusic" type="AudioStreamPlayer" parent="."]
