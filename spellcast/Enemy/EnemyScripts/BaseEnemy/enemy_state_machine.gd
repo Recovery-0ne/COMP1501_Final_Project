@@ -9,7 +9,7 @@ func _initialize():
 	current_state._enter()
 	
 func change_state(new_state_name: String):
-	if (current_state.enemy.frozen or current_state.enemy.dead):
+	if ((current_state.enemy.frozen and current_state.enemy is BasicEnemy) or current_state.enemy.dead):
 		return
 	#print_debug(current_state.name + "--->" + new_state_name)
 	var new_state = current_state.enemy.states[new_state_name]
