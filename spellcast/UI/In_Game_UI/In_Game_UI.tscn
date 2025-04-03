@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dte2li7iee18p"]
+[gd_scene load_steps=11 format=3 uid="uid://dte2li7iee18p"]
 
 [ext_resource type="PackedScene" uid="uid://c41h162r5tvjh" path="res://UI/AbilityCooldowns/Fireball_Cooldown.tscn" id="1_ht01g"]
 [ext_resource type="Script" path="res://UI/In_Game_UI/In_Game_UI.gd" id="1_ru75n"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cihayvgfownob" path="res://UI/AbilityCooldowns/Ability_Icon.tscn" id="5_tf2i2"]
 [ext_resource type="PackedScene" uid="uid://dvcwsvajpidw0" path="res://UI/AbilityCooldowns/Melee_Combo_Cooldown.tscn" id="7_78d7u"]
 [ext_resource type="PackedScene" uid="uid://dwl7r8mseig7s" path="res://UI/AbilityCooldowns/Medical_Malarkey_Cooldown.tscn" id="8_af0kq"]
+[ext_resource type="Texture2D" uid="uid://cpneq0drwg4en" path="res://Assets/Sprites/rpgiab_icon_pack_v1.3/32x32/help.png" id="9_ggt3c"]
 
 [sub_resource type="FontFile" id="FontFile_06d8f"]
 subpixel_positioning = 0
@@ -234,10 +235,28 @@ offset_bottom = 40.0
 [node name="MedicalMalarkeyCooldown" parent="Ability_Icon_Templates" instance=ExtResource("8_af0kq")]
 
 [node name="PlayerMoney" type="RichTextLabel" parent="."]
-offset_left = 24.0
-offset_top = 19.0
-offset_right = 182.0
-offset_bottom = 58.0
+offset_left = 51.0
+offset_top = 5.0
+offset_right = 209.0
+offset_bottom = 44.0
 theme_override_fonts/normal_font = SubResource("FontFile_06d8f")
 theme_override_font_sizes/normal_font_size = 25
 text = "Money: 0"
+
+[node name="MenuButton" type="MenuButton" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.14, 1.14)
+icon = ExtResource("9_ggt3c")
+item_count = 6
+popup/item_0/text = "A,D - Move"
+popup/item_1/text = "Space - Jump"
+popup/item_1/id = 1
+popup/item_2/text = "Shift - Dash"
+popup/item_2/id = 2
+popup/item_3/text = "W - Climb up wall"
+popup/item_3/id = 3
+popup/item_4/text = "Q,E,R,F - Abilities"
+popup/item_4/id = 5
+popup/item_5/text = "S - Slide down wall"
+popup/item_5/id = 4
