@@ -34,6 +34,7 @@ func flip_facing_direction():
 	
 func damage_target():
 	super()
+	player.camera.shake()
 	
 func disable_functions_for_dead():
 	vision.process_mode = Node.PROCESS_MODE_DISABLED
