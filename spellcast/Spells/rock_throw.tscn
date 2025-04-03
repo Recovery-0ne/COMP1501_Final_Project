@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dewts5qog2qp5"]
+
+[ext_resource type="Script" path="res://Spells/rock_throw.gd" id="1_vboku"]
+[ext_resource type="Shader" path="res://Shaders/ColourSwap.gdshader" id="2_ldk8j"]
+[ext_resource type="Texture2D" uid="uid://sx37hu5m3saf" path="res://Assets/Sprites/rocks.png" id="2_oask7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_enaa4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s8h0x"]
+shader = ExtResource("2_ldk8j")
+shader_parameter/target_colors = PackedColorArray(0.654902, 0.643137, 0.670588, 1, 0.498039, 0.478431, 0.521569, 1, 0.384314, 0.34902, 0.411765, 1, 0.298039, 0.27451, 0.309804, 1, 0.207843, 0.176471, 0.219608, 1, 0.14902, 0.121569, 0.160784, 1)
+shader_parameter/replace_colors = PackedColorArray(0.383853, 0.176551, 0.176538, 1, 0.332086, 0.148637, 0.148699, 1, 0.306252, 0.134819, 0.134906, 1, 0.256484, 0.115729, 0.141941, 1, 0.220433, 0.0928271, 0.0943096, 1, 0.183638, 0.0777139, 0.0953569, 1)
+shader_parameter/tolerance = 0.05
+
+[node name="RockThrow" type="Area2D"]
+scale = Vector2(4, 4)
+collision_layer = 0
+collision_mask = 131
+script = ExtResource("1_vboku")
+projectile_range = 600
+damage = 2
+
+[node name="SpellCollider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_enaa4")
+disabled = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+material = SubResource("ShaderMaterial_s8h0x")
+texture = ExtResource("2_oask7")
+hframes = 3
+vframes = 2
+frame = 1
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

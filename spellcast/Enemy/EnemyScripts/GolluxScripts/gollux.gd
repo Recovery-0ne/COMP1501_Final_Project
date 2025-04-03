@@ -36,9 +36,21 @@ func damage_target():
 	super()
 	player.camera.shake()
 	
+func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
+	super(_damage, _flinch, _apply_frozen_multiplier)
+	if _flinch == true and $StateMachine.current_state != states["attack"] and $StateMachine.current_state != states["rock_throw"] and $StateMachine.current_state != states["damaged"]:
+		$StateMachine.change_state("damaged")
+	
 func disable_functions_for_dead():
 	vision.process_mode = Node.PROCESS_MODE_DISABLED
 	attack_check.enabled = false
 	floor_check.enabled = false
 	wall_check.enabled = false
 	set_collision_layer_value(2, false)
+
+func can_use_rock_throw() -> bool:
+	return $RockThrowCooldownTimer.is_stopped() and position.distance_to(player.position) <= 500 and position.distance_to(player.position) >= 200
+	
+func use_rock_throw():
+	$RockThrowCooldownTimer.start()
+	$StateMachine/Rock_Throw/RockThrow._activate(self, player.position)
