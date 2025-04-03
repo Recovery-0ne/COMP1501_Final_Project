@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ct676tvc36je0"]
+[gd_scene load_steps=15 format=3 uid="uid://ct676tvc36je0"]
 
 [ext_resource type="PackedScene" uid="uid://dte2li7iee18p" path="res://UI/In_Game_UI/In_Game_UI.tscn" id="1_8glpc"]
 [ext_resource type="PackedScene" uid="uid://cd4doq0o7358i" path="res://Areas/area_1.tscn" id="1_c3cfy"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://drhydcmoetxlj" path="res://Enemy/EnemyScenes/Skeleton.tscn" id="7_b8jpe"]
 [ext_resource type="PackedScene" uid="uid://cjbpvatcjo8jr" path="res://Breakables/BreakableChest.tscn" id="10_yv3nh"]
 [ext_resource type="PackedScene" uid="uid://nq31xl6vbf3x" path="res://Enemy/EnemyScenes/Gollux.tscn" id="12_1t6es"]
+[ext_resource type="PackedScene" uid="uid://dbmtous8gk42o" path="res://SpikeDamage/SpikeDamage.tscn" id="13_lvuow"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bpxtw"]
 font_size = 156
@@ -97,13 +98,34 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BreakableChest" parent="." instance=ExtResource("10_yv3nh")]
-position = Vector2(-5376, -756)
+position = Vector2(-5377, -754)
 
 [node name="BreakableChest2" parent="." instance=ExtResource("10_yv3nh")]
-position = Vector2(314, -516)
+position = Vector2(313, -513)
 
 [node name="BreakableChest3" parent="." instance=ExtResource("10_yv3nh")]
-position = Vector2(-2928, 156)
+position = Vector2(-2928, 158)
 
 [node name="Gollux" parent="." instance=ExtResource("12_1t6es")]
 position = Vector2(13167, -344)
+
+[node name="BreakableChest4" parent="." instance=ExtResource("10_yv3nh")]
+position = Vector2(6346, -82)
+
+[node name="BreakableChest5" parent="." instance=ExtResource("10_yv3nh")]
+position = Vector2(10244, -658)
+
+[node name="SpikeDamage" parent="." instance=ExtResource("13_lvuow")]
+position = Vector2(-4367, 50)
+
+[node name="SpikeDamage2" parent="." instance=ExtResource("13_lvuow")]
+position = Vector2(-1205, -471)
+
+[node name="SpikeDamage3" parent="." instance=ExtResource("13_lvuow")]
+position = Vector2(527, 49)
+
+[node name="SpikeDamage4" parent="." instance=ExtResource("13_lvuow")]
+position = Vector2(4512, 674)
+
+[node name="SpikeDamage5" parent="." instance=ExtResource("13_lvuow")]
+position = Vector2(8880, 195)

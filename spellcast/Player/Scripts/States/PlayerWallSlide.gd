@@ -3,6 +3,7 @@ var wall_normal = 0
 
 func _enter():
 	super()
+	player.jump_count = 1
 	wall_normal = player.get_wall_normal().x
 	player.gravity = 15
 	player.sound_manager.play("slide")
