@@ -8,6 +8,7 @@ var jump_count = 0
 var max_jumps = 2
 
 var player_money = 0
+var camera : Camera2D
 
 #Store all names of abilities
 var ability_names := ["Fireball", "Frost", "MeleeCombo", "LightningStrike", "MedicalMalarkey"] 
@@ -42,6 +43,7 @@ func _init() -> void:
 	self.add_to_group("Player")
 
 func _ready():
+	camera = $Camera2D
 	facing_dir = direction
 	checkpoint_position = global_position
 	wall_check = $WallCheck

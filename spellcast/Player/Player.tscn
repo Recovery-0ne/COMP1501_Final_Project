@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://udvv0q57vsxm"]
+[gd_scene load_steps=54 format=3 uid="uid://udvv0q57vsxm"]
 
 [ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_uytxk"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerStateMachine.gd" id="2_jpeyr"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerWallClimb.gd" id="16_0mk32"]
 [ext_resource type="Script" path="res://Player/Scripts/States/player_melee_combo.gd" id="16_s7vh1"]
 [ext_resource type="Texture2D" uid="uid://d4auv4tiokhd1" path="res://Assets/Sprites/adventurer-hand-combat-Sheet.png" id="17_62fvt"]
+[ext_resource type="Script" path="res://Player/player_camera.gd" id="17_81kxc"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerWallJump.gd" id="17_ve5nd"]
 [ext_resource type="Script" path="res://Player/Scripts/States/PlayerDash.gd" id="18_iy4go"]
 [ext_resource type="Script" path="res://Audio/sound_manager.gd" id="19_cmlnt"]
@@ -1155,6 +1156,7 @@ collision_mask = 128
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -81)
+script = ExtResource("17_81kxc")
 
 [node name="AttackCheck" type="ShapeCast2D" parent="."]
 position = Vector2(40.305, -7.455)

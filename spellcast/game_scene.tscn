@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ct676tvc36je0"]
+[gd_scene load_steps=14 format=3 uid="uid://ct676tvc36je0"]
 
 [ext_resource type="PackedScene" uid="uid://dte2li7iee18p" path="res://UI/In_Game_UI/In_Game_UI.tscn" id="1_8glpc"]
 [ext_resource type="PackedScene" uid="uid://cd4doq0o7358i" path="res://Areas/area_1.tscn" id="1_c3cfy"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ls572kqc41a2" path="res://Enemy/EnemyScenes/SkullWolf.tscn" id="6_rb1oy"]
 [ext_resource type="PackedScene" uid="uid://drhydcmoetxlj" path="res://Enemy/EnemyScenes/Skeleton.tscn" id="7_b8jpe"]
 [ext_resource type="PackedScene" uid="uid://cjbpvatcjo8jr" path="res://Breakables/BreakableChest.tscn" id="10_yv3nh"]
+[ext_resource type="PackedScene" uid="uid://nq31xl6vbf3x" path="res://Enemy/EnemyScenes/Gollux.tscn" id="12_1t6es"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bpxtw"]
 font_size = 156
@@ -103,3 +104,6 @@ position = Vector2(314, -516)
 
 [node name="BreakableChest3" parent="." instance=ExtResource("10_yv3nh")]
 position = Vector2(-2928, 156)
+
+[node name="Gollux" parent="." instance=ExtResource("12_1t6es")]
+position = Vector2(13167, -344)
