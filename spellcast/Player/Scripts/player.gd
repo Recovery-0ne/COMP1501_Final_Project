@@ -94,6 +94,11 @@ func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
 	if _flinch and $StateMachine.current_state == states["idle"]:
 		$StateMachine.change_state("damaged")
 		
+func decrease_health(_damage: int):
+	super(_damage)
+	if health == 0:
+		$ManaBar.visible = false
+		
 func respawn_player():
 	remove_all_status_conditions()
 	dead = false
@@ -102,6 +107,7 @@ func respawn_player():
 	$StateMachine._initialize()
 	update_health_display()
 	$HPbar.visible = true
+	$ManaBar.visible = true
 	respawn_enemies()
 	
 	#This is needed so that is_on_floor() returns false and the player will fall to the ground

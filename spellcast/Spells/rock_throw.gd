@@ -24,19 +24,21 @@ func _activate(_creator : Node2D, _target_pos : Vector2):
 	#Direction is the difference in the current position and the target position. Normalize the vector to make it more useful during calculations
 	direction = (_target_pos + Vector2(0,-30) - position).normalized()
 	$SpellCollider.disabled = false
-	visible = true
+	$Marker2D/Sprite2D.visible = true
 	
 func _process(delta: float) -> void:
-	if visible: #If it's visible, then it has been activated
+	if $Marker2D/Sprite2D.visible: #If it's visible, then it has been activated
 		translate(direction * speed * delta)
-		rotate(rotation_speed * delta)
+		$Marker2D/Sprite2D.rotate(rotation_speed * delta)
 		#Past a certain range, the fireball will burn up/deactivate
 		if (position - creator_position).length() > projectile_range:
 			_deactivate()
 
 func _deactivate():
 	$SpellCollider.disabled = true
-	visible = false
+	$Marker2D/Sprite2D.visible = false
+	$Explosion.visible = true
+	$Explosion.play("explode")
 	
 func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
 	if creator == null: return
@@ -44,4 +46,6 @@ func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int
 		call_deferred("_deactivate") #Only call deactivate once the collider is finished with the collision
 		if body is Entity:
 			body.take_damage(damage, true, false)
-			
+
+func _on_explosion_animation_finished() -> void:
+	$Explosion.visible = false
