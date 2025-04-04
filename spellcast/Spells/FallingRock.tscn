@@ -1,11 +1,95 @@
-[gd_scene load_steps=5 format=3 uid="uid://cv1fhtpno3b24"]
+[gd_scene load_steps=17 format=3 uid="uid://cv1fhtpno3b24"]
 
 [ext_resource type="Script" path="res://Spells/falling_rock.gd" id="1_kcsg0"]
 [ext_resource type="Texture2D" uid="uid://sx37hu5m3saf" path="res://Assets/Sprites/rocks.png" id="2_on42n"]
 [ext_resource type="Material" uid="uid://bl6alhk5ewnk" path="res://Shaders/rock_throw.tres" id="2_ynuod"]
+[ext_resource type="Texture2D" uid="uid://dcm2jrunbrhlh" path="res://Assets/Sprites/explosion.png" id="4_5h0ex"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x7st4"]
 radius = 6.08276
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojx1g"]
+atlas = ExtResource("4_5h0ex")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frmlb"]
+atlas = ExtResource("4_5h0ex")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp6a5"]
+atlas = ExtResource("4_5h0ex")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhqav"]
+atlas = ExtResource("4_5h0ex")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvtxx"]
+atlas = ExtResource("4_5h0ex")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gnls"]
+atlas = ExtResource("4_5h0ex")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jh4u"]
+atlas = ExtResource("4_5h0ex")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h12rc"]
+atlas = ExtResource("4_5h0ex")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjiu5"]
+atlas = ExtResource("4_5h0ex")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n00gi"]
+atlas = ExtResource("4_5h0ex")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_upl37"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojx1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frmlb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hp6a5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhqav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvtxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gnls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jh4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h12rc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjiu5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n00gi")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 10.0
+}]
 
 [node name="FallingRock" type="Area2D"]
 scale = Vector2(4, 4)
@@ -30,5 +114,15 @@ hframes = 3
 vframes = 2
 frame = 2
 
+[node name="Node" type="Node" parent="."]
+
+[node name="Explosion" type="AnimatedSprite2D" parent="Node"]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_upl37")
+animation = &"explode"
+frame = 9
+frame_progress = 1.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="animation_finished" from="Node/Explosion" to="." method="_on_animated_sprite_2d_animation_finished"]

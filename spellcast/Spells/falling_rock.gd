@@ -20,6 +20,9 @@ func _deactivate():
 	on_screen = false
 	velocity = Vector2.ZERO
 	$CollisionShape2D.disabled = true
+	$Node/Explosion.global_position = global_position - Vector2(0,50)
+	$Node/Explosion.visible = true
+	$Node/Explosion.play("explode")
 
 func _physics_process(delta: float) -> void:
 	translate(velocity * delta)
@@ -33,3 +36,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	on_screen = true
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	$Node/Explosion.visible = false
