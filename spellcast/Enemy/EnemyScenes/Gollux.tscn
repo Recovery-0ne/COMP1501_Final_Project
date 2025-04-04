@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://nq31xl6vbf3x"]
+[gd_scene load_steps=37 format=3 uid="uid://nq31xl6vbf3x"]
 
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/GolluxScripts/gollux.gd" id="1_lke21"]
 [ext_resource type="Script" path="res://Enemy/EnemyScripts/BaseEnemy/enemy_state_machine.gd" id="3_ma5bd"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://bkglkj88cjvjq" path="res://UI/In_Game_UI/hp_bar.tscn" id="18_k40wt"]
 [ext_resource type="AudioStream" uid="uid://rqht2w6pewn0" path="res://Assets/Audio/SFX/Gollux/733157__locky_y__bang-on-table-4.wav" id="20_ds4pl"]
 [ext_resource type="AudioStream" uid="uid://bwdrj8cvxdy1f" path="res://Assets/Audio/SFX/Player/458867__raclure__damage-sound-effect.mp3" id="22_mvyg2"]
+[ext_resource type="PackedScene" uid="uid://bmerhlkclwsc5" path="res://Spells/RockFall.tscn" id="25_36ymo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awxm6"]
 
@@ -578,6 +579,7 @@ script = ExtResource("9_443xy")
 position = Vector2(72.445, 11.66)
 speed = 700
 rotation_speed = 15
+projectile_range = 1000
 damage = 10
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
@@ -585,6 +587,7 @@ position = Vector2(0.285714, 1.14286)
 scale = Vector2(0.628571, 0.742857)
 
 [node name="Detector" parent="." instance=ExtResource("10_1dps6")]
+vision_range = 900
 
 [node name="AttackCheck" type="ShapeCast2D" parent="."]
 position = Vector2(21.85, 8.14)
@@ -660,5 +663,7 @@ position = Vector2(1.14286, -37.4286)
 [node name="RockThrowCooldownTimer" type="Timer" parent="."]
 wait_time = 7.0
 one_shot = true
+
+[node name="RockFall" parent="." instance=ExtResource("25_36ymo")]
 
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]

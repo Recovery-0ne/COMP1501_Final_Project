@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv1fhtpno3b24"]
+
+[ext_resource type="Script" path="res://Spells/falling_rock.gd" id="1_kcsg0"]
+[ext_resource type="Texture2D" uid="uid://sx37hu5m3saf" path="res://Assets/Sprites/rocks.png" id="2_on42n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7st4"]
+radius = 6.08276
+
+[node name="FallingRock" type="Area2D"]
+scale = Vector2(4, 4)
+collision_layer = 0
+collision_mask = 129
+script = ExtResource("1_kcsg0")
+custom_gravity = 30.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.125, -1.25)
+scale = Vector2(0.5375, 0.475)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x7st4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(0.791667, 1)
+texture = ExtResource("2_on42n")
+hframes = 3
+vframes = 2
+frame = 2
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

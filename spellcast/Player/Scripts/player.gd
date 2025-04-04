@@ -91,11 +91,15 @@ func respawn_player():
 	remove_all_status_conditions()
 	dead = false
 	global_position = checkpoint_position
-	$StateMachine._initialize()
 	health = max_health
+	$StateMachine._initialize()
 	update_health_display()
 	$HPbar.visible = true
 	respawn_enemies()
+	
+	#This is needed so that is_on_floor() returns false and the player will fall to the ground
+	velocity.y = 10
+	move_and_slide()
 		
 func cast_fireball():
 	if $FireballCooldownTimer.is_stopped() and not fireball_restricted_states.has($StateMachine.current_state.name.to_lower()):
