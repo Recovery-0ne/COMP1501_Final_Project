@@ -10,6 +10,9 @@ var max_jumps = 2
 var player_money = 0
 var camera : Camera2D
 
+@export var default_mana:=100.0
+@onready var mana:=default_mana
+
 #Store all names of abilities
 var ability_names := ["Fireball", "Frost", "MeleeCombo", "LightningStrike", "MedicalMalarkey"] 
 #Store all names of unlocked abilities. Empty string represents no ability
@@ -60,6 +63,9 @@ func set_money(amount):
 	ui.find_child("PlayerMoney").text = "Money: "+str(player_money)
 	ui = get_tree().get_first_node_in_group("Shop_UI")
 	ui.find_child("PlayerMoney").text = "Money: "+str(player_money)
+	
+func update_mana_bar():
+	$ManaBar.value = (mana / default_mana) * 100
 
 func flip_to(dir:int):
 	facing_dir = dir
@@ -74,6 +80,7 @@ func move(multiplier:=1.0):
 func damage_target():
 	sound_manager.play("attack")
 	if attack_check.is_colliding():
+		mana = clamp(mana + 5, 0, default_mana)
 		#Damage all colliding objects
 		for i in attack_check.get_collision_count():
 			if (attack_check.get_collider(i) is Enemy):
@@ -102,25 +109,31 @@ func respawn_player():
 	move_and_slide()
 		
 func cast_fireball():
-	if $FireballCooldownTimer.is_stopped() and not fireball_restricted_states.has($StateMachine.current_state.name.to_lower()):
+	var mana_cost = 5
+	if mana >= mana_cost and $FireballCooldownTimer.is_stopped() and not fireball_restricted_states.has($StateMachine.current_state.name.to_lower()):
 		$FireballCooldownTimer.start()
 		$Spells/Fireball._activate(self, get_global_mouse_position())
 		sound_manager.play("fireball")
+		mana -= mana_cost
 
 func cast_frost():
-	if $FrostCooldownTimer.is_stopped() and not frost_restricted_states.has($StateMachine.current_state.name.to_lower()):
+	var mana_cost = 10
+	if mana >= mana_cost and $FrostCooldownTimer.is_stopped() and not frost_restricted_states.has($StateMachine.current_state.name.to_lower()):
 		$FrostCooldownTimer.start()
 		$Spells/Frost._activate(self, get_global_mouse_position())
 		sound_manager.play("frost")
+		mana -= mana_cost
 		
 func cast_lightning_strike():
 	var hit_an_enemy = false
-	if $LightningStrikeCooldownTimer.is_stopped() and not lightning_strike_restricted_states.has($StateMachine.current_state.name.to_lower()):
+	var mana_cost = 25
+	if mana >= mana_cost and $LightningStrikeCooldownTimer.is_stopped() and not lightning_strike_restricted_states.has($StateMachine.current_state.name.to_lower()):
 		for enemy in get_tree().get_nodes_in_group("Enemies"):
 			if enemy.is_on_screen and not enemy.dead:
 				enemy.lightning_strike()
 				hit_an_enemy = true
 		if hit_an_enemy:
+			mana -= mana_cost
 			$LightningStrikeCooldownTimer.start()
 			sound_manager.play("lightning")
 		
@@ -135,22 +148,27 @@ func start_dash_cooldown_timer():
 	$DashCooldownTimer.start()
 		
 func use_melee_combo():
-	if $MeleeComboCooldownTimer.is_stopped() and not melee_combo_restricted_states.has($StateMachine.current_state.name.to_lower()):
+	var mana_cost = 15
+	if mana >= mana_cost and $MeleeComboCooldownTimer.is_stopped() and not melee_combo_restricted_states.has($StateMachine.current_state.name.to_lower()):
 		$StateMachine.change_state("melee_combo")
+		mana -= mana_cost
 		
 func start_melee_combo_cooldown_timer():
 	$MeleeComboCooldownTimer.start()
 	
 func use_medical_malarkey():
-	if $MedicalMalarkeyCooldownTimer.is_stopped() and not medical_malarkey_restricted_states.has($StateMachine.current_state.name.to_lower()):
+	var mana_cost = 20
+	if mana >= mana_cost and $MedicalMalarkeyCooldownTimer.is_stopped() and not medical_malarkey_restricted_states.has($StateMachine.current_state.name.to_lower()):
 		health = clamp(health + 10, 0, max_health)
 		$MedicalMalarkeyCooldownTimer.start()
 		update_health_display()
 		sound_manager.play("heal")
+		mana -= mana_cost
 
 func use_ability(ability_num:int):
 	if current_ability_methods[ability_num - 1] != "":
 		call(current_ability_methods[ability_num - 1])
+		update_mana_bar()
 		
 func get_nth_current_ability_name_from_method_name(n:int):
 	var found = ability_methods.find(current_ability_methods[n])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://udvv0q57vsxm"]
+[gd_scene load_steps=55 format=3 uid="uid://udvv0q57vsxm"]
 
 [ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_uytxk"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerStateMachine.gd" id="2_jpeyr"]
@@ -33,6 +33,7 @@
 [ext_resource type="AudioStream" uid="uid://bd5xhx6mtofxm" path="res://Assets/Audio/SFX/Player/159769__timgormly__thunder_os_1.wav" id="29_g2p2a"]
 [ext_resource type="PackedScene" uid="uid://bkglkj88cjvjq" path="res://UI/In_Game_UI/hp_bar.tscn" id="32_t17xa"]
 [ext_resource type="AudioStream" uid="uid://dutj48j3hhmfx" path="res://Assets/Audio/SFX/Player/523649__lilmati__powerup-07.wav" id="32_ymn3x"]
+[ext_resource type="Texture2D" uid="uid://cslrm7oud7l5s" path="res://Assets/Sprites/blank_64x64_image.png" id="35_fk2wj"]
 [ext_resource type="Texture2D" uid="uid://mxabjsvr2h0h" path="res://Assets/Sprites/adventurer-v1.5-Sheet.png" id="56_sfjbp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tfxn8"]
@@ -1279,7 +1280,19 @@ volume_db = 5.0
 stream = ExtResource("32_ymn3x")
 
 [node name="HPbar" parent="." instance=ExtResource("32_t17xa")]
-position = Vector2(-1, -63)
+position = Vector2(-1, -69)
+
+[node name="ManaBar" type="TextureProgressBar" parent="."]
+offset_left = -49.0
+offset_top = -62.0
+offset_right = 15.0
+offset_bottom = 1.99999
+scale = Vector2(1.5, 0.08)
+value = 100.0
+texture_under = ExtResource("35_fk2wj")
+texture_progress = ExtResource("35_fk2wj")
+tint_under = Color(0.32549, 0.345098, 0.34902, 1)
+tint_progress = Color(0.0605643, 0.418992, 0.746202, 1)
 
 [connection signal="timeout" from="StateMachine/Move/CoyoteTimer" to="StateMachine/Move" method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Move/StepTimer" to="StateMachine/Move" method="_on_step_timer_timeout"]
