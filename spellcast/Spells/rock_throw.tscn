@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://sx37hu5m3saf" path="res://Assets/Sprites/rocks.png" id="2_oask7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enaa4"]
+radius = 6.50481
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s8h0x"]
 shader = ExtResource("2_ldk8j")

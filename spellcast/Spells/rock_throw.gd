@@ -22,7 +22,7 @@ func _activate(_creator : Node2D, _target_pos : Vector2):
 	#Set the rotation to match the direction it's being thrown in
 	rotation_speed = abs(rotation_speed) * _creator.facing_dir
 	#Direction is the difference in the current position and the target position. Normalize the vector to make it more useful during calculations
-	direction = (_target_pos - position).normalized()
+	direction = (_target_pos + Vector2(0,-30) - position).normalized()
 	$SpellCollider.disabled = false
 	visible = true
 	

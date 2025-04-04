@@ -40,6 +40,14 @@ func flip_facing_direction():
 func damage_target():
 	super()
 	player.camera.shake()
+	if health < max_health * 0.25:
+		$RockFall._activate()
+	elif health < max_health * 0.5:
+		if randi_range(1,2) == 1:
+			$RockFall._activate()
+	elif health < max_health * 0.75:
+		if randi_range(1,4) == 1:
+			$RockFall._activate()
 	
 func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
 	super(_damage, _flinch, _apply_frozen_multiplier)
