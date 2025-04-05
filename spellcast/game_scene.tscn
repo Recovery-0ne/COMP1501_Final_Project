@@ -45,7 +45,7 @@ position = Vector2(6149.17, 432.26)
 checkpoint_level = 3
 
 [node name="Player" parent="." instance=ExtResource("2_rfu6c")]
-position = Vector2(-5761, -133)
+position = Vector2(-5404, -136)
 
 [node name="Slime" parent="." instance=ExtResource("3_5oc71")]
 position = Vector2(922, -44)
