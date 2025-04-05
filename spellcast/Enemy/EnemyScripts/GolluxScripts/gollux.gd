@@ -88,3 +88,11 @@ func end_frozen_effect():
 	frozen = false
 	$HPbar.update_status_effect_frozen(frozen)
 	$StatusEffectTimer.disconnect("timeout", end_frozen_effect)
+	
+func load_end_credits():
+	get_tree().get_first_node_in_group("In_Game_UI").visible = false
+	var root_node = get_tree().root.get_child(0)
+	root_node.add_child(load("res://UI/Restart_UI/restart.tscn").instantiate())
+	root_node.find_child("Bgm").stop()
+	get_tree().paused = true
+	

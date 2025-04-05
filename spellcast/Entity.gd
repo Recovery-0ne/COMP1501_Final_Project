@@ -93,6 +93,7 @@ func end_burning_effect():
 func apply_freezing():
 	if has_status_effect or dead: return
 	speed = 0
+	velocity.x = 0
 	anim.speed_scale = 0
 	has_status_effect = true
 	frozen = true

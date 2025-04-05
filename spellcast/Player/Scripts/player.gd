@@ -81,6 +81,7 @@ func damage_target():
 	sound_manager.play("attack")
 	if attack_check.is_colliding():
 		mana = clamp(mana + 5, 0, default_mana)
+		update_mana_bar()
 		#Damage all colliding objects
 		for i in attack_check.get_collision_count():
 			if (attack_check.get_collider(i) is Enemy):
