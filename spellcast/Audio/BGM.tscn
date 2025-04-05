@@ -15,4 +15,4 @@ autoplay = true
 
 [node name="BossMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_df7gs")
-volume_db = -5.0
+volume_db = -13.0
