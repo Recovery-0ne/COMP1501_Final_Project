@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var chest_money = 10
+@export var chest_money = 20
 
 func open_chest():
 	$ChestBreak.play()

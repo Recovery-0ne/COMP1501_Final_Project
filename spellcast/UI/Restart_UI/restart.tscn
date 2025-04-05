@@ -1,157 +1,406 @@
-[gd_scene load_steps=10 format=3 uid="uid://6exgt5phmke1"]
+[gd_scene load_steps=18 format=3 uid="uid://6exgt5phmke1"]
 
 [ext_resource type="Script" path="res://UI/Restart_UI/restart.gd" id="1_vt5j4"]
-[ext_resource type="PackedScene" uid="uid://ct676tvc36je0" path="res://game_scene.tscn" id="2_50mbf"]
-[ext_resource type="Texture2D" uid="uid://0jq3fdmhmgwb" path="res://Assets/Sprites/Background/CloudsBack.png" id="3_mg2kf"]
-[ext_resource type="Texture2D" uid="uid://dxuw2qj8efwfg" path="res://Assets/Sprites/Background/CloudsFront.png" id="4_n4nlp"]
-[ext_resource type="Texture2D" uid="uid://do87qc3mlcav3" path="res://Assets/Sprites/Background/BGBack.png" id="5_lj3ph"]
-[ext_resource type="Texture2D" uid="uid://co56oqhns5awj" path="res://Assets/Sprites/Background/BGFront.png" id="6_d1egv"]
+[ext_resource type="PackedScene" uid="uid://f5e00ig7ikmu" path="res://UI/Start_UI/start.tscn" id="2_5h5oq"]
 [ext_resource type="FontFile" uid="uid://bljihm64bcl1j" path="res://Fonts/antiquity-print.ttf" id="7_a6skn"]
 [ext_resource type="AudioStream" uid="uid://b57oswwjywoph" path="res://Assets/Audio/BGM/No Destination.mp3" id="8_h2uue"]
-[ext_resource type="Script" path="res://UI/Restart_UI/credits.gd" id="8_jasgk"]
 
-[node name="Restart" type="Node2D"]
+[sub_resource type="Animation" id="Animation_hlhq3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.2, 0.2, 0.2, 0.427451)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Control:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Control:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_tcwm4"]
+resource_name = "fade_in"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.2, 0.2, 0.2, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Control:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Control:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8xfxt"]
+_data = {
+"RESET": SubResource("Animation_hlhq3"),
+"fade_in": SubResource("Animation_tcwm4")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_pshu5"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_uj0yy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_skil7"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_ykibd"]
+line_spacing = 44.0
+outline_size = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_c0exw"]
+line_spacing = 44.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_bgndc"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_8lasl"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_gq1vh"]
+line_spacing = 44.0
+outline_size = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_pj27d"]
+line_spacing = 44.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_koruh"]
+font_size = 71
+
+[node name="Restart" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_vt5j4")
-load_scene = ExtResource("2_50mbf")
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-offset = Vector2(600, 43.515)
-scale = Vector2(0.57, 0.57)
-transform = Transform2D(0.57, 0, 0, 0.57, 600, 43.515)
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.1, 0.05)
-motion_offset = Vector2(0, 200)
-motion_mirroring = Vector2(4096, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-modulate = Color(0.821788, 0.821789, 0.821788, 1)
-scale = Vector2(8, 8)
-texture = ExtResource("3_mg2kf")
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.1, 0.05)
-motion_offset = Vector2(0, 300)
-motion_mirroring = Vector2(4096, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-modulate = Color(0.856067, 0.856067, 0.856067, 1)
-scale = Vector2(8, 8)
-texture = ExtResource("4_n4nlp")
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.2, 0.1)
-motion_offset = Vector2(0, 100)
-motion_mirroring = Vector2(4096, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-modulate = Color(0.724643, 0.724643, 0.724643, 1)
-scale = Vector2(8, 8)
-texture = ExtResource("5_lj3ph")
-
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.3, 0.15)
-motion_offset = Vector2(0, 100)
-motion_mirroring = Vector2(4096, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
-modulate = Color(0.873298, 0.873298, 0.873298, 1)
-scale = Vector2(8, 8)
-texture = ExtResource("6_d1egv")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(655, 223)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 249.0
-offset_top = -62.0
-offset_right = 1159.0
-offset_bottom = 219.0
-theme_override_fonts/normal_font = ExtResource("7_a6skn")
-theme_override_font_sizes/normal_font_size = 141
-text = "Spellcast"
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
-offset_left = 443.0
-offset_top = 210.0
-offset_right = 951.0
-offset_bottom = 350.0
-theme_override_fonts/normal_font = ExtResource("7_a6skn")
-theme_override_font_sizes/normal_font_size = 88
-text = "You Win!"
-
-[node name="Button" type="Button" parent="."]
-offset_left = 586.0
-offset_top = 405.0
-offset_right = 755.0
-offset_bottom = 477.0
-theme_override_font_sizes/font_size = 46
-text = "Restart"
+load_scene = ExtResource("2_5h5oq")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_h2uue")
 
-[node name="Credits" type="Label" parent="."]
-offset_left = 300.0
-offset_top = -1216.0
-offset_right = 1023.0
-offset_bottom = -101.0
-text = "Developers:
-Ammar, Saif
-Amoura, Omar
-Gillespie, Sean
-Popovic, Caitlin
-Assets:
-Sounds
-Title screen music: No Destination
-BGM: https://freesound.org/people/pcmac/sounds/464535/ 
-Chest Break: https://pixabay.com/sound-effects/search/crate/
-Buy: https://pixabay.com/sound-effects/search/cash%20register/
-Buy Error: https://pixabay.com/sound-effects/search/wrong/
-Player footsteps & land: https://freesound.org/people/Wdomino/sounds/517122/ 
-Jump: https://freesound.org/people/memerunknown/sounds/670077/ 
-Attack: https://freesound.org/people/SypherZent/sounds/420668/ 
-Dash & Spell Caster hurt: https://freesound.org/people/Geoff-Bremner-Audio/sounds/683928/ 
-Wall Climb: https://freesound.org/people/Sadiquecat/sounds/738050/ 
-Wall Slide: https://freesound.org/people/Joao_Janz/sounds/477716/ 
-Fireball: https://freesound.org/people/HighPixel/sounds/431174/ 
-Frost: https://freesound.org/people/Bertsz/sounds/524305/ 
-Lightning Strike: https://freesound.org/people/timgormly/sounds/159769/ 
-Heal: https://freesound.org/people/LilMati/sounds/523649/ 
-Damaged and Gollux attack-2: https://freesound.org/people/Raclure/sounds/458867/ 
-Slime move: https://freesound.org/people/qubodup/sounds/751341/ 
-Slime jump & land: https://freesound.org/people/Zuzek06/sounds/353250/ 
-Slime hurt: https://freesound.org/people/qubodup/sounds/751339/ 
-Skeleton walk: https://freesound.org/people/hudbud321/sounds/579802/ 
-Skeleton attack & Skull Wolf move: https://freesound.org/people/Sadiquecat/sounds/737238/ 
-Skeleton & Skull Wolf hurt: https://freesound.org/people/MiSchy/sounds/369958/ 
-Skull Wolf attack: https://freesound.org/people/nomiqbomi/sounds/579066/ 
-Spell Caster footsteps: https://freesound.org/people/d00121058/sounds/390757/ 
-Gollux attack-1: https://freesound.org/people/proolsen/sounds/466272/ 
-Gollux walk: https://freesound.org/people/HenKonen/sounds/757190/ 
-Gollux hurt: https://freesound.org/people/locky_Y/sounds/733157/ 
-Sprites
-Player: https://rvros.itch.io/animated-pixel-hero 
-Skeleton: https://pimen.itch.io/fantasy-skeleton-enemies 
-Skull Wolf: https://atari-boy.itch.io/skull-wolf-pixel-art 
-Slime: https://warsvault.itch.io/high-fantasy-slime-enemy 
-Spell Caster: https://penzilla.itch.io/hooded-protagonist 
-Gollux:https://admurin.itch.io/bosses-gollux  
-Shop NPC: https://penzilla.itch.io/free-animated-protagonist 
-Shop & Chest: https://cainos.itch.io/pixel-art-platformer-village-props 
-Map & Background: https://aamatniekss.itch.io/free-pixelart-platformer-tileset 
-Fireball: https://msfrantz.itch.io/free-fire-ball-pixel-art 
-Frost: https://bdragon1727.itch.io/free-effect-and-bullet-16x16 
-Lightning Strike: https://pimen.itch.io/thunder-spell-effect-02 
-Rock: https://dustdfg.itch.io/pixel-art-top-down-rocks-pack 
-Icons: https://zeromatrix.itch.io/rpgiab-icons 
-"
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.2, 0.2, 0.427451)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
+libraries = {
+"": SubResource("AnimationLibrary_8xfxt")
+}
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Control"]
+position = Vector2(578.5, 2913)
+scale = Vector2(57.65, 292.3)
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 264.0
+offset_right = 834.0
+offset_bottom = 404.0
+theme_override_fonts/normal_font = ExtResource("7_a6skn")
+theme_override_font_sizes/normal_font_size = 88
+text = "You Win!"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 138.5
+offset_top = 943.065
+offset_right = 973.5
+offset_bottom = 1224.06
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("7_a6skn")
+theme_override_font_sizes/normal_font_size = 141
+text = "Spellcast"
+
+[node name="DevLabel" type="Label" parent="Control"]
+layout_mode = 1
+offset_left = 450.0
+offset_top = 1324.0
+offset_right = 667.0
+offset_bottom = 1379.0
+text = "Developers"
+label_settings = SubResource("LabelSettings_pshu5")
+
+[node name="DevCredits" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 157.0
+offset_top = 1393.0
+offset_right = 961.0
+offset_bottom = 1494.0
+text = "Caitlin Popovic
+Saif Ammar
+Sean Gillespie
+Omar Amoura"
+label_settings = SubResource("LabelSettings_uj0yy")
 horizontal_alignment = 1
+
+[node name="SoundLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 338.0
+offset_top = 1533.0
+offset_right = 807.0
+offset_bottom = 1588.0
+text = "Music and Sound Effects"
+label_settings = SubResource("LabelSettings_skil7")
+
+[node name="SoundCredits" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 61.0
+offset_top = 1595.0
+offset_right = 325.0
+offset_bottom = 3427.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Title Screen Music
+Background Music
+Boss Music
+Chest Break
+Buy
+Buy Error 
+Player footsteps & land  
+Jump  
+Attack
+Dash & Spell Caster hurt
+Wall Climb
+Wall Slide 
+Fireball
+Frost
+Lightning Strike
+Heal
+Damaged and Gollux attack-2
+Slime move
+Slime jump & land
+Slime hurt
+Skeleton walk
+Skeleton attack & Skull Wolf move
+Skeleton & Skull Wolf hurt
+Skull Wolf attack
+Spell Caster footsteps
+Gollux attack-1
+Gollux walk
+Gollux hurt"
+label_settings = SubResource("LabelSettings_ykibd")
 vertical_alignment = 1
-script = ExtResource("8_jasgk")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 37.0
+[node name="SoundCredits2" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 104.0
+offset_top = 1621.0
+offset_right = 898.0
+offset_bottom = 3453.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Pix - youtube: No Destination
+pcmac - freesound: https://freesound.org/people/pcmac/sounds/464535/ 
+HydroGene - https://www.youtube.com/watch?v=DEJ_Y1Fn3BE 
+freesound_community - pixabay: https://pixabay.com/sound-effects/search/crate/
+freesound_community - pixabay: https://pixabay.com/sound-effects/search/cash%20register/
+freesound_community - pixabay: https://pixabay.com/sound-effects/search/wrong/
+Wdomino - freesound: https://freesound.org/people/Wdomino/sounds/517122/ 
+memerunknown - freesound: https://freesound.org/people/memerunknown/sounds/670077/ 
+SypherZent - freesound: https://freesound.org/people/SypherZent/sounds/420668/ 
+Geoff-Bremner-Audio - freesound: https://freesound.org/people/Geoff-Bremner-Audio/sounds/683928/ 
+Sadiquecat - freesound: https://freesound.org/people/Sadiquecat/sounds/738050/ 
+ Joao_Janz - freesound: https://freesound.org/people/Joao_Janz/sounds/477716/ 
+HighPixel - freesound: https://freesound.org/people/HighPixel/sounds/431174/ 
+Bertsz - freesound: https://freesound.org/people/Bertsz/sounds/524305/ 
+timgormly - freesound: https://freesound.org/people/timgormly/sounds/159769/ 
+LilMati - freesound: https://freesound.org/people/LilMati/sounds/523649/ 
+Raclure - freesound: https://freesound.org/people/Raclure/sounds/458867/ 
+qubodup - freesound: https://freesound.org/people/qubodup/sounds/751341/ 
+Zuzek06 - freesound: https://freesound.org/people/Zuzek06/sounds/353250/ 
+qubodup - freesound: https://freesound.org/people/qubodup/sounds/751339/ 
+hudbud321 - freesound: https://freesound.org/people/hudbud321/sounds/579802/ 
+Sadiquecat - freesound: https://freesound.org/people/Sadiquecat/sounds/737238/ 
+MiSchy - freesound: https://freesound.org/people/MiSchy/sounds/369958/ 
+nomiqbomi - freesound: https://freesound.org/people/nomiqbomi/sounds/579066/ 
+d00121058 - freesound: https://freesound.org/people/d00121058/sounds/390757/ 
+proolsen - freesound: https://freesound.org/people/proolsen/sounds/466272/ 
+HenKonen - freesound: https://freesound.org/people/HenKonen/sounds/757190/ 
+locky_Y - freesound: https://freesound.org/people/locky_Y/sounds/733157/ 
+"
+label_settings = SubResource("LabelSettings_c0exw")
+vertical_alignment = 1
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="TilesetLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 401.0
+offset_top = 3524.0
+offset_right = 853.0
+offset_bottom = 3579.0
+text = "Tileset and Background"
+label_settings = SubResource("LabelSettings_bgndc")
+
+[node name="TilesetCredits" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 3602.0
+offset_right = 865.0
+offset_bottom = 3625.0
+text = "aamatniekss - itch.io: https://aamatniekss.itch.io/free-pixelart-platformer-tileset "
+
+[node name="SpiteLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 559.0
+offset_top = 3678.0
+offset_right = 693.0
+offset_bottom = 3733.0
+text = "Sprites"
+label_settings = SubResource("LabelSettings_8lasl")
+
+[node name="SpritesCredits" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 3771.0
+offset_right = 204.0
+offset_bottom = 4598.0
+text = "Player
+Skeleton
+Skull Wolf
+Slime
+Spell Caster
+Gollux
+Shop NPC
+Shop & Chest
+Fireball
+Frost
+Lightning Strike
+Rock
+Icons"
+label_settings = SubResource("LabelSettings_gq1vh")
+
+[node name="SpritesCredits2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 3799.0
+offset_right = 729.0
+offset_bottom = 4626.0
+text = "rvros - itch.io - https://rvros.itch.io/animated-pixel-hero 
+pimen - itch.io: https://pimen.itch.io/fantasy-skeleton-enemies 
+atari-boy - itch.io: https://atari-boy.itch.io/skull-wolf-pixel-art 
+warsvault - itch.io: https://warsvault.itch.io/high-fantasy-slime-enemy 
+penzilla - itch.io: https://penzilla.itch.io/hooded-protagonist 
+admurin - itch.io: https://admurin.itch.io/bosses-gollux  
+penzilla - itch.io: https://penzilla.itch.io/free-animated-protagonist 
+cainos - itch.io: https://cainos.itch.io/pixel-art-platformer-village-props 
+msfrantz - itch.io: https://msfrantz.itch.io/free-fire-ball-pixel-art 
+bdragon1727 - itch.io: https://bdragon1727.itch.io/free-effect-and-bullet-16x16 
+pimen - itch.io: https://pimen.itch.io/thunder-spell-effect-02 
+dustdfg - itch.io: https://dustdfg.itch.io/pixel-art-top-down-rocks-pack 
+zeromatrix - itch.io: https://zeromatrix.itch.io/rpgiab-icons "
+label_settings = SubResource("LabelSettings_pj27d")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 5365.0
+offset_right = 899.0
+offset_bottom = 5462.0
+text = "Thanks for playing!"
+label_settings = SubResource("LabelSettings_koruh")
+
+[connection signal="animation_finished" from="ColorRect/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="screen_exited" from="Control/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

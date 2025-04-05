@@ -10,3 +10,7 @@ func play_default_music():
 func play_boss_music():
 	$DefaultMusic.stop()
 	$BossMusic.play()
+
+func stop():
+	$DefaultMusic.stop()
+	$BossMusic.stop()
