@@ -1,0 +1,157 @@
+[gd_scene load_steps=10 format=3 uid="uid://6exgt5phmke1"]
+
+[ext_resource type="Script" path="res://UI/Restart_UI/restart.gd" id="1_vt5j4"]
+[ext_resource type="PackedScene" uid="uid://ct676tvc36je0" path="res://game_scene.tscn" id="2_50mbf"]
+[ext_resource type="Texture2D" uid="uid://0jq3fdmhmgwb" path="res://Assets/Sprites/Background/CloudsBack.png" id="3_mg2kf"]
+[ext_resource type="Texture2D" uid="uid://dxuw2qj8efwfg" path="res://Assets/Sprites/Background/CloudsFront.png" id="4_n4nlp"]
+[ext_resource type="Texture2D" uid="uid://do87qc3mlcav3" path="res://Assets/Sprites/Background/BGBack.png" id="5_lj3ph"]
+[ext_resource type="Texture2D" uid="uid://co56oqhns5awj" path="res://Assets/Sprites/Background/BGFront.png" id="6_d1egv"]
+[ext_resource type="FontFile" uid="uid://bljihm64bcl1j" path="res://Fonts/antiquity-print.ttf" id="7_a6skn"]
+[ext_resource type="AudioStream" uid="uid://b57oswwjywoph" path="res://Assets/Audio/BGM/No Destination.mp3" id="8_h2uue"]
+[ext_resource type="Script" path="res://UI/Restart_UI/credits.gd" id="8_jasgk"]
+
+[node name="Restart" type="Node2D"]
+script = ExtResource("1_vt5j4")
+load_scene = ExtResource("2_50mbf")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(600, 43.515)
+scale = Vector2(0.57, 0.57)
+transform = Transform2D(0.57, 0, 0, 0.57, 600, 43.515)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.05)
+motion_offset = Vector2(0, 200)
+motion_mirroring = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color(0.821788, 0.821789, 0.821788, 1)
+scale = Vector2(8, 8)
+texture = ExtResource("3_mg2kf")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.05)
+motion_offset = Vector2(0, 300)
+motion_mirroring = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+modulate = Color(0.856067, 0.856067, 0.856067, 1)
+scale = Vector2(8, 8)
+texture = ExtResource("4_n4nlp")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.1)
+motion_offset = Vector2(0, 100)
+motion_mirroring = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+modulate = Color(0.724643, 0.724643, 0.724643, 1)
+scale = Vector2(8, 8)
+texture = ExtResource("5_lj3ph")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 0.15)
+motion_offset = Vector2(0, 100)
+motion_mirroring = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+modulate = Color(0.873298, 0.873298, 0.873298, 1)
+scale = Vector2(8, 8)
+texture = ExtResource("6_d1egv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(655, 223)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 249.0
+offset_top = -62.0
+offset_right = 1159.0
+offset_bottom = 219.0
+theme_override_fonts/normal_font = ExtResource("7_a6skn")
+theme_override_font_sizes/normal_font_size = 141
+text = "Spellcast"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 443.0
+offset_top = 210.0
+offset_right = 951.0
+offset_bottom = 350.0
+theme_override_fonts/normal_font = ExtResource("7_a6skn")
+theme_override_font_sizes/normal_font_size = 88
+text = "You Win!"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 586.0
+offset_top = 405.0
+offset_right = 755.0
+offset_bottom = 477.0
+theme_override_font_sizes/font_size = 46
+text = "Restart"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_h2uue")
+
+[node name="Credits" type="Label" parent="."]
+offset_left = 300.0
+offset_top = -1216.0
+offset_right = 1023.0
+offset_bottom = -101.0
+text = "Developers:
+Ammar, Saif
+Amoura, Omar
+Gillespie, Sean
+Popovic, Caitlin
+Assets:
+Sounds
+Title screen music: No Destination
+BGM: https://freesound.org/people/pcmac/sounds/464535/ 
+Chest Break: https://pixabay.com/sound-effects/search/crate/
+Buy: https://pixabay.com/sound-effects/search/cash%20register/
+Buy Error: https://pixabay.com/sound-effects/search/wrong/
+Player footsteps & land: https://freesound.org/people/Wdomino/sounds/517122/ 
+Jump: https://freesound.org/people/memerunknown/sounds/670077/ 
+Attack: https://freesound.org/people/SypherZent/sounds/420668/ 
+Dash & Spell Caster hurt: https://freesound.org/people/Geoff-Bremner-Audio/sounds/683928/ 
+Wall Climb: https://freesound.org/people/Sadiquecat/sounds/738050/ 
+Wall Slide: https://freesound.org/people/Joao_Janz/sounds/477716/ 
+Fireball: https://freesound.org/people/HighPixel/sounds/431174/ 
+Frost: https://freesound.org/people/Bertsz/sounds/524305/ 
+Lightning Strike: https://freesound.org/people/timgormly/sounds/159769/ 
+Heal: https://freesound.org/people/LilMati/sounds/523649/ 
+Damaged and Gollux attack-2: https://freesound.org/people/Raclure/sounds/458867/ 
+Slime move: https://freesound.org/people/qubodup/sounds/751341/ 
+Slime jump & land: https://freesound.org/people/Zuzek06/sounds/353250/ 
+Slime hurt: https://freesound.org/people/qubodup/sounds/751339/ 
+Skeleton walk: https://freesound.org/people/hudbud321/sounds/579802/ 
+Skeleton attack & Skull Wolf move: https://freesound.org/people/Sadiquecat/sounds/737238/ 
+Skeleton & Skull Wolf hurt: https://freesound.org/people/MiSchy/sounds/369958/ 
+Skull Wolf attack: https://freesound.org/people/nomiqbomi/sounds/579066/ 
+Spell Caster footsteps: https://freesound.org/people/d00121058/sounds/390757/ 
+Gollux attack-1: https://freesound.org/people/proolsen/sounds/466272/ 
+Gollux walk: https://freesound.org/people/HenKonen/sounds/757190/ 
+Gollux hurt: https://freesound.org/people/locky_Y/sounds/733157/ 
+Sprites
+Player: https://rvros.itch.io/animated-pixel-hero 
+Skeleton: https://pimen.itch.io/fantasy-skeleton-enemies 
+Skull Wolf: https://atari-boy.itch.io/skull-wolf-pixel-art 
+Slime: https://warsvault.itch.io/high-fantasy-slime-enemy 
+Spell Caster: https://penzilla.itch.io/hooded-protagonist 
+Gollux:https://admurin.itch.io/bosses-gollux  
+Shop NPC: https://penzilla.itch.io/free-animated-protagonist 
+Shop & Chest: https://cainos.itch.io/pixel-art-platformer-village-props 
+Map & Background: https://aamatniekss.itch.io/free-pixelart-platformer-tileset 
+Fireball: https://msfrantz.itch.io/free-fire-ball-pixel-art 
+Frost: https://bdragon1727.itch.io/free-effect-and-bullet-16x16 
+Lightning Strike: https://pimen.itch.io/thunder-spell-effect-02 
+Rock: https://dustdfg.itch.io/pixel-art-top-down-rocks-pack 
+Icons: https://zeromatrix.itch.io/rpgiab-icons 
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_jasgk")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 37.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
