@@ -637,7 +637,8 @@ libraries = {
 one_shot = true
 
 [node name="LightningStrike" parent="." instance=ExtResource("13_luq7n")]
-position = Vector2(0, -15.07)
+position = Vector2(0, -3.96)
+scale = Vector2(1.1, 1.1)
 
 [node name="Sounds" type="Node2D" parent="."]
 script = ExtResource("14_2cy3t")

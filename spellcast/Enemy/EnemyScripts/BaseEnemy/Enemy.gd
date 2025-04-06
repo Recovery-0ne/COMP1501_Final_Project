@@ -14,7 +14,7 @@ var player: Player
 @onready var wall_check:= $WallCheck
 @onready var body_collider = $BodyCollider
 
-@onready var start_pos:= position
+var start_pos
 
 var can_see_target = false
 
@@ -38,6 +38,7 @@ func _ready():
 	if flip_on_start: 
 		change_direction()
 	update_health_display()
+	start_pos = position
 
 func on_screen():
 	is_on_screen = true
@@ -52,7 +53,7 @@ func _is_on_ledge():
 	return not floor_check.is_colliding()
 	
 func will_target_player():
-	return can_see_target and not _is_facing_wall() and not _is_on_ledge()
+	return can_see_target and not _is_facing_wall() and not _is_on_ledge() and player.health > 0
 		
 func change_direction():
 	move_dir *= -1
