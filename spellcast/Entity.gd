@@ -51,12 +51,13 @@ func decrease_health(_damage: int):
 		dead = true
 
 func take_damage(_damage:int, _flinch:=true, _apply_frozen_multiplier:=true):
-	sound_manager.play("hurt")
-	if frozen and _apply_frozen_multiplier: 
-		_damage = _damage/2
-	if _flinch: 
-		flinch()
-	decrease_health(_damage)
+	if health > 0:
+		sound_manager.play("hurt")
+		if frozen and _apply_frozen_multiplier: 
+			_damage = _damage/2
+		if _flinch: 
+			flinch()
+		decrease_health(_damage)
 	
 func flinch():pass #Define this for each entity in their own script
 		

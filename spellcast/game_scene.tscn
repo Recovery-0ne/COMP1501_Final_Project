@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ct676tvc36je0"]
+[gd_scene load_steps=15 format=3 uid="uid://ct676tvc36je0"]
 
 [ext_resource type="PackedScene" uid="uid://dte2li7iee18p" path="res://UI/In_Game_UI/In_Game_UI.tscn" id="1_8glpc"]
 [ext_resource type="PackedScene" uid="uid://cd4doq0o7358i" path="res://Areas/area_1.tscn" id="1_c3cfy"]
@@ -14,9 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://nq31xl6vbf3x" path="res://Enemy/EnemyScenes/Gollux.tscn" id="12_1t6es"]
 [ext_resource type="PackedScene" uid="uid://dbmtous8gk42o" path="res://SpikeDamage/SpikeDamage.tscn" id="13_lvuow"]
 [ext_resource type="PackedScene" uid="uid://bxc1grncyv7qb" path="res://Enemy/BossArea.tscn" id="13_rs0sx"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_bpxtw"]
-font_size = 156
 
 [node name="GameScene" type="Node"]
 
@@ -87,16 +84,6 @@ position = Vector2(1845, -53)
 
 [node name="Slime2" parent="." instance=ExtResource("3_5oc71")]
 position = Vector2(-4687, -515)
-
-[node name="WinLabel" type="Label" parent="."]
-offset_left = 13852.0
-offset_top = -658.0
-offset_right = 14512.0
-offset_bottom = -445.0
-text = "You Win!"
-label_settings = SubResource("LabelSettings_bpxtw")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="BreakableChest" parent="." instance=ExtResource("10_yv3nh")]
 position = Vector2(-5377, -754)
