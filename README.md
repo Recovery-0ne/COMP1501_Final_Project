@@ -9,7 +9,7 @@ Sean Gillespie:
   
   Carleton University Computer Science Student
   
-  First started programming in high school, taking a special interest in game development. Prefers to live on the mechanics side of things, but is comfortable in most areas.
+  First started programming in high school, taking a special interest in game development. Prefers to live on the mechanics side of things, but is comfortable in most areas. What began with simple text-based games soon evolved into making 2D, 3D, and even VR games solo or as part of a larger team.
 
 ---------------
 Omar Amoura:
