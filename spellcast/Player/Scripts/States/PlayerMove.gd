@@ -6,11 +6,17 @@ extends PlayerState
 func _enter():
 	super()
 	player.gravity = 0
+	if time_left == 0: 
+		time_left = default_step_time
 	$StepTimer.wait_time = time_left/2
 	$StepTimer.start()
 
 func _update(delta: float):
 	super(delta)
+	
+func _physics_update(delta: float):
+	super(delta)
+	player.move()
 	if player.velocity.x == 0:
 		state_machine.change_state("idle")
 	elif Input.is_action_pressed("jump"):
@@ -20,10 +26,6 @@ func _update(delta: float):
 		state_machine.change_state("move_attack")
 	elif not player.is_on_floor() and $CoyoteTimer.is_stopped():
 		$CoyoteTimer.start()
-	
-func _physics_update(delta: float):
-	super(delta)
-	player.move()
 	time_left = $StepTimer.time_left
 
 func _exit():
