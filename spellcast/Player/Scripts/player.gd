@@ -105,8 +105,10 @@ func respawn_player():
 	dead = false
 	global_position = checkpoint_position
 	health = max_health
+	mana = default_mana
 	$StateMachine._initialize()
 	update_health_display()
+	update_mana_bar()
 	$HPbar.visible = true
 	$ManaBar.visible = true
 	respawn_enemies()
