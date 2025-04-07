@@ -10,3 +10,10 @@ Sean Gillespie:
   Carleton University Computer Science Student
   
   First started programming in high school, taking a special interest in game development. Prefers to live on the mechanics side of things, but is comfortable in most areas.
+
+---------------
+Omar Amoura:
+
+  Carleton University Computer Science Student
+
+  First got into programming after watching his dad code for work. He began taking programming classes all through high school, and eventually ended up choosing Computer Science at Carleton. He's always been into games and thought it was so interesting how people could build these fun worlds from scratch, and he knew he wanted to be a part of that.
