@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://6exgt5phmke1"]
+[gd_scene load_steps=20 format=3 uid="uid://6exgt5phmke1"]
 
 [ext_resource type="Script" path="res://UI/Restart_UI/restart.gd" id="1_vt5j4"]
 [ext_resource type="PackedScene" uid="uid://f5e00ig7ikmu" path="res://UI/Start_UI/start.tscn" id="2_5h5oq"]
@@ -114,6 +114,14 @@ _data = {
 "fade_in": SubResource("Animation_tcwm4")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_wd2sf"]
+font = ExtResource("7_a6skn")
+font_size = 92
+
+[sub_resource type="LabelSettings" id="LabelSettings_hcs47"]
+font = ExtResource("7_a6skn")
+font_size = 144
+
 [sub_resource type="LabelSettings" id="LabelSettings_pshu5"]
 font_size = 40
 
@@ -178,17 +186,16 @@ offset_bottom = 40.0
 position = Vector2(578.5, 2913)
 scale = Vector2(57.65, 292.3)
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Control"]
+[node name="RichTextLabel2" type="Label" parent="Control"]
 layout_mode = 0
 offset_left = 326.0
 offset_top = 264.0
 offset_right = 834.0
 offset_bottom = 404.0
-theme_override_fonts/normal_font = ExtResource("7_a6skn")
-theme_override_font_sizes/normal_font_size = 88
 text = "You Win!"
+label_settings = SubResource("LabelSettings_wd2sf")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+[node name="RichTextLabel" type="Label" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -201,9 +208,8 @@ offset_right = 973.5
 offset_bottom = 1224.06
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("7_a6skn")
-theme_override_font_sizes/normal_font_size = 141
 text = "Spellcast"
+label_settings = SubResource("LabelSettings_hcs47")
 
 [node name="DevLabel" type="Label" parent="Control"]
 layout_mode = 1
